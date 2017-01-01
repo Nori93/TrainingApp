@@ -11,13 +11,15 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:background="@color/colorTopControlOne"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:id="@+id/tp_Button_1">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:textColor="@color/colorTopControlText"
-            android:text="none"/>
+            android:textColor="@color/colorTopControlTextOn"
+            android:text="@string/top_button1"
+            android:id="@+id/tp_Button_1_text"/>
     </LinearLayout>
 
     <LinearLayout
@@ -25,12 +27,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:id="@+id/tp_Button_2">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:text="none"/>
+            android:text="@string/top_button2"
+            android:id="@+id/tp_Button_2_text"/>
     </LinearLayout>
 
 
@@ -39,12 +43,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:id="@+id/tp_Button_3">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:text="none"/>
+            android:text="@string/top_button3"
+            android:id="@+id/tp_Button_3_text"/>
     </LinearLayout>
 
     <LinearLayout
@@ -52,12 +58,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:id="@+id/tp_Button_4">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:text="none"/>
+            android:text="@string/top_button4"
+            android:id="@+id/tp_Button_4_text"/>
     </LinearLayout>
 
 

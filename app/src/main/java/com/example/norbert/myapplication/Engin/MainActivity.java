@@ -17,7 +17,7 @@ public class MainActivity extends Activity {
 
 
     //Fragment tools
-    private int fragmentId = 0;                                                                     //The Id of fragment that is now on Main Window
+    private int fragmentId = 1;                                                                     //The Id of fragment that is now on Main Window
     private FragmentManager manager;                                                                //
     private FragmentTransaction transaction;
     private FragmertsHolder holder;
@@ -31,32 +31,48 @@ public class MainActivity extends Activity {
 
     }
 
-    public void setMainWindow(){
+    public void setMainWindow() {
         manager = getFragmentManager();
         transaction = manager.beginTransaction();
-        holder = new FragmertsHolder(fragmentId);
+        holder = new FragmertsHolder();
+        transaction.add(R.id.Top, holder.getTopControlPanel());
+        transaction.add(R.id.Main,holder.getStartFragment());
+        transaction.commit();
 
+    }
+    public void setBodyWindow(){
+        manager = getFragmentManager();
+        transaction = manager.beginTransaction();
         switch (fragmentId){
             //StartWindows Fragment
-             case 0:
+             case 1:
                 //holder.getStartFragment() <give some informations>
-                transaction.add(R.id.Main,holder.getStartFragment());
-                transaction.add(R.id.Top,holder.getTopControlPanel());
+                transaction.replace(R.id.Main,holder.getStartFragment());
                 transaction.commit();
                 break;
+            //Exercise Fragment
+            case 2:
+                //holder.getStartFragment() <give some informations>
+                transaction.replace(R.id.Main,holder.getListFragment_Workout());
+                transaction.commit();
+                break;
+            //Meals Fragment
+            case 3:
+                //holder.getStartFragment() <give some informations>
+                transaction.replace(R.id.Main,holder.getListFragment_Meals());
+                transaction.commit();
+                break;
+            //Profile Fragment
+            case 4:
+
+                break;
+
         }
     }
 
     public void changeScene(int id){
-        switch (fragmentId){
-            //StartWindows Fragment
-            case 0:
-                holder.destroyStartFragment();
-                transaction.remove(holder.getStartFragment());
-                break;
-        }
         this.fragmentId = id;
-        setMainWindow();
+        setBodyWindow();
     }
 
 

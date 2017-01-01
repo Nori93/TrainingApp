@@ -15,27 +15,18 @@ public class FragmertsHolder {
     //List of fragments for app
     StartWindow startFragment;
     TopControlPanel topControlPanel;
-    ListWindow listFragment;
+    ListWindow listFragment_Workout;
+    ListWindow listFragment_Meals;
     ExerciseWindow exerciseWindow;
 
-    public FragmertsHolder(int i){
-        this.index = i;
-        switch (index){
-            case 0:
-                startFragment = new StartWindow();
-                topControlPanel = new TopControlPanel();
-                break;
-            case 1:
-                listFragment = new ListWindow();
-                break;
-            case 2:
-                exerciseWindow = new ExerciseWindow();
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-        }
+    public FragmertsHolder(){
+
+        startFragment = new StartWindow();
+        topControlPanel = new TopControlPanel();
+
+        listFragment_Workout = new ListWindow();
+        listFragment_Meals=new ListWindow();
+
     }
 
 
@@ -43,12 +34,13 @@ public class FragmertsHolder {
     public StartWindow getStartFragment(){return startFragment;}
     public TopControlPanel getTopControlPanel(){return topControlPanel;}
     public ExerciseWindow getExerciseWindow(){return exerciseWindow;}
-    public ListWindow getListFragment(){return listFragment;}
-
+    public ListWindow getListFragment_Workout(){return listFragment_Workout;}
+    public ListWindow getListFragment_Meals(){return listFragment_Meals;}
 
     //Clear Frame to clear space
     public void destroyStartFragment(){this.startFragment = null;}
     public void destroyTopControlPanel(){this.topControlPanel = null;}
     public void destroyExerciseWindow(){this.exerciseWindow = null;}
-    public void destroyListFragment(){this.listFragment = null;}
+    public void destroyListFragment_Workout(){this.listFragment_Workout = null;}
+    public void destroyListFragment_Meals(){this.listFragment_Meals = null;}
 }
