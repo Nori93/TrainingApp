@@ -41,6 +41,7 @@ public class MainActivity extends Activity {
              case 0:
                 //holder.getStartFragment() <give some informations>
                 transaction.add(R.id.Main,holder.getStartFragment());
+                transaction.add(R.id.Top,holder.getTopControlPanel());
                 transaction.commit();
                 break;
         }

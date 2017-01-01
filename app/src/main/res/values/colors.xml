@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorBackGroundOne">#CCFFFD</color>
+    <color name="colorTopControlOne">#057774</color>
+    <color name="colorTopControlTwo">#004745</color>
+    <color name="colorTopControlText">#FFFFFF</color>
 </resources>
