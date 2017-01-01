@@ -11,8 +11,6 @@ import com.example.norbert.myapplication.R;
 
 public class ExerciseWindow extends Fragment {
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
