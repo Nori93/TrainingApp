@@ -1,9 +1,15 @@
 <resources>
     <string name="app_name">My Application</string>
 
-    <!--Top Panel-->
+    <!--  FRAGMENTS -->
+    <!--Top Control-->
     <string name="top_button1">Home</string>
     <string name="top_button2">Workout</string>
     <string name="top_button3">Meals</string>
     <string name="top_button4">Profile</string>
+
+    <!--Exercise-->
+    <string name="exer_button1">Back</string>
+    <string name="exer_button2">Start</string>
+    <string name="exer_button3">Add</string>
 </resources>
