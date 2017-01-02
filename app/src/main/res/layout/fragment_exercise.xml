@@ -129,11 +129,15 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:background="#AAAAAA"
+                        />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="3"/>
+                        android:layout_weight="3"
+                        android:textAlignment="center"
+                        android:text="polecane1"/>
                 </LinearLayout>
                 <LinearLayout
                     android:orientation="vertical"
@@ -144,11 +148,15 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:background="#AAAAAA"
+                        />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="3"/>
+                        android:layout_weight="3"
+                        android:textAlignment="center"
+                        android:text="polecane1"/>
                 </LinearLayout>
                 <LinearLayout
                     android:orientation="vertical"
@@ -161,12 +169,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:id="@+id/imageView" />
+                        android:id="@+id/imageView"
+                        android:background="#AAAAAA"
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="3"/>
+                        android:layout_weight="3"
+                        android:textAlignment="center"
+                        android:text="polecane1"/>
                 </LinearLayout>
             </LinearLayout>
 
