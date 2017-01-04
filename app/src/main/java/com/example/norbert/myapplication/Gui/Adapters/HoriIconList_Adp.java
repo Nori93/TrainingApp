@@ -22,7 +22,7 @@ public class HoriIconList_Adp extends BaseAdapter {
         this.table = new  int[size];
         this.num = numb;
         inflter = (LayoutInflater.from(applicationContext));
-        scroll();
+      //  scroll();
     }
 
     @Override
@@ -49,15 +49,15 @@ public class HoriIconList_Adp extends BaseAdapter {
     }
 
 
-    private void scroll() {
-        for (int i = 0; i < this.table.length; i++) {
-            if( i <= num){
-            this.table[i] = R.drawable.adp_full;}
-            else {
-            this.table[i] = R.drawable.adp_empty;}
-
-        }
-    }
+//    private void scroll() {
+//        for (int i = 0; i < this.table.length; i++) {
+//            if( i <= num){
+//          //  this.table[i] = R.drawable.adp_full;}
+//            else {
+//          //  this.table[i] = R.drawable.adp_empty;}
+//
+//        }
+//    }
 
 }
 

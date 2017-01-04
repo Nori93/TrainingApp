@@ -23,7 +23,7 @@ public class Training {
     private ArrayList<Exercise> exerciseList;
 
     public Training(String name, String desc, String author,
-                    int id, int type, int difficulty, int time_day, int time_sum) {
+                    int id, int type, int difficulty, int time_day, int time_sum,ArrayList<Exercise> excercises) {
         this.name = name;
         this.desc = desc;
         this.author = author;
@@ -32,7 +32,7 @@ public class Training {
         this.difficulty = difficulty;
         this.time_day = time_day;
         this.time_sum = time_sum;
-        exerciseList = new ArrayList<Exercise>();
+        this.exerciseList = excercises;
     }
 
     public String getName() {
