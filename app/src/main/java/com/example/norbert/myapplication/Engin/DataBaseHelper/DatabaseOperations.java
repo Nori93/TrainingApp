@@ -1,11 +1,11 @@
 package com.example.norbert.myapplication.Engin.DataBaseHelper;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import com.example.norbert.myapplication.Engin.Repository.InformationRepository;
 
 /**
  * Created by Kamil Czaja on 2017-01-03.
@@ -17,7 +17,7 @@ public class DatabaseOperations extends SQLiteOpenHelper {
     public static final int DB_VERSION = 1;
 
     public DatabaseOperations(Context context) {
-        super(context, InformationRepository.InformationInfo.DATABASE_NAME, null, DB_VERSION);
+        super(context, InformationRepository.InformationTableDetails.DATABASE_NAME, null, DB_VERSION);
     }
 
     @Override
@@ -32,16 +32,7 @@ public class DatabaseOperations extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
-    public void PutInformationData (DatabaseOperations db, int data)
-    {
-        SQLiteDatabase DB = db.getWritableDatabase();
-        ContentValues content = new ContentValues();
-        content.put(InformationRepository.InformationInfo.COLUMN_WAGA,data);
-        content.put(InformationRepository.InformationInfo.COLUMN_WZROST, 185);
 
-        long success = DB.insert(InformationRepository.InformationInfo.TABLE_NAME,null,content);
-        Log.d("DataBase operations", "Row inserted to informacje");
-    }
 
 
 }
