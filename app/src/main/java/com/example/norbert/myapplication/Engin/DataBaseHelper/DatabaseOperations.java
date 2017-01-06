@@ -14,7 +14,7 @@ import com.example.norbert.myapplication.Engin.Repository.InformationRepository;
 
 public class DatabaseOperations extends SQLiteOpenHelper {
 
-    public static final int DB_VERSION = 1;
+    public static final int DB_VERSION = 2;
 
     public DatabaseOperations(Context context) {
         super(context, InformationRepository.InformationTableDetails.DATABASE_NAME, null, DB_VERSION);
@@ -22,7 +22,7 @@ public class DatabaseOperations extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_INFORMACJE_TABLE = "CREATE TABLE \"Informacje\" ( `waga` INTEGER, `wzrost` INTEGER, `ilosc_kalorii` INTEGER, `poziom_aktywnosci` INTEGER, `tluszcz` INTEGER, `weglowodany` INTEGER, `bialko` INTEGER )";
+        String CREATE_INFORMACJE_TABLE = "CREATE TABLE \"Informacje\" ( `waga` INTEGER, `wzrost` INTEGER, `ilosc_kalorii` INTEGER, `poziom_aktywnosci` INTEGER, `tluszcz` INTEGER, `weglowodany` INTEGER, `bialko` INTEGER, `ID` INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE )";
         db.execSQL(CREATE_INFORMACJE_TABLE);
 
         Log.d("Informacje Created","Informacje");

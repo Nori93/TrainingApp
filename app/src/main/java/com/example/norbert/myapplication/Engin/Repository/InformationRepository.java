@@ -13,6 +13,7 @@ import android.provider.BaseColumns;
 import android.util.Log;
 
 import com.example.norbert.myapplication.Engin.DataBaseHelper.DatabaseOperations;
+import com.example.norbert.myapplication.Engin.Objects.UserInformation;
 
 
 public class InformationRepository{
@@ -21,7 +22,7 @@ public class InformationRepository{
 
     public static abstract class InformationTableDetails implements BaseColumns {
 
-        public static final String DATABASE_NAME = "test1234";
+        public static final String DATABASE_NAME = "cwiczenia";
         public static final String TABLE_NAME = "Informacje";
 
         public static final String COLUMN_WAGA = "waga";
@@ -31,27 +32,55 @@ public class InformationRepository{
         public static final String COLUMN_TLUSZCZ = "tluszcz";
         public static final String COLUMN_WEGLOWODANY = "weglowodany";
         public static final String COLUMN_BIALKO = "bialko";
+        public static final String COLUMN_ID = "ID";
     }
 
 
-    public void PutInformationData (DatabaseOperations db, int data)
+    public void putInformationData(DatabaseOperations db, UserInformation data)
     {
         SQLiteDatabase DB = db.getWritableDatabase();
         ContentValues content = new ContentValues();
-        content.put(InformationTableDetails.COLUMN_WAGA,data);
-        content.put(InformationTableDetails.COLUMN_WZROST, 185);
+        content.put(InformationTableDetails.COLUMN_WAGA, data.getWeight());
+        content.put(InformationTableDetails.COLUMN_WZROST, data.getHeight());
+        content.put(InformationTableDetails.COLUMN_KALORIE, data.getCal());
+        content.put(InformationTableDetails.COLUMN_POZIOM, data.getActivityLvl());
+        content.put(InformationTableDetails.COLUMN_TLUSZCZ, data.getFat());
+        content.put(InformationTableDetails.COLUMN_WEGLOWODANY, data.getCarb());
+        content.put(InformationTableDetails.COLUMN_BIALKO, data.getProtein());
+
 
         long success = DB.insert(InformationTableDetails.TABLE_NAME,null,content);
         Log.d("DataBase operations", "Row inserted to informacje");
     }
 
-        public Cursor getInformation(DatabaseOperations db)
+        public UserInformation getInformationData(DatabaseOperations db)
         {
-            SQLiteDatabase DB = db.getReadableDatabase();
-            String[] coloumns = {InformationTableDetails.COLUMN_WAGA, InformationTableDetails.COLUMN_WZROST};
-            Cursor CR = DB.query(InformationTableDetails.TABLE_NAME, coloumns,null,null,null,null,null);
+            try{
+                SQLiteDatabase DB = db.getReadableDatabase();
+                String[] coloumns = {InformationTableDetails.COLUMN_WAGA, InformationTableDetails.COLUMN_WZROST,InformationTableDetails.COLUMN_KALORIE,
+                        InformationTableDetails.COLUMN_POZIOM,InformationTableDetails.COLUMN_TLUSZCZ,
+                        InformationTableDetails.COLUMN_WEGLOWODANY,InformationTableDetails.COLUMN_BIALKO,
+                        InformationTableDetails.COLUMN_ID};
 
-            return CR;
+                Cursor CR = DB.query(InformationTableDetails.TABLE_NAME, coloumns,null,null,null,null,InformationTableDetails.COLUMN_ID+" DESC");
+
+                CR.moveToFirst();
+                UserInformation userData= new UserInformation(Float.parseFloat(CR.getString(0)),(Float.parseFloat(CR.getString(1))),
+                        (Float.parseFloat(CR.getString(2))),(Float.parseFloat(CR.getString(3))),(Float.parseFloat(CR.getString(4))),
+                        (Float.parseFloat(CR.getString(5))),(Float.parseFloat(CR.getString(6))));
+
+                Log.d("DataBase operations","Data recievied from DB");
+
+//            do{
+//                Log.d("Dane z bazy" , CR.getString(0)+" "+CR.getString((1)));
+//            }while(CR.moveToNext());
+
+                return userData;
+            }
+            catch (Exception ex){
+                return  new UserInformation();
+            }
+
         }
 
 

@@ -15,9 +15,17 @@ public class UserInformation {
     private float protein;
 
 
+    public UserInformation(){}
+
     public UserInformation(float weight, float height, float cal, float activityLvl, float fat, float carb, float protein)
     {
-
+        this.weight = weight;
+        this.height = height;
+        this.cal = cal;
+        this.activityLvl = activityLvl;
+        this.fat = fat;
+        this.carb = carb;
+        this.protein = protein;
     }
 
 
