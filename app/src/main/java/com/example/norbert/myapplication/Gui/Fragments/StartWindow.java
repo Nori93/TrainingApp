@@ -42,7 +42,7 @@ public class StartWindow extends Fragment {
         View view = inflater.inflate(R.layout.fragment_start_window,container, false);
         ctx= this.getActivity();
         InformationRepository = new InformationRepository();
-        DatabaseOperations DB = new DatabaseOperations(ctx);
+        final DatabaseOperations DB = new DatabaseOperations(ctx);
         final UserInformation CR =  InformationRepository.getInformationData(DB); // Dostajesz cały wypełniony obiekt!
         final ArrayList<String> list = new ArrayList<String>();
 
@@ -62,6 +62,9 @@ public class StartWindow extends Fragment {
         list.add("Weight: "+CR.getWeight()+"kg");
         list.add("Height: "+CR.getHeight()+"cm");
         list.add("Activity level: "+CR.getActivityLvl());
+        list.add("Set your % of calories as carbs:");
+        list.add("Set your % of calories as fat:");
+        list.add("Set your % of calories as proteins:");
 
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
@@ -88,21 +91,45 @@ public class StartWindow extends Fragment {
                     public void onClick(DialogInterface dialog,int which) {
                         // Write your code here to execute after dialog
                         String regexStr = "^[0-9]*$";
-                        if (text.getText().toString().trim().matches(regexStr)) {
+                        if (text.getText().toString().trim().matches(regexStr)&&text.getText().toString().isEmpty()==false) {
                             switch (position) {
                                 case 0:
+                                    alertDialog.setTitle("Set your weight");
                                     list.set(position, "Weight: " + text.getText()+"kg");
                                     CR.setWeight(Float.valueOf(text.getText().toString()));
                                     Listadapter.notifyDataSetChanged();
                                     break;
                                 case 1:
+                                    alertDialog.setTitle("Set your height");
                                     list.set(position, "Height: " + text.getText()+"cm");
                                     CR.setHeight(Float.valueOf(text.getText().toString()));
                                     Listadapter.notifyDataSetChanged();
                                     break;
                                 case 2:
+                                    alertDialog.setTitle("Set your activity level");
                                     list.set(position, "Activity Level: " + text.getText());
                                     CR.setActivityLvl(Float.valueOf(text.getText().toString()));
+                                    Listadapter.notifyDataSetChanged();
+                                    break;
+                                case 3:
+                                    alertDialog.setTitle("Set your carbs ");
+                                    list.set(position, "Carbs: " + text.getText()+"%");
+                                    CR.setCarb((float) Math.ceil((CR.getCal()*((Float.valueOf(text.getText().toString()))/100))/4));
+                                    carb.setText("Total carbohydrates needed: "+CR.getCarb()+"g");
+                                    Listadapter.notifyDataSetChanged();
+                                    break;
+                                case 4:
+                                    alertDialog.setTitle("Set your fat ");
+                                    list.set(position, "Fat: " + text.getText()+"%");
+                                    CR.setFat((float) Math.ceil((CR.getCal()*((Float.valueOf(text.getText().toString()))/100))/9));
+                                    fat.setText("Total fat needed: "+CR.getFat()+"g");
+                                    Listadapter.notifyDataSetChanged();
+                                    break;
+                                case 5:
+                                    alertDialog.setTitle("Set your protein ");
+                                    list.set(position, "Protein: " + text.getText()+"%");
+                                    CR.setProtein((float) Math.ceil((CR.getCal()*((Float.valueOf(text.getText().toString()))/100))/4));
+                                    protein.setText("Total protein needed: "+CR.getProtein()+"g");
                                     Listadapter.notifyDataSetChanged();
                                     break;
                             }
@@ -115,6 +142,7 @@ public class StartWindow extends Fragment {
 
                 final AlertDialog alert=alertDialog.create();
                 alert.show();
+                InformationRepository.putInformationData(DB,new UserInformation(CR.getWeight(),CR.getHeight(),2000,CR.getActivityLvl(),CR.getFat(),CR.getCarb(),CR.getProtein()));
             }
         });
        // buttonTest.setOnClickListener(new View.OnClickListener() {
