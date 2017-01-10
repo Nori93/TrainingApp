@@ -35,6 +35,8 @@ public class StartWindow extends Fragment {
     private ArrayAdapter<String> Listadapter;
     private ArrayList<String> arrayList;
     InformationRepository InformationRepository;
+    String regexStr = "^[0-9]*$";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,13 +47,14 @@ public class StartWindow extends Fragment {
         final DatabaseOperations DB = new DatabaseOperations(ctx);
         final UserInformation CR =  InformationRepository.getInformationData(DB); // Dostajesz cały wypełniony obiekt!
         final ArrayList<String> list = new ArrayList<String>();
+        final CharSequence[] activity={"low","medium","high"};
 
         lista = (ListView) view.findViewById(R.id.ListView);
         calories = (TextView) view.findViewById(R.id.textView);
         carb = (TextView) view.findViewById(R.id.textView6);
         fat= (TextView) view.findViewById(R.id.textView5);
         protein = (TextView) view.findViewById(R.id.textView3);
-
+        InformationRepository.putInformationData(DB,new UserInformation(CR.getWeight(),CR.getHeight(),2000,CR.getActivityLvl(),CR.getFat(),CR.getCarb(),CR.getProtein()));
         calories.setText("Total Calories Needed: "+CR.getCal());
         carb.setText("Total carbohydrates needed: "+CR.getCarb());
         fat.setText("Total fat needed: "+CR.getFat());
@@ -82,7 +85,17 @@ public class StartWindow extends Fragment {
                         alertDialog.setTitle("Set your Height(cm)");
                         break;
                     case 2:
-                        alertDialog.setTitle("Set your Activity Level");
+                        //alertDialog.setTitle("Set your Activity Level").setSingleChoiceItems(activity,0,)
+                        regexStr="[+-]?([0-9]*[.])?[0-9]+";
+                        break;
+                    case 3:
+                        alertDialog.setTitle("Set your carbs ");
+                        break;
+                    case 4:
+                        alertDialog.setTitle("Set your fat ");
+                        break;
+                    case 5:
+                        alertDialog.setTitle("Set your protein ");
                         break;
                 }
 
@@ -90,43 +103,38 @@ public class StartWindow extends Fragment {
                 alertDialog.setNeutralButton("OK",new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog,int which) {
                         // Write your code here to execute after dialog
-                        String regexStr = "^[0-9]*$";
+
                         if (text.getText().toString().trim().matches(regexStr)&&text.getText().toString().isEmpty()==false) {
                             switch (position) {
                                 case 0:
-                                    alertDialog.setTitle("Set your weight");
                                     list.set(position, "Weight: " + text.getText()+"kg");
                                     CR.setWeight(Float.valueOf(text.getText().toString()));
                                     Listadapter.notifyDataSetChanged();
                                     break;
                                 case 1:
-                                    alertDialog.setTitle("Set your height");
                                     list.set(position, "Height: " + text.getText()+"cm");
                                     CR.setHeight(Float.valueOf(text.getText().toString()));
                                     Listadapter.notifyDataSetChanged();
                                     break;
                                 case 2:
-                                    alertDialog.setTitle("Set your activity level");
                                     list.set(position, "Activity Level: " + text.getText());
                                     CR.setActivityLvl(Float.valueOf(text.getText().toString()));
                                     Listadapter.notifyDataSetChanged();
                                     break;
                                 case 3:
-                                    alertDialog.setTitle("Set your carbs ");
                                     list.set(position, "Carbs: " + text.getText()+"%");
                                     CR.setCarb((float) Math.ceil((CR.getCal()*((Float.valueOf(text.getText().toString()))/100))/4));
                                     carb.setText("Total carbohydrates needed: "+CR.getCarb()+"g");
                                     Listadapter.notifyDataSetChanged();
                                     break;
                                 case 4:
-                                    alertDialog.setTitle("Set your fat ");
                                     list.set(position, "Fat: " + text.getText()+"%");
                                     CR.setFat((float) Math.ceil((CR.getCal()*((Float.valueOf(text.getText().toString()))/100))/9));
                                     fat.setText("Total fat needed: "+CR.getFat()+"g");
                                     Listadapter.notifyDataSetChanged();
                                     break;
                                 case 5:
-                                    alertDialog.setTitle("Set your protein ");
+
                                     list.set(position, "Protein: " + text.getText()+"%");
                                     CR.setProtein((float) Math.ceil((CR.getCal()*((Float.valueOf(text.getText().toString()))/100))/4));
                                     protein.setText("Total protein needed: "+CR.getProtein()+"g");
