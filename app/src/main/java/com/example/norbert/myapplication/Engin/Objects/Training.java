@@ -1,19 +1,21 @@
 package com.example.norbert.myapplication.Engin.Objects;
 
+import android.support.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by norbert on 01.01.2017.
+ * Created by Kamil Czaja on 20.01.2017.
  */
 
 public class Training {
-    private int ID;
+    private Integer ID;
     private  String Data;
     private List<Series> Serie;
 
 
-    public Training(int id, String data, List<Series> serie) {
+    public Training(Integer id, String data, List<Series> serie) {
         ID = id;
         Data = data;
         Serie = serie;

@@ -26,6 +26,7 @@ import com.example.norbert.myapplication.Engin.Objects.Exercise;
 import com.example.norbert.myapplication.Engin.Objects.UserInformation;
 import com.example.norbert.myapplication.Engin.Repository.ExerciseRepository;
 import com.example.norbert.myapplication.Engin.Repository.InformationRepository;
+import com.example.norbert.myapplication.Engin.Repository.TrainingRepository;
 import com.example.norbert.myapplication.R;
 
 public class StartWindow extends Fragment {
@@ -160,6 +161,9 @@ public class StartWindow extends Fragment {
                 ExerciseRepository Exerciserepo = new ExerciseRepository();
                 ArrayList<Exercise> tmp =  Exerciserepo.getAllExercise(DB);
                 Exercise tmp2 =  Exerciserepo.getExerciseById(1,DB);
+
+                TrainingRepository TrainingRepo = new TrainingRepository();
+
 
                 ///////////
             }
