@@ -159,6 +159,7 @@ public class StartWindow extends Fragment {
 
                 ExerciseRepository Exerciserepo = new ExerciseRepository();
                 ArrayList<Exercise> tmp =  Exerciserepo.getAllExercise(DB);
+                Exercise tmp2 =  Exerciserepo.getExerciseById(1,DB);
 
                 ///////////
             }

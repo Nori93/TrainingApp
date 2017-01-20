@@ -27,31 +27,51 @@ public class ExerciseRepository {
         public static final String COLUMN_ID = "ID";
     }
 
-    public Exercise getExerciseById(int Id){
+    public Exercise getExerciseById(int Id,DatabaseOperations db){
 
-        return  new Exercise(1,"nazwa","opis");
-    }
-
-    public ArrayList<Exercise> getAllExercise(DatabaseOperations db){
 
         try{
             ArrayList<Exercise> ExerciseArrayList = new ArrayList<Exercise>();
             SQLiteDatabase DB = db.getReadableDatabase();
             String[] coloumns = {ExerciseTableDetails.COLUMN_ID,ExerciseTableDetails.COLUMN_NAZWA,ExerciseTableDetails.COLUMN_OPIS};
 
-            Cursor CR = DB.query(ExerciseTableDetails.TABLE_NAME, coloumns,null,null,null,null,null);
+            String whereClause = ExerciseTableDetails.COLUMN_ID+"= ?";
+            String[] whereArgs = new String[] {
+                   Integer.toString(Id)
+            };
+
+            Cursor CR = DB.query(ExerciseTableDetails.TABLE_NAME, coloumns,whereClause,whereArgs,null,null,null);
             CR.moveToFirst();
 
-            do{
-              ExerciseArrayList.add(new Exercise(Integer.parseInt(CR.getString(0)),CR.getString(1),CR.getString(2)));
-            }while(CR.moveToNext());
-
-            Log.d("DataBase operations","Recieved all exercises");
-
-            return ExerciseArrayList ;
+            Log.d("DataBase operations","Recieved exercise");
+            return new Exercise(Integer.parseInt(CR.getString(0)),CR.getString(1),CR.getString(2));
         }
         catch (Exception ex){
-            return  new ArrayList<Exercise>();
+            return  new Exercise(-1,"Nie ma takiego cwiczenia","Nie ma takiego cwiczenia");
         }
+
+    }
+
+    public ArrayList<Exercise> getAllExercise(DatabaseOperations db)
+        {
+            try{
+                ArrayList<Exercise> ExerciseArrayList = new ArrayList<Exercise>();
+                SQLiteDatabase DB = db.getReadableDatabase();
+                String[] coloumns = {ExerciseTableDetails.COLUMN_ID,ExerciseTableDetails.COLUMN_NAZWA,ExerciseTableDetails.COLUMN_OPIS};
+
+                Cursor CR = DB.query(ExerciseTableDetails.TABLE_NAME, coloumns,null,null,null,null,null);
+                CR.moveToFirst();
+
+                do{
+                  ExerciseArrayList.add(new Exercise(Integer.parseInt(CR.getString(0)),CR.getString(1),CR.getString(2)));
+                }while(CR.moveToNext());
+
+                Log.d("DataBase operations","Recieved all exercises");
+
+                return ExerciseArrayList ;
+            }
+            catch (Exception ex){
+                return  new ArrayList<Exercise>();
+            }
         }
 }
