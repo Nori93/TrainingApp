@@ -16,7 +16,7 @@ import com.example.norbert.myapplication.Engin.Repository.SeriesRepository;
 public class DatabaseOperations extends SQLiteOpenHelper {
 
     public static final int DB_VERSION = 2;
-    public static final String DATABASE_NAME = "cwiczenaia2.2";
+    public static final String DATABASE_NAME = "cwiczenaia2.3";
     public static final String LOG = "DataBase";
 
 
@@ -35,12 +35,18 @@ public class DatabaseOperations extends SQLiteOpenHelper {
         Log.d(LOG,"Serie created");
         String CREATE_EXERCISE_TABLE = "CREATE TABLE \"cwiczenia\" ( `ID` INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, `nazwa` TEXT UNIQUE, `opis` TEXT )";
         db.execSQL(CREATE_EXERCISE_TABLE);
-        Log.d(LOG,"Ćwiczenia created");
+        Log.d(LOG,"Cwiczenia created");
         String CREATE_TRAINING_TABLE ="CREATE TABLE `trening` ( `ID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, `data` TEXT NOT NULL )";
         db.execSQL(CREATE_TRAINING_TABLE);
         Log.d(LOG,"Trening created");
+
+        feedDatabase(db);
     }
 
+    private void feedDatabase(SQLiteDatabase db){
+        Log.d(LOG,"Running feed method");
+        SeedClassHelper.DBSeeder.SeedDataBase(db);
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
