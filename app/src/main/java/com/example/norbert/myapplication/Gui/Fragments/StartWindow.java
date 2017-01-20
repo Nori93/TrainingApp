@@ -22,7 +22,9 @@ import android.widget.Toast;
 
 import com.example.norbert.myapplication.Engin.DataBaseHelper.DatabaseOperations;
 import com.example.norbert.myapplication.Engin.MainActivity;
+import com.example.norbert.myapplication.Engin.Objects.Exercise;
 import com.example.norbert.myapplication.Engin.Objects.UserInformation;
+import com.example.norbert.myapplication.Engin.Repository.ExerciseRepository;
 import com.example.norbert.myapplication.Engin.Repository.InformationRepository;
 import com.example.norbert.myapplication.R;
 
@@ -151,6 +153,14 @@ public class StartWindow extends Fragment {
                 final AlertDialog alert=alertDialog.create();
                 alert.show();
                 InformationRepository.putInformationData(DB,new UserInformation(CR.getWeight(),CR.getHeight(),2000,CR.getActivityLvl(),CR.getFat(),CR.getCarb(),CR.getProtein(),"cel"));
+
+
+                // Kamil Czaja tests
+
+                ExerciseRepository Exerciserepo = new ExerciseRepository();
+                ArrayList<Exercise> tmp =  Exerciserepo.getAllExercise(DB);
+
+                ///////////
             }
         });
        // buttonTest.setOnClickListener(new View.OnClickListener() {
