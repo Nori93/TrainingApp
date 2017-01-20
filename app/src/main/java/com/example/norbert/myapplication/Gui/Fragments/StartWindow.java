@@ -54,7 +54,7 @@ public class StartWindow extends Fragment {
         carb = (TextView) view.findViewById(R.id.textView6);
         fat= (TextView) view.findViewById(R.id.textView5);
         protein = (TextView) view.findViewById(R.id.textView3);
-        InformationRepository.putInformationData(DB,new UserInformation(CR.getWeight(),CR.getHeight(),2000,CR.getActivityLvl(),CR.getFat(),CR.getCarb(),CR.getProtein()));
+        InformationRepository.putInformationData(DB,new UserInformation(CR.getWeight(),CR.getHeight(),2000,CR.getActivityLvl(),CR.getFat(),CR.getCarb(),CR.getProtein(),"cel"));
         calories.setText("Total Calories Needed: "+CR.getCal());
         carb.setText("Total carbohydrates needed: "+CR.getCarb());
         fat.setText("Total fat needed: "+CR.getFat());
@@ -150,7 +150,7 @@ public class StartWindow extends Fragment {
 
                 final AlertDialog alert=alertDialog.create();
                 alert.show();
-                InformationRepository.putInformationData(DB,new UserInformation(CR.getWeight(),CR.getHeight(),2000,CR.getActivityLvl(),CR.getFat(),CR.getCarb(),CR.getProtein()));
+                InformationRepository.putInformationData(DB,new UserInformation(CR.getWeight(),CR.getHeight(),2000,CR.getActivityLvl(),CR.getFat(),CR.getCarb(),CR.getProtein(),"cel"));
             }
         });
        // buttonTest.setOnClickListener(new View.OnClickListener() {

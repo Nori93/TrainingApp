@@ -22,7 +22,7 @@ public class InformationRepository{
 
     public static abstract class InformationTableDetails implements BaseColumns {
 
-        public static final String DATABASE_NAME = "cwiczenia";
+
         public static final String TABLE_NAME = "Informacje";
 
         public static final String COLUMN_WAGA = "waga";
@@ -32,6 +32,7 @@ public class InformationRepository{
         public static final String COLUMN_TLUSZCZ = "tluszcz";
         public static final String COLUMN_WEGLOWODANY = "weglowodany";
         public static final String COLUMN_BIALKO = "bialko";
+        public static final String COLUMN_CEL = "cel";
         public static final String COLUMN_ID = "ID";
     }
 
@@ -47,6 +48,7 @@ public class InformationRepository{
         content.put(InformationTableDetails.COLUMN_TLUSZCZ, data.getFat());
         content.put(InformationTableDetails.COLUMN_WEGLOWODANY, data.getCarb());
         content.put(InformationTableDetails.COLUMN_BIALKO, data.getProtein());
+        content.put(InformationTableDetails.COLUMN_CEL, data.getTarget());
 
 
         long success = DB.insert(InformationTableDetails.TABLE_NAME,null,content);
@@ -59,7 +61,7 @@ public class InformationRepository{
                 SQLiteDatabase DB = db.getReadableDatabase();
                 String[] coloumns = {InformationTableDetails.COLUMN_WAGA, InformationTableDetails.COLUMN_WZROST,InformationTableDetails.COLUMN_KALORIE,
                         InformationTableDetails.COLUMN_POZIOM,InformationTableDetails.COLUMN_TLUSZCZ,
-                        InformationTableDetails.COLUMN_WEGLOWODANY,InformationTableDetails.COLUMN_BIALKO,
+                        InformationTableDetails.COLUMN_WEGLOWODANY,InformationTableDetails.COLUMN_BIALKO,InformationTableDetails.COLUMN_CEL,
                         InformationTableDetails.COLUMN_ID};
 
                 Cursor CR = DB.query(InformationTableDetails.TABLE_NAME, coloumns,null,null,null,null,InformationTableDetails.COLUMN_ID+" DESC");
@@ -67,13 +69,9 @@ public class InformationRepository{
                 CR.moveToFirst();
                 UserInformation userData= new UserInformation(Float.parseFloat(CR.getString(0)),(Float.parseFloat(CR.getString(1))),
                         (Float.parseFloat(CR.getString(2))),(Float.parseFloat(CR.getString(3))),(Float.parseFloat(CR.getString(4))),
-                        (Float.parseFloat(CR.getString(5))),(Float.parseFloat(CR.getString(6))));
+                        (Float.parseFloat(CR.getString(5))),(Float.parseFloat(CR.getString(6))),CR.getString(7));
 
                 Log.d("DataBase operations","Data recievied from DB");
-
-//            do{
-//                Log.d("Dane z bazy" , CR.getString(0)+" "+CR.getString((1)));
-//            }while(CR.moveToNext());
 
                 return userData;
             }

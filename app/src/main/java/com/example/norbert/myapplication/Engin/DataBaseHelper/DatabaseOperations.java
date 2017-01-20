@@ -16,29 +16,34 @@ import com.example.norbert.myapplication.Engin.Repository.SeriesRepository;
 public class DatabaseOperations extends SQLiteOpenHelper {
 
     public static final int DB_VERSION = 2;
+    public static final String DATABASE_NAME = "cwiczenaia2.2";
+    public static final String LOG = "DataBase";
+
 
     public DatabaseOperations(Context context) {
-        //super(context, SeriesRepository.SeriesTableDetails.DATABASE_NAME, null, DB_VERSION);
-
-        super(context, InformationRepository.InformationTableDetails.DATABASE_NAME, null, DB_VERSION);
-
+        super(context, DATABASE_NAME, null, DB_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_INFORMACJE_TABLE = "CREATE TABLE \"Informacje\" ( `waga` INTEGER, `wzrost` INTEGER, `ilosc_kalorii` INTEGER, `poziom_aktywnosci` INTEGER, `tluszcz` INTEGER, `weglowodany` INTEGER, `bialko` INTEGER, `ID` INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE )";
+
+        String CREATE_INFORMACJE_TABLE = "CREATE TABLE \"Informacje\" ( `waga` REAL, `wzrost` REAL, `ilosc_kalorii` INTEGER, `poziom_aktywnosci` TEXT, `tluszcz` INTEGER, `weglowodany` INTEGER, `bialko` INTEGER, `plec` NUMERIC, `budowa_ciala` TEXT, `ID` INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, `cel` TEXT )";
         db.execSQL(CREATE_INFORMACJE_TABLE);
+        Log.d(LOG,"Informacje created");
         String CREATE_SERIA_TABLE = "CREATE TABLE \"Seria\" ( `ID` INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, `powtorzenia` INTEGER, `obciazenie` INTEGER, `ID_cw` INTEGER, `ID_tr` INTEGER)";
         db.execSQL(CREATE_SERIA_TABLE);
-
-        Log.d("Informacje Created","Informacje");
+        Log.d(LOG,"Serie created");
+        String CREATE_EXERCISE_TABLE = "CREATE TABLE \"cwiczenia\" ( `ID` INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, `nazwa` TEXT UNIQUE, `opis` TEXT )";
+        db.execSQL(CREATE_EXERCISE_TABLE);
+        Log.d(LOG,"Ćwiczenia created");
+        String CREATE_TRAINING_TABLE ="CREATE TABLE `trening` ( `ID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, `data` TEXT NOT NULL )";
+        db.execSQL(CREATE_TRAINING_TABLE);
+        Log.d(LOG,"Trening created");
     }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
     }
-
-
 
 }

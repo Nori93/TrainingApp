@@ -19,7 +19,6 @@ public class SeriesRepository {
 
     public static abstract class SeriesTableDetails implements BaseColumns {
 
-        public static final String DATABASE_NAME = "cwiczenia";
         public static final String TABLE_NAME = "seria";
 
         public static final String COLUMN_ID = "ID";

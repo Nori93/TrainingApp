@@ -13,11 +13,12 @@ public class UserInformation {
     private float fat;
     private float carb;
     private float protein;
+    private String target;
 
 
     public UserInformation(){}
 
-    public UserInformation(float weight, float height, float cal, float activityLvl, float fat, float carb, float protein)
+    public UserInformation(float weight, float height, float cal, float activityLvl, float fat, float carb, float protein, String target)
     {
         this.weight = weight;
         this.height = height;
@@ -26,6 +27,7 @@ public class UserInformation {
         this.fat = fat;
         this.carb = carb;
         this.protein = protein;
+        this.target = target;
     }
 
 
@@ -83,6 +85,14 @@ public class UserInformation {
 
     public void setProtein(float protein) {
         this.protein = protein;
+    }
+
+    public String getTarget() {
+        return target;
+    }
+
+    public void setTarget(String target) {
+        this.target = target;
     }
 }
 
