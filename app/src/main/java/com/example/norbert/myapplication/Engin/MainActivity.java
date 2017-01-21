@@ -4,13 +4,23 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.widget.RelativeLayout;
 
+import com.example.norbert.myapplication.Engin.Sensor.Accelerometer;
+import com.example.norbert.myapplication.Engin.Sensor.Gravity;
+import com.example.norbert.myapplication.Engin.Sensor.LinearAccelerometer;
 import com.example.norbert.myapplication.Gui.FragmertsHolder;
 import com.example.norbert.myapplication.R;
 
 public class MainActivity extends Activity {
+
+    //Sensors
+    SensorManager sensorManager;
+    Accelerometer accelerometer;
+    Gravity gravity;
+    LinearAccelerometer linearAccelerometer;
 
     //Main Window is a container for all fragments
     private RelativeLayout mainWindow;
@@ -30,6 +40,11 @@ public class MainActivity extends Activity {
         mainWindow = (RelativeLayout)findViewById(R.id.Main);
         setMainWindow();
 
+        //Sensor
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        accelerometer = new Accelerometer(sensorManager);
+        gravity = new Gravity(sensorManager);
+        linearAccelerometer = new LinearAccelerometer(sensorManager);
     }
 
     public void setMainWindow() {

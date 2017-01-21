@@ -1,6 +1,8 @@
 package com.example.norbert.myapplication.Gui.Adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import com.example.norbert.myapplication.Engin.Objects.Exercise;
 import com.example.norbert.myapplication.R;
 /**
  * Created by norbert on 31.12.2016.
@@ -32,9 +35,13 @@ public class IconText_Adp extends BaseAdapter {
     List<Drawable> drawableList;
     List<String> titleList;
 
+    // List that containt all exercise
+    List<Exercise> exercisesList;
+
     //Dimension of icons in list
     private int widthIcon;
     private int heightIcon;
+    private Bitmap temp_icon;
 
 
 
@@ -44,6 +51,12 @@ public class IconText_Adp extends BaseAdapter {
         this.inflater = (LayoutInflater.from(applicationContext));
         this.drawableList = draw;
         this.titleList = title;
+    }
+
+    public IconText_Adp(Context applicationContext, List<Exercise> exercisesList){
+        this.context = applicationContext;
+        this.inflater = (LayoutInflater.from(applicationContext));
+        this.exercisesList = exercisesList;
     }
 
 
@@ -75,8 +88,9 @@ public class IconText_Adp extends BaseAdapter {
         icon.setMaxHeight(heightIcon);
 
         try {
-            icon.setImageDrawable(drawableList.get(position));
-            title.setText(titleList.get(position));
+            temp_icon = BitmapFactory.decodeFile(exercisesList.get(position).getSciezka());
+            icon.setImageBitmap(temp_icon);
+            title.setText(exercisesList.get(position).getNazwa());
         }catch (Exception e){
             Log.e("Error",position + " do not set on IconText adp ");
         }

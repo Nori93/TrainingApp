@@ -30,13 +30,14 @@
                 android:inputType="textPersonName"
                 android:text="wyszukaj"
                 android:ems="10"
-                android:id="@+id/editText"
+                android:id="@+id/list_search"
                 android:layout_weight="1" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="3"/>
+                android:layout_weight="3"
+                android:id="@+id/list_button"/>
         </LinearLayout>
 
     </LinearLayout>
@@ -47,8 +48,8 @@
         android:layout_weight="1">
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
+            android:layout_height="match_parent"
+            android:id="@+id/list_listview">
         </ListView>
     </RelativeLayout>
 </LinearLayout>
