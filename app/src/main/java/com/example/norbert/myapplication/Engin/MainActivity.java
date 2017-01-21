@@ -78,5 +78,11 @@ public class MainActivity extends Activity {
         setBodyWindow();
     }
 
-
+    public void setCalendar() {
+        manager = getFragmentManager();
+        transaction = manager.beginTransaction();
+        holder = new FragmertsHolder();
+        transaction.add(R.id.calendar, holder.getCalendarWindow());
+        transaction.commit();
+    }
 }
