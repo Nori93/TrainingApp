@@ -65,6 +65,8 @@ public class MainActivity extends Activity {
                 break;
             //Profile Fragment
             case 4:
+                transaction.replace(R.id.Main,holder.getProfilWindow());
+                transaction.commit();
 
                 break;
 

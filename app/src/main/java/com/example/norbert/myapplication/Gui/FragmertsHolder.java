@@ -4,6 +4,7 @@ package com.example.norbert.myapplication.Gui;
 
 import com.example.norbert.myapplication.Gui.Fragments.ExerciseWindow;
 import com.example.norbert.myapplication.Gui.Fragments.ListWindow;
+import com.example.norbert.myapplication.Gui.Fragments.ProfilWindow;
 import com.example.norbert.myapplication.Gui.Fragments.StartWindow;
 import com.example.norbert.myapplication.Gui.Fragments.TopControlPanel;
 
@@ -18,6 +19,7 @@ public class FragmertsHolder {
     ListWindow listFragment_Workout;
     ListWindow listFragment_Meals;
     ExerciseWindow exerciseWindow;
+    ProfilWindow profilWindow;
 
     public FragmertsHolder(){
 
@@ -26,6 +28,7 @@ public class FragmertsHolder {
 
         listFragment_Workout = new ListWindow();
         listFragment_Meals=new ListWindow();
+        profilWindow = new ProfilWindow();
 
     }
 
@@ -36,6 +39,8 @@ public class FragmertsHolder {
     public ExerciseWindow getExerciseWindow(){return exerciseWindow;}
     public ListWindow getListFragment_Workout(){return listFragment_Workout;}
     public ListWindow getListFragment_Meals(){return listFragment_Meals;}
+    public ProfilWindow getProfilWindow(){return profilWindow;}
+
 
     //Clear Frame to clear space
     public void destroyStartFragment(){this.startFragment = null;}
@@ -43,4 +48,5 @@ public class FragmertsHolder {
     public void destroyExerciseWindow(){this.exerciseWindow = null;}
     public void destroyListFragment_Workout(){this.listFragment_Workout = null;}
     public void destroyListFragment_Meals(){this.listFragment_Meals = null;}
+    public void destroyProfilWindow(){this.profilWindow = null;}
 }
