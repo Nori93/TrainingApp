@@ -47,7 +47,9 @@ public class ListWindow extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        exerciseArrayList = new ArrayList<Exercise>();
         databaseOperations = new DatabaseOperations(view.getContext());
+        exerciseRepository = new ExerciseRepository();
         exerciseArrayList = exerciseRepository.getAllExercise(databaseOperations);
 
 
@@ -55,6 +57,7 @@ public class ListWindow extends Fragment {
         search_button = (Button)view.findViewById(R.id.list_button);
         list = (ListView)view.findViewById(R.id.list_listview);
         adapter = new IconText_Adp(view.getContext(),exerciseArrayList);
+        list.setAdapter(adapter);
     }
 
 

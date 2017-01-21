@@ -31,27 +31,18 @@ public class IconText_Adp extends BaseAdapter {
     ImageView  icon;
     TextView title;
 
-    // List that containt the icon and description in on element of list
-    List<Drawable> drawableList;
-    List<String> titleList;
 
     // List that containt all exercise
     List<Exercise> exercisesList;
 
     //Dimension of icons in list
-    private int widthIcon;
-    private int heightIcon;
+    private int widthIcon = 30;
+    private int heightIcon = 30;
     private Bitmap temp_icon;
 
 
 
 
-    public IconText_Adp(Context applicationContext, List<Drawable> draw, List<String> title){
-        this.context = applicationContext;
-        this.inflater = (LayoutInflater.from(applicationContext));
-        this.drawableList = draw;
-        this.titleList = title;
-    }
 
     public IconText_Adp(Context applicationContext, List<Exercise> exercisesList){
         this.context = applicationContext;
@@ -62,10 +53,7 @@ public class IconText_Adp extends BaseAdapter {
 
     @Override
     public int getCount() {
-        if(drawableList.size() == titleList.size()){
-            Log.e("Warning","The Lists in IconText_Adp are not the same lenght");
-        }
-        return drawableList.size();
+        return exercisesList.size();
     }
 
     @Override
@@ -90,10 +78,11 @@ public class IconText_Adp extends BaseAdapter {
         try {
             temp_icon = BitmapFactory.decodeFile(exercisesList.get(position).getSciezka());
             icon.setImageBitmap(temp_icon);
-            title.setText(exercisesList.get(position).getNazwa());
+
         }catch (Exception e){
             Log.e("Error",position + " do not set on IconText adp ");
         }
+        title.setText(exercisesList.get(position).getNazwa());
 
         return view;
     }

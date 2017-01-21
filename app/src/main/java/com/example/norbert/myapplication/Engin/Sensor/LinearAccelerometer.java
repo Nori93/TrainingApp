@@ -47,9 +47,9 @@ public class LinearAccelerometer implements SensorEventListener{
         deltaZ = lastZ - event.values[2];
 
 
-        Log.e("Sensor : Linear","X = " + deltaX);
-        Log.e("Sensor : Linear","Y = " + deltaY);
-        Log.e("Sensor : Linear","Z = " + deltaZ);
+       // Log.e("Sensor : Linear","X = " + deltaX);
+       // Log.e("Sensor : Linear","Y = " + deltaY);
+       // Log.e("Sensor : Linear","Z = " + deltaZ);
 
     }
 
