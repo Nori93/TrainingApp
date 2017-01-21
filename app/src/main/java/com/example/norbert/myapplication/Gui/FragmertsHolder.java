@@ -2,6 +2,7 @@ package com.example.norbert.myapplication.Gui;
 
 
 
+import com.example.norbert.myapplication.Gui.Fragments.CalendarWindow;
 import com.example.norbert.myapplication.Gui.Fragments.ExerciseWindow;
 import com.example.norbert.myapplication.Gui.Fragments.ListWindow;
 import com.example.norbert.myapplication.Gui.Fragments.ProfilWindow;
@@ -20,6 +21,7 @@ public class FragmertsHolder {
     ListWindow listFragment_Meals;
     ExerciseWindow exerciseWindow;
     ProfilWindow profilWindow;
+    CalendarWindow calendarWindow;
 
     public FragmertsHolder(){
 
@@ -29,6 +31,7 @@ public class FragmertsHolder {
         listFragment_Workout = new ListWindow();
         listFragment_Meals=new ListWindow();
         profilWindow = new ProfilWindow();
+        calendarWindow = new CalendarWindow();
 
     }
 
@@ -40,6 +43,8 @@ public class FragmertsHolder {
     public ListWindow getListFragment_Workout(){return listFragment_Workout;}
     public ListWindow getListFragment_Meals(){return listFragment_Meals;}
     public ProfilWindow getProfilWindow(){return profilWindow;}
+    public CalendarWindow getCalendarWindow() {return calendarWindow;}
+
 
 
     //Clear Frame to clear space
@@ -49,4 +54,5 @@ public class FragmertsHolder {
     public void destroyListFragment_Workout(){this.listFragment_Workout = null;}
     public void destroyListFragment_Meals(){this.listFragment_Meals = null;}
     public void destroyProfilWindow(){this.profilWindow = null;}
+    public void destroyCalendarWindow(){this.calendarWindow=null;}
 }
