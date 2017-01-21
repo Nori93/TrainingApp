@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
@@ -33,8 +35,12 @@ public class ProfilWindow extends Fragment {
     private ArrayAdapter<String> Listadapter;
     private ArrayList<String> arrayList;
     InformationRepository InformationRepository;
-    String regexStr = "^[0-9]*$";
-
+    String regexStr = "^[0-9]*$",sCarb="% Calories as carbohydrates:",sProteins="% Calories as proteinss:",sFat="% Calories as fat:";
+    float tluszcz,bialko,weglowodany;
+    float which1=1.2f;
+    CharSequence[] activity={"low","medium","high"};
+    CharSequence[] Target={"Reduce","Gain","Maintain actual weight"};
+    String target="Reduce";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,14 +51,14 @@ public class ProfilWindow extends Fragment {
         final DatabaseOperations DB = new DatabaseOperations(ctx);
         final UserInformation CR =  InformationRepository.getInformationData(DB); // Dostajesz cały wypełniony obiekt!
         final ArrayList<String> list = new ArrayList<String>();
-        final CharSequence[] activity={"low","medium","high"};
+
 
         lista = (ListView) view.findViewById(R.id.ListView);
         calories = (TextView) view.findViewById(R.id.textView);
         carb = (TextView) view.findViewById(R.id.textView6);
         fat= (TextView) view.findViewById(R.id.textView5);
         protein = (TextView) view.findViewById(R.id.textView3);
-        InformationRepository.putInformationData(DB,new UserInformation(CR.getWeight(),CR.getHeight(),2000,CR.getActivityLvl(),CR.getFat(),CR.getCarb(),CR.getProtein(),"cel"));
+        InformationRepository.putInformationData(DB,new UserInformation(CR.getWeight(),CR.getHeight(),2000,CR.getActivityLvl(),CR.getFat(),CR.getCarb(),CR.getProtein(),CR.getTarget()));
         calories.setText("Total Calories Needed: "+CR.getCal());
         carb.setText("Total carbohydrates needed: "+CR.getCarb());
         fat.setText("Total fat needed: "+CR.getFat());
@@ -63,9 +69,10 @@ public class ProfilWindow extends Fragment {
         list.add("Weight: "+CR.getWeight()+"kg");
         list.add("Height: "+CR.getHeight()+"cm");
         list.add("Activity level: "+CR.getActivityLvl());
-        list.add("Set your % of calories as carbs:");
-        list.add("Set your % of calories as fat:");
-        list.add("Set your % of calories as proteins:");
+        list.add(sCarb+(Math.round(((CR.getCarb()*4)*100)/CR.getCal())));
+        list.add(sFat+(Math.round(((CR.getFat()*9)*100)/CR.getCal())));
+        list.add(sProteins+(Math.round(((CR.getProtein()*4)*100)/CR.getCal())));
+        list.add("Target: "+CR.getTarget());
 
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
@@ -73,31 +80,74 @@ public class ProfilWindow extends Fragment {
             public void onItemClick(AdapterView<?> arg0, View arg1,final int position, long arg3)
             {
                 final AlertDialog.Builder alertDialog = new AlertDialog.Builder(ctx);
+               final EditText text = new EditText(ctx);
 
-                final EditText text = new EditText(ctx);
                 switch(position) {
                     case 0:
+                        alertDialog.setView(text);
                         alertDialog.setTitle("Set your Weight (kg)");
                         break;
                     case 1:
+                        alertDialog.setView(text);
                         alertDialog.setTitle("Set your Height(cm)");
                         break;
                     case 2:
-                        //alertDialog.setTitle("Set your Activity Level").setSingleChoiceItems(activity,0,)
+                        alertDialog.setTitle("Set your Activity Level").setSingleChoiceItems(activity,0,new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            if(which==0) {
+                                which1 = 1.2f;
+                            }
+                            else if(which==1){
+                                which1=1.4f;
+                            }
+                            else if(which==2){
+                                which1=1.6f;
+                            }
+
+                             }
+                     });
+                        text.setText(""+which1);
                         regexStr="[+-]?([0-9]*[.])?[0-9]+";
                         break;
                     case 3:
+                        alertDialog.setView(text);
                         alertDialog.setTitle("Set your carbs ");
                         break;
                     case 4:
+                        alertDialog.setView(text);
                         alertDialog.setTitle("Set your fat ");
                         break;
                     case 5:
+                        alertDialog.setView(text);
                         alertDialog.setTitle("Set your protein ");
                         break;
+                    case 6:
+                        alertDialog.setTitle("Set your Target").setSingleChoiceItems(Target,0,new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                if(which==0) {
+                                    target = "Reduce";
+                                }
+                                else if(which==1){
+                                    target="Gain";
+                                }
+                                else if(which==2){
+                                    target="Maintain actual weight";
+                                }
+
+                            }
+                        });
+                        text.setText(""+target);
+                        regexStr=".*";
+                        break;
+
                 }
 
-                alertDialog.setView(text);
                 alertDialog.setNeutralButton("OK",new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog,int which) {
                         // Write your code here to execute after dialog
@@ -115,29 +165,55 @@ public class ProfilWindow extends Fragment {
                                     Listadapter.notifyDataSetChanged();
                                     break;
                                 case 2:
-                                    list.set(position, "Activity Level: " + text.getText());
+
+                                    list.set(position, "Activity Level: " + which1);
                                     CR.setActivityLvl(Float.valueOf(text.getText().toString()));
                                     Listadapter.notifyDataSetChanged();
                                     break;
                                 case 3:
-                                    list.set(position, "Carbs: " + text.getText()+"%");
+                                    weglowodany=Float.valueOf(text.getText().toString());
+                                    if((weglowodany+bialko+tluszcz)<=101){
+                                    list.set(position, sCarb + text.getText()+"%");
                                     CR.setCarb((float) Math.ceil((CR.getCal()*((Float.valueOf(text.getText().toString()))/100))/4));
                                     carb.setText("Total carbohydrates needed: "+CR.getCarb()+"g");
                                     Listadapter.notifyDataSetChanged();
-                                    break;
+                                    break;}
+                                    else{
+                                        Toast.makeText(ctx,"Sum of calories, fat and protein needs to be 100%",Toast.LENGTH_LONG).show();
+                                        break;
+                                    }
                                 case 4:
-                                    list.set(position, "Fat: " + text.getText()+"%");
+                                    tluszcz=Float.valueOf(text.getText().toString());
+                                    if((weglowodany+bialko+tluszcz)<=100){
+                                    list.set(position, sFat + text.getText()+"%");
                                     CR.setFat((float) Math.ceil((CR.getCal()*((Float.valueOf(text.getText().toString()))/100))/9));
                                     fat.setText("Total fat needed: "+CR.getFat()+"g");
                                     Listadapter.notifyDataSetChanged();
-                                    break;
+                                        break;
+                                    }
+                                    else{
+                                        Toast.makeText(ctx,"Sum of calories, fat and protein needs to be 100%",Toast.LENGTH_LONG).show();
+                                        break;
+                                    }
                                 case 5:
-
-                                    list.set(position, "Protein: " + text.getText()+"%");
+                                    bialko=Float.valueOf(text.getText().toString());
+                                    if((weglowodany+bialko+tluszcz)<=100){
+                                    list.set(position, sProteins + text.getText()+"%");
                                     CR.setProtein((float) Math.ceil((CR.getCal()*((Float.valueOf(text.getText().toString()))/100))/4));
                                     protein.setText("Total protein needed: "+CR.getProtein()+"g");
                                     Listadapter.notifyDataSetChanged();
                                     break;
+                                    }
+                                    else{
+                                        Toast.makeText(ctx,"Sum of calories, fat and protein needs to be 100%",Toast.LENGTH_LONG).show();
+                                        break;
+                                    }
+                                case 6:
+                                        list.set(position,"Target: "+target);
+                                        CR.setTarget(text.getText().toString());
+                                        Listadapter.notifyDataSetChanged();
+                                        break;
+
                             }
                         }
                         else{
@@ -148,7 +224,7 @@ public class ProfilWindow extends Fragment {
 
                 final AlertDialog alert=alertDialog.create();
                 alert.show();
-                InformationRepository.putInformationData(DB,new UserInformation(CR.getWeight(),CR.getHeight(),2000,CR.getActivityLvl(),CR.getFat(),CR.getCarb(),CR.getProtein(),"cel"));
+                InformationRepository.putInformationData(DB,new UserInformation(CR.getWeight(),CR.getHeight(),2000,CR.getActivityLvl(),CR.getFat(),CR.getCarb(),CR.getProtein(),CR.getTarget()));
 
 
                 // Kamil Czaja tests
@@ -158,43 +234,31 @@ public class ProfilWindow extends Fragment {
                 Exercise tmp2 =  Exerciserepo.getExerciseById(1,DB);
 
                 ///////////
+
             }
         });
-       // buttonTest.setOnClickListener(new View.OnClickListener() {
-       //     @Override
-       //     public void onClick(View v) {
-
-
-              //  InformationRepository.putInformationData(DB,new UserInformation(1,2,3,4,5,6,7)); // Przekazujesz cały wypełniony obiekt!
-
-      //      }
-      //  });
-
-      //  buttonGet = (Button) view.findViewById(R.id.button3);
-
-     //   buttonGet.setOnClickListener(new View.OnClickListener() {
-     //       @Override
-     //       public void onClick(View v) {
-              //  DatabaseOperations DB = new DatabaseOperations(ctx);
-             //   UserInformation CR =  InformationRepository.getInformationData(DB); // Dostajesz cały wypełniony obiekt!
-             //   list.clear();
-        //     list.set(0,"Weight:10");
-         //   list.addItems("dsa"+CR.getFat());
-        //       Test1.setText(list.get(0));
-         //       Listadapter.notifyDataSetChanged();
-        //    }
-      //  });
-
-
-
 
 
         return view;
     }
 
+    private void calcTotalCalories(){
+
+    }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
+    @Override
+    public void onSaveInstanceState( Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+    }
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+    }
+
 }
