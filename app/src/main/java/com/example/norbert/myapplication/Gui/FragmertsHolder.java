@@ -2,12 +2,14 @@ package com.example.norbert.myapplication.Gui;
 
 
 
+import com.example.norbert.myapplication.Gui.Fragments.AddTrainingWindow;
 import com.example.norbert.myapplication.Gui.Fragments.CalendarWindow;
 import com.example.norbert.myapplication.Gui.Fragments.ExerciseWindow;
 import com.example.norbert.myapplication.Gui.Fragments.ListWindow;
 import com.example.norbert.myapplication.Gui.Fragments.ProfilWindow;
 import com.example.norbert.myapplication.Gui.Fragments.StartWindow;
 import com.example.norbert.myapplication.Gui.Fragments.TopControlPanel;
+import com.example.norbert.myapplication.Gui.Fragments.TrainingListWindow;
 
 public class FragmertsHolder {
 
@@ -22,6 +24,8 @@ public class FragmertsHolder {
     ExerciseWindow exerciseWindow;
     ProfilWindow profilWindow;
     CalendarWindow calendarWindow;
+    TrainingListWindow trainingListWindow;
+    AddTrainingWindow addTrainingWindow;
     public FragmertsHolder(){
 
         startFragment = new StartWindow();
@@ -33,6 +37,11 @@ public class FragmertsHolder {
 
         calendarWindow = new CalendarWindow();
 
+        trainingListWindow=new TrainingListWindow();
+
+        trainingListWindow=new TrainingListWindow();
+
+        addTrainingWindow= new AddTrainingWindow();
     }
 
 
@@ -44,6 +53,8 @@ public class FragmertsHolder {
     public ListWindow getListFragment_Meals(){return listFragment_Meals;}
     public ProfilWindow getProfilWindow(){return profilWindow;}
     public CalendarWindow getCalendarWindow(){return calendarWindow;}
+    public TrainingListWindow getTrainingListWindow(){return  trainingListWindow;}
+    public AddTrainingWindow getAddTrainingWindow(){return addTrainingWindow;};
 
 
     //Clear Frame to clear space
@@ -53,4 +64,6 @@ public class FragmertsHolder {
     public void destroyListFragment_Workout(){this.listFragment_Workout = null;}
     public void destroyListFragment_Meals(){this.listFragment_Meals = null;}
     public void destroyProfilWindow(){this.profilWindow = null;}
+    public void destroyTrainingListWindow(){this.trainingListWindow=null;}
+    public void destroyAddTrainingWindow(){this.addTrainingWindow=null;}
 }

@@ -85,4 +85,29 @@ public class MainActivity extends Activity {
         transaction.add(R.id.calendar, holder.getCalendarWindow());
         transaction.commit();
     }
+    public void replaceCalendar() {
+        manager = getFragmentManager();
+        transaction = manager.beginTransaction();
+        holder = new FragmertsHolder();
+        transaction.replace(R.id.calendar, holder.getTrainingListWindow());
+        transaction.commit();
+    }
+    public void backtoCalendar() {
+        manager = getFragmentManager();
+        transaction = manager.beginTransaction();
+        holder = new FragmertsHolder();
+        transaction.replace(R.id.calendar, holder.getCalendarWindow());
+        transaction.commit();
+    }
+    public void goToAddTraining() {
+        manager = getFragmentManager();
+        transaction = manager.beginTransaction();
+        holder = new FragmertsHolder();
+        transaction.replace(R.id.calendar, holder.getAddTrainingWindow());
+        transaction.commit();
+    }
+    public void loadTrainings(String month)
+    {
+
+    }
 }

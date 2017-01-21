@@ -8,10 +8,16 @@ import android.view.ViewGroup;
 import android.widget.CalendarView;
 import android.widget.Toast;
 
+import com.example.norbert.myapplication.Engin.MainActivity;
 import com.example.norbert.myapplication.R;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class CalendarWindow extends Fragment {
     CalendarView calendar;
+    String selectedDate;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -25,6 +31,13 @@ public class CalendarWindow extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initializeCalendar(view);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        selectedDate = sdf.format(new Date(calendar.getDate()));
+        selectedDate=selectedDate.substring(3,5);
+        ((MainActivity)getActivity()).loadTrainings(selectedDate);
+
+        //Toast.makeText(getActivity().getApplicationContext(), selectedDate, Toast.LENGTH_LONG).show();
+
     }
     public void initializeCalendar(View view) {
 
@@ -80,12 +93,28 @@ public class CalendarWindow extends Fragment {
 
             public void onSelectedDayChange(CalendarView view, int year, int month, int day) {
 
-                Toast.makeText(getActivity().getApplicationContext(), day + "/" + month + "/" + year, Toast.LENGTH_LONG).show();
+                String month1=repairData(String.valueOf(month+1));
+                if(selectedDate!=month1) {
+                    ((MainActivity) getActivity()).loadTrainings(String.valueOf(month));
+                    selectedDate=month1;
+
+                }
+                ((MainActivity)getActivity()).replaceCalendar();
+
+
+                Toast.makeText(getActivity().getApplicationContext(), day + "/" + month1 + "/" + year, Toast.LENGTH_LONG).show();
 
             }
 
         });
 
+
+    }
+    public String repairData(String month)
+    {
+        if(month.length()==1)
+            month="0"+month;
+        return month;
     }
 
 }
