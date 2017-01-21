@@ -10,6 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.norbert.myapplication.Engin.MainActivity;
+import com.example.norbert.myapplication.Engin.Objects.Exercise;
+import com.example.norbert.myapplication.Engin.Objects.UserInformation;
+import com.example.norbert.myapplication.Engin.Repository.ExerciseRepository;
+import com.example.norbert.myapplication.Engin.Repository.InformationRepository;
+import com.example.norbert.myapplication.Engin.Repository.TrainingRepository;
 import com.example.norbert.myapplication.Gui.FragmertsHolder;
 import com.example.norbert.myapplication.R;
 

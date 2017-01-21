@@ -24,6 +24,8 @@ public class ExerciseRepository {
         public static final String TABLE_NAME = "cwiczenia";
         public static final String COLUMN_NAZWA= "nazwa";
         public static final String COLUMN_OPIS = "opis";
+        public static final String COLUMN_INSTRUKCJE = "instrukcje";
+        public static final String COLUMN_SCIEZKA = "path";
         public static final String COLUMN_ID = "ID";
     }
 
@@ -33,7 +35,7 @@ public class ExerciseRepository {
         try{
             ArrayList<Exercise> ExerciseArrayList = new ArrayList<Exercise>();
             SQLiteDatabase DB = db.getReadableDatabase();
-            String[] coloumns = {ExerciseTableDetails.COLUMN_ID,ExerciseTableDetails.COLUMN_NAZWA,ExerciseTableDetails.COLUMN_OPIS};
+            String[] coloumns = {ExerciseTableDetails.COLUMN_ID,ExerciseTableDetails.COLUMN_NAZWA,ExerciseTableDetails.COLUMN_OPIS,ExerciseTableDetails.COLUMN_INSTRUKCJE,ExerciseTableDetails.COLUMN_SCIEZKA};
 
             String whereClause = ExerciseTableDetails.COLUMN_ID+"= ?";
             String[] whereArgs = new String[] {
@@ -44,10 +46,10 @@ public class ExerciseRepository {
             CR.moveToFirst();
 
             Log.d("DataBase operations","Recieved exercise");
-            return new Exercise(Integer.parseInt(CR.getString(0)),CR.getString(1),CR.getString(2));
+            return new Exercise(Integer.parseInt(CR.getString(0)),CR.getString(1),CR.getString(2),CR.getString(3),CR.getString(4));
         }
         catch (Exception ex){
-            return  new Exercise(-1,"Nie ma takiego cwiczenia","Nie ma takiego cwiczenia");
+            return  new Exercise(-1,"Nie ma takiego cwiczenia","Nie ma takiego cwiczenia","","");
         }
 
     }
@@ -57,13 +59,13 @@ public class ExerciseRepository {
             try{
                 ArrayList<Exercise> ExerciseArrayList = new ArrayList<Exercise>();
                 SQLiteDatabase DB = db.getReadableDatabase();
-                String[] coloumns = {ExerciseTableDetails.COLUMN_ID,ExerciseTableDetails.COLUMN_NAZWA,ExerciseTableDetails.COLUMN_OPIS};
+                String[] coloumns = {ExerciseTableDetails.COLUMN_ID,ExerciseTableDetails.COLUMN_NAZWA,ExerciseTableDetails.COLUMN_OPIS,ExerciseTableDetails.COLUMN_INSTRUKCJE,ExerciseTableDetails.COLUMN_SCIEZKA};
 
                 Cursor CR = DB.query(ExerciseTableDetails.TABLE_NAME, coloumns,null,null,null,null,null);
                 CR.moveToFirst();
 
                 do{
-                  ExerciseArrayList.add(new Exercise(Integer.parseInt(CR.getString(0)),CR.getString(1),CR.getString(2)));
+                  ExerciseArrayList.add(new Exercise(Integer.parseInt(CR.getString(0)),CR.getString(1),CR.getString(2),CR.getString(3),CR.getString(4)));
                 }while(CR.moveToNext());
 
                 Log.d("DataBase operations","Recieved all exercises");
