@@ -16,7 +16,7 @@ import com.example.norbert.myapplication.Engin.Repository.SeriesRepository;
 public class DatabaseOperations extends SQLiteOpenHelper {
 
     public static final int DB_VERSION = 2;
-    public static final String DATABASE_NAME = "cwiczenaia2.3";
+    public static final String DATABASE_NAME = "cwiczenaia2.7";
     public static final String LOG = "DataBase";
 
 
@@ -33,7 +33,7 @@ public class DatabaseOperations extends SQLiteOpenHelper {
         String CREATE_SERIA_TABLE = "CREATE TABLE \"Seria\" ( `ID` INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, `powtorzenia` INTEGER, `obciazenie` INTEGER, `ID_cw` INTEGER, `ID_tr` INTEGER)";
         db.execSQL(CREATE_SERIA_TABLE);
         Log.d(LOG,"Serie created");
-        String CREATE_EXERCISE_TABLE = "CREATE TABLE \"cwiczenia\" ( `ID` INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, `nazwa` TEXT UNIQUE, `opis` TEXT )";
+        String CREATE_EXERCISE_TABLE = "CREATE TABLE \"cwiczenia\" ( `ID` INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, `nazwa` TEXT UNIQUE, `opis` TEXT, `instrukcje` TEXT, `path` TEXT )";
         db.execSQL(CREATE_EXERCISE_TABLE);
         Log.d(LOG,"Cwiczenia created");
         String CREATE_TRAINING_TABLE ="CREATE TABLE `trening` ( `ID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, `data` TEXT NOT NULL )";

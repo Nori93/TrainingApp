@@ -9,7 +9,7 @@ import com.example.norbert.myapplication.Engin.DataBaseHelper.DatabaseOperations
 import com.example.norbert.myapplication.Engin.Objects.Training;
 
 /**
- * Created by Czajmen on 20.01.2017.
+ * Created by Kamil Czaja on 20.01.2017.
  */
 
 public class TrainingRepository {
