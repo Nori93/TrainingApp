@@ -6,7 +6,11 @@ import android.provider.BaseColumns;
 import android.util.Log;
 
 import com.example.norbert.myapplication.Engin.DataBaseHelper.DatabaseOperations;
+import com.example.norbert.myapplication.Engin.Objects.Series;
 import com.example.norbert.myapplication.Engin.Objects.Training;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Kamil Czaja on 20.01.2017.
@@ -41,6 +45,17 @@ public class TrainingRepository {
         }finally {
             DB.endTransaction();
         }
+    }
+
+    public void DeleteExistingTraining(int trainingId,DatabaseOperations db){
+
+    }
+
+    public  Training GetTrainingById(int trainingId,DatabaseOperations db)
+    {
+
+        List<Series> series = new ArrayList<>();
+        return new Training(-1,"data",series);
     }
 
 }

@@ -58,7 +58,7 @@ public class ProfilWindow extends Fragment {
         carb = (TextView) view.findViewById(R.id.textView6);
         fat= (TextView) view.findViewById(R.id.textView5);
         protein = (TextView) view.findViewById(R.id.textView3);
-        InformationRepository.putInformationData(DB,new UserInformation(CR.getWeight(),CR.getHeight(),2000,CR.getActivityLvl(),CR.getFat(),CR.getCarb(),CR.getProtein(),CR.getTarget(),"typ",1));
+        InformationRepository.putInformationData(DB,new UserInformation(CR.getWeight(),CR.getHeight(),2000,CR.getActivityLvl(),CR.getFat(),CR.getCarb(),CR.getProtein(),CR.getTarget(),"typ",1,19));
 
         Listadapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.customlayout, list);
         lista.setAdapter(Listadapter);
@@ -273,7 +273,7 @@ public class ProfilWindow extends Fragment {
 
 
     private void SaveToBase(UserInformation CR,DatabaseOperations DB,InformationRepository InformationRepository){
-        InformationRepository.putInformationData(DB,new UserInformation(CR.getWeight(),CR.getHeight(),CR.getCal(),CR.getActivityLvl(),CR.getFat(),CR.getCarb(),CR.getProtein(),CR.getTarget(),"typ",1));
+        InformationRepository.putInformationData(DB,new UserInformation(CR.getWeight(),CR.getHeight(),CR.getCal(),CR.getActivityLvl(),CR.getFat(),CR.getCarb(),CR.getProtein(),CR.getTarget(),"typ",1,19));
     }
 
     @Override

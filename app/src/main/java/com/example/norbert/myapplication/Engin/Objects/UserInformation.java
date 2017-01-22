@@ -16,11 +16,13 @@ public class UserInformation {
     private String target;
     private String bodyType;
     private int sex;
+    private int age;
+
 
 
     public UserInformation(){}
 
-    public UserInformation(float weight, float height, float cal, float activityLvl, float fat, float carb, float protein, String target, String bodyType, int sex)
+    public UserInformation(float weight, float height, float cal, float activityLvl, float fat, float carb, float protein, String target, String bodyType, int sex,int age)
     {
         this.weight = weight;
         this.height = height;
@@ -30,6 +32,7 @@ public class UserInformation {
         this.carb = carb;
         this.protein = protein;
         this.target = target;
+        this.age = age;
     }
 
 
@@ -111,6 +114,14 @@ public class UserInformation {
 
     public void setSex(int sex) {
         this.sex = sex;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }
 
