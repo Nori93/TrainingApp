@@ -1,5 +1,6 @@
 package com.example.norbert.myapplication.Engin.Repository;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.BaseColumns;
@@ -27,6 +28,28 @@ public class ExerciseRepository {
         public static final String COLUMN_INSTRUKCJE = "instrukcje";
         public static final String COLUMN_SCIEZKA = "path";
         public static final String COLUMN_ID = "ID";
+    }
+
+
+    public void insertNewExcerise(Exercise exercise,DatabaseOperations db){
+        try{
+
+
+            SQLiteDatabase DB = db.getWritableDatabase();
+            ContentValues content = new ContentValues();
+            content.put(ExerciseTableDetails.COLUMN_NAZWA, exercise.getNazwa());
+            content.put(ExerciseTableDetails.COLUMN_OPIS, exercise.getOpis());
+            content.put(ExerciseTableDetails.COLUMN_INSTRUKCJE, exercise.getInstrukcje());
+            content.put(ExerciseTableDetails.COLUMN_SCIEZKA, exercise.getSciezka());
+
+
+            long success = DB.insert(ExerciseTableDetails.TABLE_NAME,null,content);
+            Log.d("DataBase operations","inserted row exercise");
+
+        }
+        catch (Exception ex){
+            Log.d("DataBase operations","error while inserting row exercise");
+        }
     }
 
     public Exercise getExerciseById(int Id,DatabaseOperations db){

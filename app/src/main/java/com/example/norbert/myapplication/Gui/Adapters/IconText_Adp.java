@@ -76,8 +76,8 @@ public class IconText_Adp extends BaseAdapter {
         icon.setMaxHeight(heightIcon);
 
         try {
-            temp_icon = BitmapFactory.decodeFile(exercisesList.get(position).getSciezka());
-            icon.setImageBitmap(temp_icon);
+           // temp_icon = BitmapFactory.decodeFile(exercisesList.get(position).getSciezka());
+           // icon.setImageBitmap(temp_icon);
 
         }catch (Exception e){
             Log.e("Error",position + " do not set on IconText adp ");

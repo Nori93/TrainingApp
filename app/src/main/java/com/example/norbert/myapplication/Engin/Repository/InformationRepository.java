@@ -49,6 +49,8 @@ public class InformationRepository{
         content.put(InformationTableDetails.COLUMN_WEGLOWODANY, data.getCarb());
         content.put(InformationTableDetails.COLUMN_BIALKO, data.getProtein());
         content.put(InformationTableDetails.COLUMN_CEL, data.getTarget());
+      //  content.put(InformationTableDetails.COLUMN_PLEC, data.getTarget());
+
 
 
         long success = DB.insert(InformationTableDetails.TABLE_NAME,null,content);
