@@ -33,17 +33,18 @@ public class ProfilWindow extends Fragment {
     Context ctx;
     ListView lista;
     TextView calories,fat,carb,protein;
-    Button Save;
+    Button Save,CountCalories;
     private ArrayAdapter<String> Listadapter;
     String regexStr = "^[0-9]*$",sCarb="% Calories as carbohydrates:",sProteins="% Calories as proteins:",sFat="% Calories as fat:";
     float tluszcz,bialko,weglowodany;
-    float which1=1.2f;
-    int sex=1;
+    double totalCalories;
+    float which1;
+    int sex;
     CharSequence[] activity={"low","medium","high"};
     CharSequence[] Target={"Reduce","Gain","Maintain actual weight"};
     CharSequence[] BodyType={"Mesomorph","Ectomorph","Endomorph"};
     CharSequence[] Sex={"Male","Female"};
-    String target="Reduce",bodyType="Mesomorph";
+    String target,bodyType;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,27 +57,34 @@ public class ProfilWindow extends Fragment {
         final UserInformation CR =  InformationRepository.getInformationData(DB); // Dostajesz cały wypełniony obiekt!
         final ArrayList<String> list = new ArrayList<String>();
 
+        CountCalories = (Button) view.findViewById(R.id.CountCalories);
         Save = (Button) view.findViewById(R.id.Save);
         lista = (ListView) view.findViewById(R.id.ListView);
         calories = (TextView) view.findViewById(R.id.textView);
         carb = (TextView) view.findViewById(R.id.textView6);
         fat= (TextView) view.findViewById(R.id.textView5);
         protein = (TextView) view.findViewById(R.id.textView3);
-        InformationRepository.putInformationData(DB,new UserInformation(CR.getWeight(),CR.getHeight(),2000,CR.getActivityLvl(),CR.getFat(),CR.getCarb(),CR.getProtein(),CR.getTarget(),"typ",1,19));
 
         Listadapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.customlayout, list);
         lista.setAdapter(Listadapter);
         Listadapter.notifyDataSetChanged();
-
         UstawieniePoczatkowe(list,CR);
         ObslugaListy(list,CR,DB);
-
+        calcTotalCalories(CR);
         Save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             SaveToBase(CR,DB,InformationRepository);
             }
         });
+        CountCalories.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                OkClicked(totalCalories,CR);
+                if(totalCalories==0){
+                    Toast.makeText(ctx,"You need to fill Weight, Height, Activity level, Target, Body Type, Sex and Age",Toast.LENGTH_LONG).show();
+                }
 
+            }
+        });
         return view;
     }
 
@@ -104,6 +112,7 @@ public class ProfilWindow extends Fragment {
         else{
             list.add("Sex: Female");
         }
+        list.add("Age: "+CR.getAge());
     }
 
     private void ObslugaListy(final ArrayList<String> list, final UserInformation CR,final DatabaseOperations DB){
@@ -131,18 +140,27 @@ public class ProfilWindow extends Fragment {
                             public void onClick(DialogInterface dialog, int which) {
 
                                 if(which==0) {
-                                    which1 = 1.2f;
+                                     which1 = 1.2f;
+                                    text.setText(""+which1);
                                 }
                                 else if(which==1){
-                                    which1=1.4f;
+                                     which1=1.4f;
+                                    text.setText(""+which1);
                                 }
                                 else if(which==2){
                                     which1=1.6f;
+                                    text.setText(""+which1);
+                                }
+                                else {
+                                    which1 = 1.2f;
+                                    text.setText("" + which1);
                                 }
 
                             }
+
                         });
-                        text.setText(""+which1);
+
+
                         regexStr="[+-]?([0-9]*[.])?[0-9]+";
                         break;
                     case 3:
@@ -165,17 +183,24 @@ public class ProfilWindow extends Fragment {
 
                                 if(which==0) {
                                     target = "Reduce";
+                                    text.setText(""+target);
                                 }
                                 else if(which==1){
                                     target="Gain";
+                                    text.setText(""+target);
                                 }
                                 else if(which==2){
                                     target="Maintain actual weight";
+                                    text.setText(""+target);
+                                }
+                                else{
+                                    target="Reduce";
+                                    text.setText(""+target);
                                 }
 
                             }
                         });
-                        text.setText(""+target);
+
                         regexStr=".*";
                         break;
                     case 7:
@@ -186,17 +211,24 @@ public class ProfilWindow extends Fragment {
 
                                 if(which==0) {
                                    bodyType = "Mesomorph";
+                                    text.setText(""+bodyType);
                                 }
                                 else if(which==1){
                                     bodyType="Ectomorph";
+                                    text.setText(""+bodyType);
                                 }
                                 else if(which==2){
                                     bodyType="Endomorph";
+                                    text.setText(""+bodyType);
+                                }
+                                else{
+                                    bodyType = "Mesomorph";
+                                    text.setText(""+bodyType);
                                 }
 
                             }
                         });
-                        text.setText(""+bodyType);
+
                         regexStr=".*";
                         break;
                     case 8:
@@ -207,15 +239,21 @@ public class ProfilWindow extends Fragment {
 
                                 if(which==0) {
                                     sex = 1;
+                                    text.setText(""+sex);
                                 }
                                 else if(which==1){
                                     sex=2;
+                                    text.setText(""+sex);
                                 }
 
                             }
                         });
-                        text.setText(""+sex);
+
                         regexStr=".*";
+                        break;
+                    case 9:
+                        alertDialog.setView(text);
+                        alertDialog.setTitle("Set your Age ");
                         break;
 
                 }
@@ -226,16 +264,17 @@ public class ProfilWindow extends Fragment {
 
                         if (text.getText().toString().trim().matches(regexStr)&&text.getText().toString().isEmpty()==false) {
                            switchForOk(position,CR,text,list);
+
                         }
                         else{
                             Toast.makeText(ctx,"Wrong values",Toast.LENGTH_LONG).show();
                         }
+
                     }
                 });
 
                 final AlertDialog alert=alertDialog.create();
                 alert.show();
-
 
 
                 // Kamil Czaja tests
@@ -245,12 +284,16 @@ public class ProfilWindow extends Fragment {
                 Exercise tmp2 =  Exerciserepo.getExerciseById(1,DB);
 
                 ///////////
-                calcTotalCalories(CR,DB);
+
             }
         });
 
     }
-
+private void OkClicked(double totalCalories,UserInformation CR){
+    calcTotalCalories(CR);
+    CR.setCal((float)totalCalories);
+    calories.setText("Total Calories Needed: "+Math.round(totalCalories));
+}
     private void switchForOk(int position,UserInformation CR,EditText text,ArrayList<String> list){
         switch (position) {
             case 0:
@@ -264,8 +307,7 @@ public class ProfilWindow extends Fragment {
                 Listadapter.notifyDataSetChanged();
                 break;
             case 2:
-
-                list.set(position, "Activity Level: " + which1);
+                list.set(position, "Activity Level: " + text.getText());
                 CR.setActivityLvl(Float.valueOf(text.getText().toString()));
                 Listadapter.notifyDataSetChanged();
                 break;
@@ -329,22 +371,115 @@ public class ProfilWindow extends Fragment {
 
                 Listadapter.notifyDataSetChanged();
                 break;
+            case 9:
+                list.set(position, "Age: " + text.getText());
+                CR.setAge(Integer.valueOf(text.getText().toString()));
+                Listadapter.notifyDataSetChanged();
+                break;
 
         }
     }
 
 
-    private void calcTotalCalories(UserInformation CR,DatabaseOperations DB){
-        CR.getHeight();
+    private void calcTotalCalories(UserInformation CR){
+        totalCalories=0;
+        if(CR.getSex()==1){
+            totalCalories=(66.5+(13.7*CR.getWeight())+(5*CR.getHeight())-(6.8-CR.getAge()))*CR.getActivityLvl();
+            switch (CR.getTarget()) {
+                case "Gain":
+                    switch (CR.getBodyType()) {
+                        case "Mesomorph":
+                            totalCalories = totalCalories + (0.15 * totalCalories);
+                            break;
+                        case "Endomorph":
+                            totalCalories = totalCalories + (0.1 * totalCalories);
+                            break;
+                        default:
+                            totalCalories = totalCalories + (0.2 * totalCalories);
+                            break;
+                    }
+                    break;
+                case "Reduce":
+                    switch (CR.getBodyType()) {
+                        case "Mesomorph":
+                            totalCalories = totalCalories - (0.15 * totalCalories);
+                            break;
+                        case "Endomorph":
+                            totalCalories = totalCalories + (0.2 * totalCalories);
+                            break;
+                        default:
+                            totalCalories = totalCalories + (0.1 * totalCalories);
+                            break;
+                    }
+                    break;
+                default:
+                    switch (CR.getBodyType()) {
+                        case "Mesomorph":
+                            totalCalories = totalCalories - 100;
+                            break;
+                        case "Endomorph":
+                            totalCalories = totalCalories - 200;
+                            break;
+                        default:
+                            totalCalories = totalCalories+0;
+                            break;
+                    }
+                    break;
+            }
+
+        }
+        else if(CR.getSex()==2){
+        totalCalories=(65.5+(9.6*CR.getWeight())+(1.85*CR.getHeight())-(4.7-CR.getAge()))*CR.getActivityLvl();
+            switch (CR.getTarget()) {
+                case "Gain":
+                    switch (CR.getBodyType()) {
+                        case "Mesomorph":
+                            totalCalories = totalCalories + (0.15 * totalCalories);
+                            break;
+                        case "Endomorph":
+                            totalCalories = totalCalories + (0.1 * totalCalories);
+                            break;
+                        default:
+                            totalCalories = totalCalories + (0.2 * totalCalories);
+                            break;
+                    }
+                    break;
+                case "Reduce":
+                    switch (CR.getBodyType()) {
+                        case "Mesomorph":
+                            totalCalories = totalCalories - (0.15 * totalCalories);
+                            break;
+                        case "Endomorph":
+                            totalCalories = totalCalories + (0.2 * totalCalories);
+                            break;
+                        default:
+                            totalCalories = totalCalories + (0.1 * totalCalories);
+                            break;
+                    }
+                    break;
+                default:
+                    switch (CR.getBodyType()) {
+                        case "Mesomorph":
+                            totalCalories = totalCalories - 100;
+                            break;
+                        case "Endomorph":
+                            totalCalories = totalCalories - 200;
+                            break;
+                        default:
+                            totalCalories = totalCalories+0;
+                            break;
+                    }
+                    break;
+            }
+
+        }
+
     }
 
-
     private void SaveToBase(UserInformation CR,DatabaseOperations DB,InformationRepository InformationRepository){
-<<<<<<< Updated upstream
-        InformationRepository.putInformationData(DB,new UserInformation(CR.getWeight(),CR.getHeight(),CR.getCal(),CR.getActivityLvl(),CR.getFat(),CR.getCarb(),CR.getProtein(),CR.getTarget(),"typ",1,19));
-=======
-        InformationRepository.putInformationData(DB,new UserInformation(CR.getWeight(),CR.getHeight(),CR.getCal(),CR.getActivityLvl(),CR.getFat(),CR.getCarb(),CR.getProtein(),CR.getTarget(),CR.getBodyType(),CR.getSex()));
->>>>>>> Stashed changes
+
+        InformationRepository.putInformationData(DB,new UserInformation(CR.getWeight(),CR.getHeight(),CR.getCal(),CR.getActivityLvl(),CR.getFat(),CR.getCarb(),CR.getProtein(),CR.getTarget(),CR.getBodyType(),CR.getSex(),CR.getAge()));
+
     }
 
     @Override
