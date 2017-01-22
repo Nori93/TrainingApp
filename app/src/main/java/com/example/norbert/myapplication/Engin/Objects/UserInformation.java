@@ -14,11 +14,13 @@ public class UserInformation {
     private float carb;
     private float protein;
     private String target;
+    private String bodyType;
+    private int sex;
 
 
     public UserInformation(){}
 
-    public UserInformation(float weight, float height, float cal, float activityLvl, float fat, float carb, float protein, String target)
+    public UserInformation(float weight, float height, float cal, float activityLvl, float fat, float carb, float protein, String target, String bodyType, int sex)
     {
         this.weight = weight;
         this.height = height;
@@ -93,6 +95,22 @@ public class UserInformation {
 
     public void setTarget(String target) {
         this.target = target;
+    }
+
+    public String getBodyType() {
+        return bodyType;
+    }
+
+    public void setBodyType(String bodyType) {
+        this.bodyType = bodyType;
+    }
+
+    public int getSex() {
+        return sex;
+    }
+
+    public void setSex(int sex) {
+        this.sex = sex;
     }
 }
 
