@@ -38,9 +38,13 @@ public class ProfilWindow extends Fragment {
     String regexStr = "^[0-9]*$",sCarb="% Calories as carbohydrates:",sProteins="% Calories as proteins:",sFat="% Calories as fat:";
     float tluszcz,bialko,weglowodany;
     float which1=1.2f;
+    int sex=1;
     CharSequence[] activity={"low","medium","high"};
     CharSequence[] Target={"Reduce","Gain","Maintain actual weight"};
-    String target="Reduce";
+    CharSequence[] BodyType={"Mesomorph","Ectomorph","Endomorph"};
+    CharSequence[] Sex={"Male","Female"};
+    String target="Reduce",bodyType="Mesomorph";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -93,6 +97,13 @@ public class ProfilWindow extends Fragment {
         list.add(sFat+tluszcz+"%");
         list.add(sProteins+bialko+"%");
         list.add("Target: "+CR.getTarget());
+        list.add("Body Type: "+CR.getBodyType());
+        if(CR.getSex()==1) {
+            list.add("Sex: Male");
+        }
+        else{
+            list.add("Sex: Female");
+        }
     }
 
     private void ObslugaListy(final ArrayList<String> list, final UserInformation CR,final DatabaseOperations DB){
@@ -165,6 +176,45 @@ public class ProfilWindow extends Fragment {
                             }
                         });
                         text.setText(""+target);
+                        regexStr=".*";
+                        break;
+                    case 7:
+                        alertDialog.setTitle("Set your Body Type").setSingleChoiceItems(BodyType,0,new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                if(which==0) {
+                                   bodyType = "Mesomorph";
+                                }
+                                else if(which==1){
+                                    bodyType="Ectomorph";
+                                }
+                                else if(which==2){
+                                    bodyType="Endomorph";
+                                }
+
+                            }
+                        });
+                        text.setText(""+bodyType);
+                        regexStr=".*";
+                        break;
+                    case 8:
+                        alertDialog.setTitle("Set your sex").setSingleChoiceItems(Sex,0,new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                if(which==0) {
+                                    sex = 1;
+                                }
+                                else if(which==1){
+                                    sex=2;
+                                }
+
+                            }
+                        });
+                        text.setText(""+sex);
                         regexStr=".*";
                         break;
 
@@ -262,6 +312,23 @@ public class ProfilWindow extends Fragment {
                 CR.setTarget(text.getText().toString());
                 Listadapter.notifyDataSetChanged();
                 break;
+            case 7:
+                list.set(position,"Body Type: "+bodyType);
+                CR.setBodyType(text.getText().toString());
+                Listadapter.notifyDataSetChanged();
+                break;
+            case 8:
+                list.set(position,"Sex: "+sex);
+                CR.setSex(sex);
+                if(CR.getSex()==1) {
+                    list.set(8,"Sex: Male");
+                }
+                else{
+                    list.set(8,"Sex: Female");
+                }
+
+                Listadapter.notifyDataSetChanged();
+                break;
 
         }
     }
@@ -273,7 +340,11 @@ public class ProfilWindow extends Fragment {
 
 
     private void SaveToBase(UserInformation CR,DatabaseOperations DB,InformationRepository InformationRepository){
+<<<<<<< Updated upstream
         InformationRepository.putInformationData(DB,new UserInformation(CR.getWeight(),CR.getHeight(),CR.getCal(),CR.getActivityLvl(),CR.getFat(),CR.getCarb(),CR.getProtein(),CR.getTarget(),"typ",1,19));
+=======
+        InformationRepository.putInformationData(DB,new UserInformation(CR.getWeight(),CR.getHeight(),CR.getCal(),CR.getActivityLvl(),CR.getFat(),CR.getCarb(),CR.getProtein(),CR.getTarget(),CR.getBodyType(),CR.getSex()));
+>>>>>>> Stashed changes
     }
 
     @Override
