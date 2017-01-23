@@ -37,7 +37,7 @@ public class ProfilWindow extends Fragment {
     private ArrayAdapter<String> Listadapter;
     String regexStr = "^[0-9]*$",sCarb="% Calories as carbohydrates:",sProteins="% Calories as proteins:",sFat="% Calories as fat:";
     float tluszcz,bialko,weglowodany;
-    double totalCalories;
+
     float which1;
     int sex;
     CharSequence[] activity={"low","medium","high"};
@@ -78,9 +78,15 @@ public class ProfilWindow extends Fragment {
         });
         CountCalories.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                OkClicked(totalCalories,CR);
-                if(totalCalories==0){
+                double a=     calcTotalCalories(CR);
+
+                if(   a==0||CR.getAge()==0){
                     Toast.makeText(ctx,"You need to fill Weight, Height, Activity level, Target, Body Type, Sex and Age",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    calcTotalCalories(CR);
+                    CR.setCal((float)a);
+                    calories.setText("Total Calories Needed: "+Math.round(calcTotalCalories(CR)));
                 }
 
             }
@@ -104,8 +110,18 @@ public class ProfilWindow extends Fragment {
         list.add(sCarb+weglowodany+"%");
         list.add(sFat+tluszcz+"%");
         list.add(sProteins+bialko+"%");
-        list.add("Target: "+CR.getTarget());
-        list.add("Body Type: "+CR.getBodyType());
+        if(CR.getTarget()==null){
+            list.add("Target: ");
+        }
+        else{
+            list.add("Target: "+CR.getTarget());
+        }
+        if(CR.getBodyType()==null){
+            list.add("Body Type: ");
+        }
+        else{
+            list.add("Body Type: "+CR.getBodyType());
+        }
         if(CR.getSex()==1) {
             list.add("Sex: Male");
         }
@@ -134,6 +150,8 @@ public class ProfilWindow extends Fragment {
                         alertDialog.setTitle("Set your Height(cm)");
                         break;
                     case 2:
+                        which1=1.2f;
+                        text.setText(""+which1);
                         alertDialog.setTitle("Set your Activity Level").setSingleChoiceItems(activity,0,new DialogInterface.OnClickListener() {
 
                             @Override
@@ -151,11 +169,6 @@ public class ProfilWindow extends Fragment {
                                     which1=1.6f;
                                     text.setText(""+which1);
                                 }
-                                else {
-                                    which1 = 1.2f;
-                                    text.setText("" + which1);
-                                }
-
                             }
 
                         });
@@ -176,6 +189,8 @@ public class ProfilWindow extends Fragment {
                         alertDialog.setTitle("Set your protein ");
                         break;
                     case 6:
+                        target = "Reduce";
+                        text.setText(""+target);
                         alertDialog.setTitle("Set your Target").setSingleChoiceItems(Target,0,new DialogInterface.OnClickListener() {
 
                             @Override
@@ -204,6 +219,8 @@ public class ProfilWindow extends Fragment {
                         regexStr=".*";
                         break;
                     case 7:
+                        bodyType = "Mesomorph";
+                        text.setText(""+bodyType);
                         alertDialog.setTitle("Set your Body Type").setSingleChoiceItems(BodyType,0,new DialogInterface.OnClickListener() {
 
                             @Override
@@ -285,15 +302,11 @@ public class ProfilWindow extends Fragment {
 
                 ///////////
 
+
             }
         });
 
     }
-private void OkClicked(double totalCalories,UserInformation CR){
-    calcTotalCalories(CR);
-    CR.setCal((float)totalCalories);
-    calories.setText("Total Calories Needed: "+Math.round(totalCalories));
-}
     private void switchForOk(int position,UserInformation CR,EditText text,ArrayList<String> list){
         switch (position) {
             case 0:
@@ -381,8 +394,8 @@ private void OkClicked(double totalCalories,UserInformation CR){
     }
 
 
-    private void calcTotalCalories(UserInformation CR){
-        totalCalories=0;
+    private double calcTotalCalories(UserInformation CR){
+        double totalCalories = 0;
         if(CR.getSex()==1){
             totalCalories=(66.5+(13.7*CR.getWeight())+(5*CR.getHeight())-(6.8-CR.getAge()))*CR.getActivityLvl();
             switch (CR.getTarget()) {
@@ -474,6 +487,7 @@ private void OkClicked(double totalCalories,UserInformation CR){
 
         }
 
+        return totalCalories;
     }
 
     private void SaveToBase(UserInformation CR,DatabaseOperations DB,InformationRepository InformationRepository){
