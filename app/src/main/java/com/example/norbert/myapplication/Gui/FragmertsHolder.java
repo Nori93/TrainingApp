@@ -34,6 +34,7 @@ public class FragmertsHolder {
         listFragment_Workout = new ListWindow();
         listFragment_Meals=new ListWindow();
         profilWindow = new ProfilWindow();
+        exerciseWindow = new ExerciseWindow();
 
         calendarWindow = new CalendarWindow();
 
