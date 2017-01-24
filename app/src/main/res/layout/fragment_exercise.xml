@@ -63,7 +63,6 @@
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
                     android:gravity="center"
-                    android:id="@+id/exer_inst"
                     android:text="Instruction"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true" />
@@ -80,7 +79,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:id="@+id/exer_inst"/>
         </LinearLayout>
         <LinearLayout
             android:orientation="vertical"

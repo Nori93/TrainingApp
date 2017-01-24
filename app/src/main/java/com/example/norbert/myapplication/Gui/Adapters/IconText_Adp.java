@@ -2,8 +2,6 @@ package com.example.norbert.myapplication.Gui.Adapters;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +10,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.List;
-
 import com.example.norbert.myapplication.Engin.Objects.Exercise;
 import com.example.norbert.myapplication.R;
+
+import java.util.List;
 /**
  * Created by norbert on 31.12.2016.
  */
@@ -57,8 +55,8 @@ public class IconText_Adp extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
-        return null;
+    public Exercise getItem(int position) {
+        return exercisesList.get(position);
     }
 
     @Override

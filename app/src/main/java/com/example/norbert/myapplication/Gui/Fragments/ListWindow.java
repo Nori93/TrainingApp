@@ -5,13 +5,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.CalendarView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.norbert.myapplication.Engin.DataBaseHelper.DatabaseOperations;
+import com.example.norbert.myapplication.Engin.MainActivity;
 import com.example.norbert.myapplication.Engin.Objects.Exercise;
 import com.example.norbert.myapplication.Engin.Repository.ExerciseRepository;
 import com.example.norbert.myapplication.Gui.Adapters.IconText_Adp;
@@ -58,6 +58,14 @@ public class ListWindow extends Fragment {
         list = (ListView)view.findViewById(R.id.list_listview);
         adapter = new IconText_Adp(view.getContext(),exerciseArrayList);
         list.setAdapter(adapter);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ((MainActivity) getActivity()).setListSelected(adapter.getItem(position));
+                ((MainActivity) getActivity()).goToExerciseDesc();
+            }
+        });
     }
 
 

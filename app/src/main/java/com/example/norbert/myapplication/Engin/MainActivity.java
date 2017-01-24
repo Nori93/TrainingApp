@@ -8,6 +8,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.widget.RelativeLayout;
 
+import com.example.norbert.myapplication.Engin.Objects.Exercise;
 import com.example.norbert.myapplication.Engin.Sensor.Accelerometer;
 import com.example.norbert.myapplication.Engin.Sensor.Gravity;
 import com.example.norbert.myapplication.Engin.Sensor.LinearAccelerometer;
@@ -33,6 +34,9 @@ public class MainActivity extends Activity {
     private FragmentTransaction transaction;
     private FragmertsHolder holder;
 
+
+    // List Window
+    Exercise exercise;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,5 +128,26 @@ public class MainActivity extends Activity {
     public void loadTrainings(String month)
     {
 
+    }
+
+
+    // Exercise Transfer
+    public Exercise getListSelected() {
+        return exercise;
+    }
+
+    public void setListSelected(Exercise e){
+        this.exercise = e;
+    }
+
+    //on List item Click
+
+
+    public void goToExerciseDesc() {
+        manager = getFragmentManager();
+        transaction = manager.beginTransaction();
+        holder = new FragmertsHolder();
+        transaction.replace(R.id.Main, holder.getExerciseWindow());
+        transaction.commit();
     }
 }
