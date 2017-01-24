@@ -33,6 +33,8 @@ public class UserInformation {
         this.protein = protein;
         this.target = target;
         this.age = age;
+        this.bodyType = bodyType;
+
     }
 
 

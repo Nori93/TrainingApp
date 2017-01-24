@@ -67,15 +67,15 @@ public class InformationRepository{
                 SQLiteDatabase DB = db.getReadableDatabase();
                 String[] coloumns = {InformationTableDetails.COLUMN_WAGA, InformationTableDetails.COLUMN_WZROST,InformationTableDetails.COLUMN_KALORIE,
                         InformationTableDetails.COLUMN_POZIOM,InformationTableDetails.COLUMN_TLUSZCZ,
-                        InformationTableDetails.COLUMN_WEGLOWODANY,InformationTableDetails.COLUMN_BIALKO,InformationTableDetails.COLUMN_CEL,
-                        InformationTableDetails.COLUMN_BUDOWA,InformationTableDetails.COLUMN_PLEC,InformationTableDetails.COLUMN_AGE,InformationTableDetails.COLUMN_ID};
+                        InformationTableDetails.COLUMN_WEGLOWODANY,InformationTableDetails.COLUMN_BIALKO,InformationTableDetails.COLUMN_CEL,InformationTableDetails.COLUMN_PLEC,
+                        InformationTableDetails.COLUMN_BUDOWA,InformationTableDetails.COLUMN_AGE,InformationTableDetails.COLUMN_ID};
 
                 Cursor CR = DB.query(InformationTableDetails.TABLE_NAME, coloumns,null,null,null,null,InformationTableDetails.COLUMN_ID+" DESC");
 
                 CR.moveToFirst();
                 UserInformation userData= new UserInformation(Float.parseFloat(CR.getString(0)),(Float.parseFloat(CR.getString(1))),
                         (Float.parseFloat(CR.getString(2))),(Float.parseFloat(CR.getString(3))),(Float.parseFloat(CR.getString(4))),
-                        (Float.parseFloat(CR.getString(5))),(Float.parseFloat(CR.getString(6))),CR.getString(7),CR.getString(8),Integer.parseInt(CR.getString(9)),0);
+                        (Float.parseFloat(CR.getString(5))),(Float.parseFloat(CR.getString(6))),CR.getString(7),CR.getString(9),Integer.parseInt(CR.getString(8)),Integer.parseInt(CR.getString(10)));
 
                 Log.d("DataBase operations","Data recievied from DB");
 
