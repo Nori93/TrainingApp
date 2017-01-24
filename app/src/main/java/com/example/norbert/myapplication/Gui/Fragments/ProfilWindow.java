@@ -36,9 +36,7 @@ public class ProfilWindow extends Fragment {
     Button Save,CountCalories;
     private ArrayAdapter<String> Listadapter;
     String regexStr = "^[0-9]*$",sCarb="% Calories as carbohydrates:",sProteins="% Calories as proteins:",sFat="% Calories as fat:";
-    float tluszcz,bialko,weglowodany;
-
-    float which1;
+    float tluszcz,bialko,weglowodany,which1;
     int sex;
     CharSequence[] activity={"low","medium","high"};
     CharSequence[] Target={"Reduce","Gain","Maintain actual weight"};
@@ -87,6 +85,7 @@ public class ProfilWindow extends Fragment {
                     calcTotalCalories(CR);
                     CR.setCal((float)a);
                     calories.setText("Total Calories Needed: "+Math.round(calcTotalCalories(CR)));
+                        Calories(CR);
                 }
 
             }
@@ -97,10 +96,10 @@ public class ProfilWindow extends Fragment {
 
 
     private void UstawieniePoczatkowe(ArrayList<String> list, UserInformation CR){
-        calories.setText("Total Calories Needed: "+CR.getCal());
-        carb.setText("Total carbohydrates needed: "+CR.getCarb());
-        fat.setText("Total fat needed: "+CR.getFat());
-        protein.setText("Total protein needed: "+CR.getProtein());
+        calories.setText("Total Calories Needed: "+Math.round(CR.getCal()));
+        carb.setText("Total carbohydrates needed: "+CR.getCarb()+"g");
+        fat.setText("Total fat needed: "+CR.getFat()+"g");
+        protein.setText("Total protein needed: "+CR.getProtein()+"g");
         weglowodany=(Math.round(((CR.getCarb()*4)*100)/CR.getCal()));
         tluszcz=(Math.round(((CR.getFat()*9)*100)/CR.getCal()));
         bialko=(Math.round(((CR.getProtein()*4)*100)/CR.getCal()));
@@ -125,8 +124,11 @@ public class ProfilWindow extends Fragment {
         if(CR.getSex()==1) {
             list.add("Sex: Male");
         }
-        else{
+        else if(CR.getSex()==2){
             list.add("Sex: Female");
+        }
+        else{
+            list.add("Sex: ");
         }
         list.add("Age: "+CR.getAge());
     }
@@ -208,11 +210,6 @@ public class ProfilWindow extends Fragment {
                                     target="Maintain actual weight";
                                     text.setText(""+target);
                                 }
-                                else{
-                                    target="Reduce";
-                                    text.setText(""+target);
-                                }
-
                             }
                         });
 
@@ -238,17 +235,14 @@ public class ProfilWindow extends Fragment {
                                     bodyType="Endomorph";
                                     text.setText(""+bodyType);
                                 }
-                                else{
-                                    bodyType = "Mesomorph";
-                                    text.setText(""+bodyType);
-                                }
 
                             }
                         });
-
                         regexStr=".*";
                         break;
                     case 8:
+                        sex=1;
+                        text.setText(""+sex);
                         alertDialog.setTitle("Set your sex").setSingleChoiceItems(Sex,0,new DialogInterface.OnClickListener() {
 
                             @Override
@@ -262,7 +256,6 @@ public class ProfilWindow extends Fragment {
                                     sex=2;
                                     text.setText(""+sex);
                                 }
-
                             }
                         });
 
@@ -277,23 +270,17 @@ public class ProfilWindow extends Fragment {
 
                 alertDialog.setNeutralButton("OK",new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog,int which) {
-                        // Write your code here to execute after dialog
-
                         if (text.getText().toString().trim().matches(regexStr)&&text.getText().toString().isEmpty()==false) {
                            switchForOk(position,CR,text,list);
-
                         }
                         else{
                             Toast.makeText(ctx,"Wrong values",Toast.LENGTH_LONG).show();
                         }
-
                     }
                 });
 
                 final AlertDialog alert=alertDialog.create();
                 alert.show();
-
-
                 // Kamil Czaja tests
 
                 ExerciseRepository Exerciserepo = new ExerciseRepository();
@@ -301,11 +288,17 @@ public class ProfilWindow extends Fragment {
                 Exercise tmp2 =  Exerciserepo.getExerciseById(1,DB);
 
                 ///////////
-
-
             }
         });
 
+    }
+    private void Calories(UserInformation CR){
+        CR.setCarb((float) Math.ceil((CR.getCal()*((Float.valueOf(weglowodany))/100))/4));
+        carb.setText("Total carbohydrates needed: "+CR.getCarb()+"g");
+        CR.setFat((float) Math.ceil((CR.getCal()*((Float.valueOf(tluszcz))/100))/9));
+        fat.setText("Total fat needed: "+CR.getFat()+"g");
+        CR.setProtein((float) Math.ceil((CR.getCal()*((Float.valueOf(bialko))/100))/4));
+        protein.setText("Total protein needed: "+CR.getProtein()+"g");
     }
     private void switchForOk(int position,UserInformation CR,EditText text,ArrayList<String> list){
         switch (position) {
@@ -326,7 +319,7 @@ public class ProfilWindow extends Fragment {
                 break;
             case 3:
                 weglowodany=Float.valueOf(text.getText().toString());
-                if((weglowodany+bialko+tluszcz)<=101){
+                if((weglowodany+bialko+tluszcz)<=100){
                     list.set(position, sCarb + text.getText()+"%");
                     CR.setCarb((float) Math.ceil((CR.getCal()*((Float.valueOf(text.getText().toString()))/100))/4));
                     carb.setText("Total carbohydrates needed: "+CR.getCarb()+"g");
@@ -392,7 +385,6 @@ public class ProfilWindow extends Fragment {
 
         }
     }
-
 
     private double calcTotalCalories(UserInformation CR){
         double totalCalories = 0;
