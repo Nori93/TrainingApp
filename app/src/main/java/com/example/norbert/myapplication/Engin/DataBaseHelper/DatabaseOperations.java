@@ -34,7 +34,7 @@ import java.util.List;
 public class DatabaseOperations extends SQLiteAssetHelper {
 
     public static final int DB_VERSION = 2;
-    public static final String DATABASE_NAME = "cwiczenia1.1.db";
+    public static final String DATABASE_NAME = "cwiczenia1.2.db";
     public static final String LOG = "DataBase";
     Context context;
 
