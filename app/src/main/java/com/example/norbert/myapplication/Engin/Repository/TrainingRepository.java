@@ -1,6 +1,7 @@
 package com.example.norbert.myapplication.Engin.Repository;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.BaseColumns;
 import android.util.Log;
@@ -34,10 +35,29 @@ public class TrainingRepository {
         try{
             TrainingTableContent.put(TrainingTableDetails.COLUMN_DATA,training.getData());
 
-            if(-1 == DB.insert(TrainingTableDetails.TABLE_NAME,null,TrainingTableContent)
-               || -1 ==  DB.insert(SeriesRepository.SeriesTableDetails.TABLE_NAME,null,SeriesContentValue)){
+
+            if(-1 == DB.insert(TrainingTableDetails.TABLE_NAME,null,TrainingTableContent))
+            {
                 throw new Exception();
             }
+
+            for(Series seria : training.getSerie())
+            {
+                SeriesContentValue.clear();
+
+                SeriesContentValue.put(SeriesRepository.SeriesTableDetails.COLUMN_POWTORZENIA, seria.getRepeats());
+                SeriesContentValue.put(SeriesRepository.SeriesTableDetails.COLUMN_OBCIAZENIE, seria.getWeights());
+                SeriesContentValue.put(SeriesRepository.SeriesTableDetails.COLUMN_ID_CW, seria.getId_cw());
+                SeriesContentValue.put(SeriesRepository.SeriesTableDetails.COLUMN_ID_TR, seria.getId_tr());
+
+                if(-1 == DB.insert(SeriesRepository.SeriesTableDetails.TABLE_NAME,null,SeriesContentValue))
+                {
+                    throw new Exception();
+                }
+            }
+
+            Log.d("DataBase operations", "Row inserted to series");
+
             DB.setTransactionSuccessful();
         }catch (Exception ex)
         {
@@ -53,9 +73,27 @@ public class TrainingRepository {
 
     public  Training GetTrainingById(int trainingId,DatabaseOperations db)
     {
+        List<Series> serie = new ArrayList<>();
+        SQLiteDatabase DB = db.getReadableDatabase();
+        String[] coloumnsTraining = {TrainingTableDetails.COLUMN_ID, TrainingTableDetails.COLUMN_DATA};
 
-        List<Series> series = new ArrayList<>();
-        return new Training(-1,"data",series);
+        String whereClause = TrainingTableDetails.COLUMN_ID+"= ?";
+        String[] whereArgs = new String[] {
+                Integer.toString(trainingId)
+        };
+
+        Cursor TrainingCR = DB.query(ExerciseRepository.ExerciseTableDetails.TABLE_NAME, coloumnsTraining,whereClause,whereArgs,null,null,null);
+        TrainingCR.moveToFirst();
+
+        String[] columnsSeries = {SeriesRepository.SeriesTableDetails.COLUMN_ID, SeriesRepository.SeriesTableDetails.COLUMN_POWTORZENIA, SeriesRepository.SeriesTableDetails.COLUMN_OBCIAZENIE,
+                SeriesRepository.SeriesTableDetails.COLUMN_ID_CW, SeriesRepository.SeriesTableDetails.COLUMN_ID_TR};
+        
+        Cursor SeriesCR = DB.query(SeriesRepository.SeriesTableDetails.TABLE_NAME, columnsSeries,whereClause,whereArgs,null,null,null);
+
+        do{
+            serie.add(new Series(Integer.parseInt(SeriesCR.getString(0)),Integer.parseInt(SeriesCR.getString(1)),Float.parseFloat(SeriesCR.getString(2)),Integer.parseInt(SeriesCR.getString(3)),Integer.parseInt(SeriesCR.getString(4))));
+          }while(SeriesCR.moveToNext());
+
+        return new Training(Integer.parseInt(TrainingCR.getString(0)),TrainingCR.getString(1),serie);
     }
-
 }
