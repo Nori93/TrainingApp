@@ -53,14 +53,14 @@ public class AddTrainingWindow extends Fragment {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,8);
+                ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,R.integer.trainingListWindow);
             }
         });
         addSeriesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((MainActivity)getActivity()).setActualTrainingName(nameOfTraining.getText().toString());
-                ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,3);
+                ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,R.integer.listFragment_Workout);
             }
         });
 

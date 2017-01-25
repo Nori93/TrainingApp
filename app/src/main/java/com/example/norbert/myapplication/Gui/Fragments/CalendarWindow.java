@@ -102,7 +102,7 @@ public class CalendarWindow extends Fragment {
                     selectedDate=month1;
 
                 }
-                ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,8);
+                ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,R.integer.trainingListWindow);
 
 
                 Toast.makeText(getActivity().getApplicationContext(), day + "/" + month1 + "/" + year, Toast.LENGTH_LONG).show();

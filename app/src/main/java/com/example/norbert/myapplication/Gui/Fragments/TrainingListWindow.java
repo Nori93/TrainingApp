@@ -51,13 +51,13 @@ public class TrainingListWindow extends Fragment {
         backToCalendarButt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,7);
+                ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,R.integer.calendarWindow);
             }
         });
         addTrainingButt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,9);
+                ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,R.integer.addTrainingWindow);
             }
         });
     }
