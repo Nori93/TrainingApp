@@ -2,6 +2,8 @@ package com.example.norbert.myapplication.Gui;
 
 
 
+import android.app.Fragment;
+
 import com.example.norbert.myapplication.Gui.Fragments.AddTrainingWindow;
 import com.example.norbert.myapplication.Gui.Fragments.CalendarWindow;
 import com.example.norbert.myapplication.Gui.Fragments.ExerciseWindow;
@@ -17,36 +19,32 @@ public class FragmertsHolder {
     private int index;
 
     //List of fragments for app
-    StartWindow startFragment;
-    TopControlPanel topControlPanel;
-    ListWindow listFragment_Workout;
-    ListWindow listFragment_Meals;
-    ExerciseWindow exerciseWindow;
-    ProfilWindow profilWindow;
-    CalendarWindow calendarWindow;
-    TrainingListWindow trainingListWindow;
-    AddTrainingWindow addTrainingWindow;
+    StartWindow startFragment;              // 1
+    TopControlPanel topControlPanel;        // 2
+    ListWindow listFragment_Workout;        // 3
+    ListWindow listFragment_Meals;          // 4
+    ExerciseWindow exerciseWindow;          // 5
+    ProfilWindow profilWindow;              // 6
+    CalendarWindow calendarWindow;          // 7
+    TrainingListWindow trainingListWindow;  // 8
+    AddTrainingWindow addTrainingWindow;    // 9
     public FragmertsHolder(){
 
         startFragment = new StartWindow();
         topControlPanel = new TopControlPanel();
-
         listFragment_Workout = new ListWindow();
         listFragment_Meals=new ListWindow();
         profilWindow = new ProfilWindow();
         exerciseWindow = new ExerciseWindow();
-
         calendarWindow = new CalendarWindow();
-
         trainingListWindow=new TrainingListWindow();
-
         trainingListWindow=new TrainingListWindow();
-
         addTrainingWindow= new AddTrainingWindow();
     }
 
 
-    // Get The Fragment and give to MainWindow
+    // version 0.1
+    /**
     public StartWindow getStartFragment(){return startFragment;}
     public TopControlPanel getTopControlPanel(){return topControlPanel;}
     public ExerciseWindow getExerciseWindow(){return exerciseWindow;}
@@ -56,6 +54,33 @@ public class FragmertsHolder {
     public CalendarWindow getCalendarWindow(){return calendarWindow;}
     public TrainingListWindow getTrainingListWindow(){return  trainingListWindow;}
     public AddTrainingWindow getAddTrainingWindow(){return addTrainingWindow;};
+    */
+    // version 0.2
+    public Fragment getFragment(int index) {
+        switch (index) {
+            case 1:
+                return startFragment;
+            case 2:
+                return topControlPanel;
+            case 3:
+                return listFragment_Workout;
+            case 4:
+                return listFragment_Meals;
+            case 5:
+                return exerciseWindow;
+            case 6:
+                return profilWindow;
+            case 7:
+                return calendarWindow;
+            case 8:
+                return trainingListWindow;
+            case 9:
+                return addTrainingWindow;
+
+        }
+        return null;
+    }
+
 
 
     //Clear Frame to clear space
@@ -67,4 +92,6 @@ public class FragmertsHolder {
     public void destroyProfilWindow(){this.profilWindow = null;}
     public void destroyTrainingListWindow(){this.trainingListWindow=null;}
     public void destroyAddTrainingWindow(){this.addTrainingWindow=null;}
+
+
 }

@@ -55,8 +55,8 @@ public class MainActivity extends Activity {
         manager = getFragmentManager();
         transaction = manager.beginTransaction();
         holder = new FragmertsHolder();
-        transaction.add(R.id.Top, holder.getTopControlPanel());
-        transaction.add(R.id.Main,holder.getStartFragment());
+        transaction.add(R.id.Top, holder.getFragment(2));
+        transaction.add(R.id.Main,holder.getFragment(1));
         transaction.commit();
 
     }
@@ -66,25 +66,24 @@ public class MainActivity extends Activity {
         switch (fragmentId){
             //StartWindows Fragment
              case 1:
-                //holder.getStartFragment() <give some informations>
-                transaction.replace(R.id.Main,holder.getStartFragment());
+                transaction.replace(R.id.Main,holder.getFragment(1));
                 transaction.commit();
                 break;
             //Exercise Fragment
             case 2:
                 //holder.getStartFragment() <give some informations>
-                transaction.replace(R.id.Main,holder.getListFragment_Workout());
+                transaction.replace(R.id.Main,holder.getFragment(3));
                 transaction.commit();
                 break;
             //Meals Fragment
             case 3:
                 //holder.getStartFragment() <give some informations>
-                transaction.replace(R.id.Main,holder.getListFragment_Meals());
+                transaction.replace(R.id.Main,holder.getFragment(4));
                 transaction.commit();
                 break;
             //Profile Fragment
             case 4:
-                transaction.replace(R.id.Main,holder.getProfilWindow());
+                transaction.replace(R.id.Main,holder.getFragment(6));
                 transaction.commit();
 
                 break;
@@ -101,28 +100,28 @@ public class MainActivity extends Activity {
         manager = getFragmentManager();
         transaction = manager.beginTransaction();
         holder = new FragmertsHolder();
-        transaction.add(R.id.calendar, holder.getCalendarWindow());
+        transaction.add(R.id.calendar, holder.getFragment(7));
         transaction.commit();
     }
     public void replaceCalendar() {
         manager = getFragmentManager();
         transaction = manager.beginTransaction();
         holder = new FragmertsHolder();
-        transaction.replace(R.id.calendar, holder.getTrainingListWindow());
+        transaction.replace(R.id.calendar, holder.getFragment(8));
         transaction.commit();
     }
     public void backtoCalendar() {
         manager = getFragmentManager();
         transaction = manager.beginTransaction();
         holder = new FragmertsHolder();
-        transaction.replace(R.id.calendar, holder.getCalendarWindow());
+        transaction.replace(R.id.calendar, holder.getFragment(7));
         transaction.commit();
     }
     public void goToAddTraining() {
         manager = getFragmentManager();
         transaction = manager.beginTransaction();
         holder = new FragmertsHolder();
-        transaction.replace(R.id.calendar, holder.getAddTrainingWindow());
+        transaction.replace(R.id.calendar, holder.getFragment(9));
         transaction.commit();
     }
     public void loadTrainings(String month)
@@ -143,11 +142,10 @@ public class MainActivity extends Activity {
     //on List item Click
 
 
-    public void goToExerciseDesc() {
-        manager = getFragmentManager();
+
+    public void fragmentReplace(int where, int index){
         transaction = manager.beginTransaction();
-        holder = new FragmertsHolder();
-        transaction.replace(R.id.Main, holder.getExerciseWindow());
+        transaction.replace(where, holder.getFragment(index));
         transaction.commit();
     }
 }

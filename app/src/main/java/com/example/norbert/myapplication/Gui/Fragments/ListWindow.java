@@ -63,7 +63,7 @@ public class ListWindow extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ((MainActivity) getActivity()).setListSelected(adapter.getItem(position));
-                ((MainActivity) getActivity()).goToExerciseDesc();
+                ((MainActivity) getActivity()).fragmentReplace(R.id.Main,5);
             }
         });
     }
