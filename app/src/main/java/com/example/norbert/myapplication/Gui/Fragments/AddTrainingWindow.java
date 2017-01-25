@@ -12,6 +12,9 @@ import android.widget.ListView;
 import com.example.norbert.myapplication.Engin.MainActivity;
 import com.example.norbert.myapplication.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class AddTrainingWindow extends Fragment {
 
@@ -21,6 +24,17 @@ public class AddTrainingWindow extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
+
+
+        final DatabaseOperations DB = new DatabaseOperations(getActivity());
+        //tests
+        TrainingRepository trainingRepository = new TrainingRepository();
+        Training tmp =  trainingRepository.GetTrainingById(1,DB);
+
+
+
         return inflater.inflate(R.layout.fragment_add_training,container, false);
     }
 

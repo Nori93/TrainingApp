@@ -82,11 +82,13 @@ public class TrainingRepository {
                 Integer.toString(trainingId)
         };
 
-        Cursor TrainingCR = DB.query(ExerciseRepository.ExerciseTableDetails.TABLE_NAME, coloumnsTraining,whereClause,whereArgs,null,null,null);
+        Cursor TrainingCR = DB.query(TrainingTableDetails.TABLE_NAME, coloumnsTraining,whereClause,whereArgs,null,null,null);
         TrainingCR.moveToFirst();
 
         String[] columnsSeries = {SeriesRepository.SeriesTableDetails.COLUMN_ID, SeriesRepository.SeriesTableDetails.COLUMN_POWTORZENIA, SeriesRepository.SeriesTableDetails.COLUMN_OBCIAZENIE,
                 SeriesRepository.SeriesTableDetails.COLUMN_ID_CW, SeriesRepository.SeriesTableDetails.COLUMN_ID_TR};
+
+         whereClause = SeriesRepository.SeriesTableDetails.COLUMN_ID_TR+"= ?";
 
         Cursor SeriesCR = DB.query(SeriesRepository.SeriesTableDetails.TABLE_NAME, columnsSeries,whereClause,whereArgs,null,null,null);
 
