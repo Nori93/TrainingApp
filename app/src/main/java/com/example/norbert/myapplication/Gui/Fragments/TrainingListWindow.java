@@ -7,9 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.norbert.myapplication.Engin.MainActivity;
 import com.example.norbert.myapplication.R;
+
+import java.text.SimpleDateFormat;
+
+import static android.R.attr.format;
 
 
 public class TrainingListWindow extends Fragment {
@@ -17,6 +22,8 @@ public class TrainingListWindow extends Fragment {
     ListView lv;
     Button addTrainingButt;
     Button backToCalendarButt;
+    TextView dataTextView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -34,17 +41,23 @@ public class TrainingListWindow extends Fragment {
         lv=(ListView)view.findViewById(R.id.frtrli_list);
         addTrainingButt=(Button)view.findViewById(R.id.frtrli_add_button);
         backToCalendarButt=(Button)view.findViewById(R.id.frtrli_back_button);
+        dataTextView=(TextView)view.findViewById(R.id.frtrli_data_textview);
+
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        String selectedDate = format.format(((MainActivity)getActivity()).getData());
+        dataTextView.setText(selectedDate);
+
 
         backToCalendarButt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).backtoCalendar();
+                ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,7);
             }
         });
         addTrainingButt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).goToAddTraining();
+                ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,9);
             }
         });
     }

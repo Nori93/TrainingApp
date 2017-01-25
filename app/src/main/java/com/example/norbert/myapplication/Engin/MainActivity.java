@@ -15,6 +15,10 @@ import com.example.norbert.myapplication.Engin.Sensor.LinearAccelerometer;
 import com.example.norbert.myapplication.Gui.FragmertsHolder;
 import com.example.norbert.myapplication.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class MainActivity extends Activity {
 
     //Sensors
@@ -26,6 +30,9 @@ public class MainActivity extends Activity {
     //Main Window is a container for all fragments
     private RelativeLayout mainWindow;
 
+    //Calendar tools
+    Date data;
+    String actualTrainingName;
 
 
     //Fragment tools
@@ -96,34 +103,7 @@ public class MainActivity extends Activity {
         setBodyWindow();
     }
 
-    public void setCalendar() {
-        manager = getFragmentManager();
-        transaction = manager.beginTransaction();
-        holder = new FragmertsHolder();
-        transaction.add(R.id.calendar, holder.getFragment(7));
-        transaction.commit();
-    }
-    public void replaceCalendar() {
-        manager = getFragmentManager();
-        transaction = manager.beginTransaction();
-        holder = new FragmertsHolder();
-        transaction.replace(R.id.calendar, holder.getFragment(8));
-        transaction.commit();
-    }
-    public void backtoCalendar() {
-        manager = getFragmentManager();
-        transaction = manager.beginTransaction();
-        holder = new FragmertsHolder();
-        transaction.replace(R.id.calendar, holder.getFragment(7));
-        transaction.commit();
-    }
-    public void goToAddTraining() {
-        manager = getFragmentManager();
-        transaction = manager.beginTransaction();
-        holder = new FragmertsHolder();
-        transaction.replace(R.id.calendar, holder.getFragment(9));
-        transaction.commit();
-    }
+
     public void loadTrainings(String month)
     {
 
@@ -148,7 +128,27 @@ public class MainActivity extends Activity {
         transaction.commit();
     }
 
-    private int getTag(int resorce){
-        return getResources().getInteger(resorce);
+    public void setData(String rok,String miesiac,String dzien) {
+        String datawString=dzien+'-'+miesiac+'-'+rok;
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            data = format.parse(datawString);
+            System.out.println(data);
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    public Date getData()
+    {
+        return data;
+    }
+    public String getActualTrainingName()
+    {
+        return actualTrainingName;
+    }
+    public void setActualTrainingName(String name)
+    {
+        actualTrainingName=name;
     }
 }

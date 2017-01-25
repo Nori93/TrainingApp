@@ -94,12 +94,15 @@ public class CalendarWindow extends Fragment {
             public void onSelectedDayChange(CalendarView view, int year, int month, int day) {
 
                 String month1=repairData(String.valueOf(month+1));
+                String year1=String.valueOf(year);
+                String day1=String.valueOf(day);
+                ((MainActivity)getActivity()).setData(year1,month1,day1);
                 if(selectedDate!=month1) {
                     ((MainActivity) getActivity()).loadTrainings(String.valueOf(month));
                     selectedDate=month1;
 
                 }
-                ((MainActivity)getActivity()).replaceCalendar();
+                ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,8);
 
 
                 Toast.makeText(getActivity().getApplicationContext(), day + "/" + month1 + "/" + year, Toast.LENGTH_LONG).show();
