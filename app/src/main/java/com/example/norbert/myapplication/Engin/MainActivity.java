@@ -55,8 +55,8 @@ public class MainActivity extends Activity {
         manager = getFragmentManager();
         transaction = manager.beginTransaction();
         holder = new FragmertsHolder();
-        transaction.add(R.id.Top, holder.getFragment(2));
-        transaction.add(R.id.Main,holder.getFragment(1));
+        transaction.add(R.id.Top, holder.getFragment(getTag(R.integer.topControlPanel)));
+        transaction.add(R.id.Main,holder.getFragment(getTag(R.integer.startWindow)));
         transaction.commit();
 
     }
@@ -66,24 +66,24 @@ public class MainActivity extends Activity {
         switch (fragmentId){
             //StartWindows Fragment
              case 1:
-                transaction.replace(R.id.Main,holder.getFragment(1));
+                transaction.replace(R.id.Main,holder.getFragment(getTag(R.integer.startWindow)));
                 transaction.commit();
                 break;
-            //Exercise Fragment
+            //Workout List Fragment
             case 2:
                 //holder.getStartFragment() <give some informations>
-                transaction.replace(R.id.Main,holder.getFragment(3));
+                transaction.replace(R.id.Main,holder.getFragment(getTag(R.integer.listFragment_Workout)));
                 transaction.commit();
                 break;
             //Meals Fragment
             case 3:
                 //holder.getStartFragment() <give some informations>
-                transaction.replace(R.id.Main,holder.getFragment(4));
+                transaction.replace(R.id.Main,holder.getFragment(getTag(R.integer.listFragment_Meals)));
                 transaction.commit();
                 break;
             //Profile Fragment
             case 4:
-                transaction.replace(R.id.Main,holder.getFragment(6));
+                transaction.replace(R.id.Main,holder.getFragment(getTag(R.integer.profilWindow)));
                 transaction.commit();
 
                 break;
@@ -142,10 +142,13 @@ public class MainActivity extends Activity {
     //on List item Click
 
 
-
-    public void fragmentReplace(int where, int index){
+    public void fragmentReplace(int where, int tag){
         transaction = manager.beginTransaction();
-        transaction.replace(where, holder.getFragment(index));
+        transaction.replace(where, holder.getFragment(getTag(tag)));
         transaction.commit();
+    }
+
+    private int getTag(int resorce){
+        return getResources().getInteger(resorce);
     }
 }

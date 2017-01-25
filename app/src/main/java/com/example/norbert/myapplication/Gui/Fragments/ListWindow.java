@@ -62,8 +62,10 @@ public class ListWindow extends Fragment {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //get target exercise
                 ((MainActivity) getActivity()).setListSelected(adapter.getItem(position));
-                ((MainActivity) getActivity()).fragmentReplace(R.id.Main,5);
+                // start fragment exercise
+                ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.exerciseWindow);
             }
         });
     }

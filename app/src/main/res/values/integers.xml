@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="startWindow" >1</integer>
+    <integer name="topControlPanel">2</integer>
+    <integer name="listFragment_Workout">3</integer>
+    <integer name="listFragment_Meals">4</integer>
+    <integer name="exerciseWindow">5</integer>
+    <integer name="profilWindow">6</integer>
+    <integer name="calendarWindow">7</integer>
+    <integer name="trainingListWindow">8</integer>
+    <integer name="addTrainingWindow">9</integer>
+</resources>
+

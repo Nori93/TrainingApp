@@ -19,7 +19,7 @@ public class FragmertsHolder {
     private int index;
 
     //List of fragments for app
-    StartWindow startFragment;              // 1
+    StartWindow startWindow;                // 1
     TopControlPanel topControlPanel;        // 2
     ListWindow listFragment_Workout;        // 3
     ListWindow listFragment_Meals;          // 4
@@ -30,7 +30,7 @@ public class FragmertsHolder {
     AddTrainingWindow addTrainingWindow;    // 9
     public FragmertsHolder(){
 
-        startFragment = new StartWindow();
+        startWindow = new StartWindow();
         topControlPanel = new TopControlPanel();
         listFragment_Workout = new ListWindow();
         listFragment_Meals=new ListWindow();
@@ -59,7 +59,7 @@ public class FragmertsHolder {
     public Fragment getFragment(int index) {
         switch (index) {
             case 1:
-                return startFragment;
+                return startWindow;
             case 2:
                 return topControlPanel;
             case 3:
@@ -84,7 +84,7 @@ public class FragmertsHolder {
 
 
     //Clear Frame to clear space
-    public void destroyStartFragment(){this.startFragment = null;}
+    public void destroyStartFragment(){this.startWindow = null;}
     public void destroyTopControlPanel(){this.topControlPanel = null;}
     public void destroyExerciseWindow(){this.exerciseWindow = null;}
     public void destroyListFragment_Workout(){this.listFragment_Workout = null;}
