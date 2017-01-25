@@ -7,6 +7,7 @@ import android.app.Fragment;
 import com.example.norbert.myapplication.Gui.Fragments.AddTrainingWindow;
 import com.example.norbert.myapplication.Gui.Fragments.CalendarWindow;
 import com.example.norbert.myapplication.Gui.Fragments.ExerciseWindow;
+import com.example.norbert.myapplication.Gui.Fragments.InputWindow;
 import com.example.norbert.myapplication.Gui.Fragments.ListWindow;
 import com.example.norbert.myapplication.Gui.Fragments.ProfilWindow;
 import com.example.norbert.myapplication.Gui.Fragments.StartWindow;
@@ -28,6 +29,7 @@ public class FragmertsHolder {
     CalendarWindow calendarWindow;          // 7
     TrainingListWindow trainingListWindow;  // 8
     AddTrainingWindow addTrainingWindow;    // 9
+    InputWindow inputWindow;
     public FragmertsHolder(){
 
         startWindow = new StartWindow();
@@ -40,6 +42,7 @@ public class FragmertsHolder {
         trainingListWindow=new TrainingListWindow();
         trainingListWindow=new TrainingListWindow();
         addTrainingWindow= new AddTrainingWindow();
+        inputWindow = new InputWindow();
     }
 
 
