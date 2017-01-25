@@ -139,6 +139,9 @@ public class MainActivity extends Activity {
             e.printStackTrace();
         }
     }
+    private int getTag(int resorce) {
+        return getResources().getInteger(resorce);
+    }
     public Date getData()
     {
         return data;
