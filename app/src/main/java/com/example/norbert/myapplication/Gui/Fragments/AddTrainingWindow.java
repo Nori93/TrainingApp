@@ -28,10 +28,10 @@ public class AddTrainingWindow extends Fragment {
 
 
 
-        final DatabaseOperations DB = new DatabaseOperations(getActivity());
-        //tests
-        TrainingRepository trainingRepository = new TrainingRepository();
-        Training tmp =  trainingRepository.GetTrainingById(1,DB);
+//        final DatabaseOperations DB = new DatabaseOperations(getActivity());
+//        //tests
+//        TrainingRepository trainingRepository = new TrainingRepository();
+//        Training tmp =  trainingRepository.GetTrainingById(1,DB);
 
 
 
