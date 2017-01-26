@@ -66,9 +66,11 @@ public class ProfilWindow extends Fragment {
         Listadapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.customlayout, list);
         lista.setAdapter(Listadapter);
         Listadapter.notifyDataSetChanged();
-        UstawieniePoczatkowe(list,CR);
-        ObslugaListy(list,CR,DB);
+
+        StartSetting(list,CR);
+        ListHandling(list,CR,DB);
         calcTotalCalories(CR);
+
         Save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             SaveToBase(CR,DB,InformationRepository);
@@ -76,26 +78,43 @@ public class ProfilWindow extends Fragment {
         });
         CountCalories.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                double a=     calcTotalCalories(CR);
-
-                if(   a==0||CR.getAge()==0){
-                    Toast.makeText(ctx,"You need to fill Weight, Height, Activity level, Target, Body Type, Sex and Age",Toast.LENGTH_LONG).show();
-                }
-                else{
-                    calcTotalCalories(CR);
-                    CR.setCal((float)a);
-                    calories.setText("Total Calories Needed: "+Math.round(calcTotalCalories(CR)));
-                        Calories(CR);
-                }
-
+            CountCaloriesIf(CR);
             }
         });
         return view;
     }
 
 
+private void CountCaloriesIf(UserInformation CR){
 
-    private void UstawieniePoczatkowe(ArrayList<String> list, UserInformation CR){
+    if(CR.getWeight()==0){
+        Toast.makeText(ctx,"You need to fill Weight",Toast.LENGTH_LONG).show();
+    }
+    else if(CR.getHeight()==0){
+        Toast.makeText(ctx,"You need to fill Height",Toast.LENGTH_LONG).show();
+    }
+    else if(CR.getActivityLvl()==0){
+        Toast.makeText(ctx,"You need to fill Activity level",Toast.LENGTH_LONG).show();
+    }
+    else if(CR.getTarget()==null){
+        Toast.makeText(ctx,"You need to fill Target",Toast.LENGTH_LONG).show();
+    }
+    else if(CR.getBodyType()==null){
+        Toast.makeText(ctx,"You need to fill Body Type",Toast.LENGTH_LONG).show();
+    }
+    else if(CR.getSex()==0){
+        Toast.makeText(ctx,"You need to fill Sex",Toast.LENGTH_LONG).show();
+    }
+    else if(   CR.getAge()==0){
+        Toast.makeText(ctx,"You need to fill Age",Toast.LENGTH_LONG).show();
+    }
+    else{
+        CR.setCal((float)calcTotalCalories(CR));
+        calories.setText("Total Calories Needed: "+Math.round(calcTotalCalories(CR)));
+        Calories(CR);
+    }
+}
+    private void StartSetting(ArrayList<String> list, UserInformation CR){
         calories.setText("Total Calories Needed: "+Math.round(CR.getCal()));
         carb.setText("Total carbohydrates needed: "+CR.getCarb()+"g");
         fat.setText("Total fat needed: "+CR.getFat()+"g");
@@ -133,7 +152,7 @@ public class ProfilWindow extends Fragment {
         list.add("Age: "+CR.getAge());
     }
 
-    private void ObslugaListy(final ArrayList<String> list, final UserInformation CR,final DatabaseOperations DB){
+    private void ListHandling(final ArrayList<String> list, final UserInformation CR,final DatabaseOperations DB){
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
             @Override
@@ -410,10 +429,10 @@ public class ProfilWindow extends Fragment {
                             totalCalories = totalCalories - (0.15 * totalCalories);
                             break;
                         case "Endomorph":
-                            totalCalories = totalCalories + (0.2 * totalCalories);
+                            totalCalories = totalCalories - (0.2 * totalCalories);
                             break;
                         default:
-                            totalCalories = totalCalories + (0.1 * totalCalories);
+                            totalCalories = totalCalories - (0.1 * totalCalories);
                             break;
                     }
                     break;
@@ -455,10 +474,10 @@ public class ProfilWindow extends Fragment {
                             totalCalories = totalCalories - (0.15 * totalCalories);
                             break;
                         case "Endomorph":
-                            totalCalories = totalCalories + (0.2 * totalCalories);
+                            totalCalories = totalCalories - (0.2 * totalCalories);
                             break;
                         default:
-                            totalCalories = totalCalories + (0.1 * totalCalories);
+                            totalCalories = totalCalories - (0.1 * totalCalories);
                             break;
                     }
                     break;
