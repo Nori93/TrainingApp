@@ -23,6 +23,8 @@ public class TrainingRepository {
         public static final String TABLE_NAME = "trening";
         public static final String COLUMN_ID = "ID";
         public static final String COLUMN_DATA = "data";
+        public static final String COLUMN_NAZWA = "nazwa";
+        public static final String COLUMN_OPIS = "opis";
     }
 
     public void AddNewTrening(Training training,DatabaseOperations db)//Training -> ID Series all ID's MUST BE NULL!!!!
@@ -34,6 +36,8 @@ public class TrainingRepository {
         DB.beginTransaction();
         try{
             TrainingTableContent.put(TrainingTableDetails.COLUMN_DATA,training.getData());
+            TrainingTableContent.put(TrainingTableDetails.COLUMN_NAZWA,training.getNazwa());
+            TrainingTableContent.put(TrainingTableDetails.COLUMN_OPIS,training.getOpis());
 
 
             if(-1 == DB.insert(TrainingTableDetails.TABLE_NAME,null,TrainingTableContent))
@@ -67,35 +71,67 @@ public class TrainingRepository {
         }
     }
 
-    public void DeleteExistingTraining(int trainingId,DatabaseOperations db){
+    public boolean DeleteExistingTraining(int trainingId,DatabaseOperations db){ //return false if exception was throwed
 
+        SQLiteDatabase DB = db.getWritableDatabase();
+        try{
+            DB.beginTransaction();
+            String whereClause = TrainingTableDetails.COLUMN_ID+"= ?";
+            String[] whereArgs = new String[] {
+                    Integer.toString(trainingId)
+            };
+            DB.delete(TrainingTableDetails.TABLE_NAME,whereClause,whereArgs);
+
+            whereClause = SeriesRepository.SeriesTableDetails.COLUMN_ID_TR+"= ?";
+            DB.delete(SeriesRepository.SeriesTableDetails.COLUMN_ID_TR,whereClause,whereArgs);
+            DB.setTransactionSuccessful();
+            Log.d("DataBase operations", "Training successfully deleted");
+            return  true;
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+        finally {
+            DB.endTransaction();
+        }
     }
 
     public  Training GetTrainingById(int trainingId,DatabaseOperations db)
     {
-        List<Series> serie = new ArrayList<>();
-        SQLiteDatabase DB = db.getReadableDatabase();
-        String[] coloumnsTraining = {TrainingTableDetails.COLUMN_ID, TrainingTableDetails.COLUMN_DATA};
+        try
+        {
+            List<Series> serie = new ArrayList<>();
+            SQLiteDatabase DB = db.getReadableDatabase();
+            String[] coloumnsTraining = {TrainingTableDetails.COLUMN_ID, TrainingTableDetails.COLUMN_DATA,TrainingTableDetails.COLUMN_NAZWA,TrainingTableDetails.COLUMN_OPIS};
 
-        String whereClause = TrainingTableDetails.COLUMN_ID+"= ?";
-        String[] whereArgs = new String[] {
-                Integer.toString(trainingId)
-        };
+            String whereClause = TrainingTableDetails.COLUMN_ID+"= ?";
+            String[] whereArgs = new String[] {
+                    Integer.toString(trainingId)
+            };
 
-        Cursor TrainingCR = DB.query(TrainingTableDetails.TABLE_NAME, coloumnsTraining,whereClause,whereArgs,null,null,null);
-        TrainingCR.moveToFirst();
+            Cursor TrainingCR = DB.query(TrainingTableDetails.TABLE_NAME, coloumnsTraining,whereClause,whereArgs,null,null,null);
+            TrainingCR.moveToFirst();
 
-        String[] columnsSeries = {SeriesRepository.SeriesTableDetails.COLUMN_ID, SeriesRepository.SeriesTableDetails.COLUMN_POWTORZENIA, SeriesRepository.SeriesTableDetails.COLUMN_OBCIAZENIE,
-                SeriesRepository.SeriesTableDetails.COLUMN_ID_CW, SeriesRepository.SeriesTableDetails.COLUMN_ID_TR};
+            Log.d("Traiing", TrainingCR.getString(1));
 
-         whereClause = SeriesRepository.SeriesTableDetails.COLUMN_ID_TR+"= ?";
+            String[] columnsSeries = {SeriesRepository.SeriesTableDetails.COLUMN_ID, SeriesRepository.SeriesTableDetails.COLUMN_POWTORZENIA, SeriesRepository.SeriesTableDetails.COLUMN_OBCIAZENIE,
+                    SeriesRepository.SeriesTableDetails.COLUMN_ID_CW, SeriesRepository.SeriesTableDetails.COLUMN_ID_TR};
 
-        Cursor SeriesCR = DB.query(SeriesRepository.SeriesTableDetails.TABLE_NAME, columnsSeries,whereClause,whereArgs,null,null,null);
+            whereClause = SeriesRepository.SeriesTableDetails.COLUMN_ID_TR+"= ?";
 
-        do{
-            serie.add(new Series(Integer.parseInt(SeriesCR.getString(0)),Integer.parseInt(SeriesCR.getString(1)),Float.parseFloat(SeriesCR.getString(2)),Integer.parseInt(SeriesCR.getString(3)),Integer.parseInt(SeriesCR.getString(4))));
-          }while(SeriesCR.moveToNext());
+            Cursor SeriesCR = DB.query(SeriesRepository.SeriesTableDetails.TABLE_NAME, columnsSeries,whereClause,whereArgs,null,null,null);
+            SeriesCR.moveToFirst();
 
-        return new Training(Integer.parseInt(TrainingCR.getString(0)),TrainingCR.getString(1),serie);
+            do{
+                serie.add(new Series(Integer.parseInt(SeriesCR.getString(0)),Integer.parseInt(SeriesCR.getString(1)),Float.parseFloat(SeriesCR.getString(2)),Integer.parseInt(SeriesCR.getString(3)),Integer.parseInt(SeriesCR.getString(4))));
+            }while(SeriesCR.moveToNext());
+
+            return new Training(Integer.parseInt(TrainingCR.getString(0)),TrainingCR.getString(1),serie,TrainingCR.getString(2),TrainingCR.getString(3));
+        }
+        catch (Exception ex){
+            List<Series> serie = new ArrayList<>();
+            return  new Training(-1,"01-01-1970",serie,"brak","brak");
+        }
     }
 }

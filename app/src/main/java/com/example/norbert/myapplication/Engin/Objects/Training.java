@@ -12,13 +12,17 @@ import java.util.List;
 public class Training {
     private Integer ID;
     private  String Data;
+    private String opis;
+    private String nazwa;
     private List<Series> Serie;
 
 
-    public Training(Integer id, String data, List<Series> serie) {
+    public Training(Integer id, String data, List<Series> serie,String nazwa, String opis) {
         ID = id;
         Data = data;
         Serie = serie;
+        this.opis = opis;
+        this.nazwa = nazwa;
     }
 
     public List<Series> getSerie() {
@@ -43,5 +47,21 @@ public class Training {
 
     public void setID(int ID) {
         this.ID = ID;
+    }
+
+    public String getOpis() {
+        return opis;
+    }
+
+    public void setOpis(String opis) {
+        this.opis = opis;
+    }
+
+    public String getNazwa() {
+        return nazwa;
+    }
+
+    public void setNazwa(String nazwa) {
+        this.nazwa = nazwa;
     }
 }

@@ -75,7 +75,8 @@ public class InformationRepository{
                 CR.moveToFirst();
                 UserInformation userData= new UserInformation(Float.parseFloat(CR.getString(0)),(Float.parseFloat(CR.getString(1))),
                         (Float.parseFloat(CR.getString(2))),(Float.parseFloat(CR.getString(3))),(Float.parseFloat(CR.getString(4))),
-                        (Float.parseFloat(CR.getString(5))),(Float.parseFloat(CR.getString(6))),CR.getString(7),CR.getString(9),Integer.parseInt(CR.getString(8)),Integer.parseInt(CR.getString(10)));
+                        (Float.parseFloat(CR.getString(5))),(Float.parseFloat(CR.getString(6))),CR.getString(7),CR.getString(9),
+                            Integer.parseInt(CR.getString(8)),Integer.parseInt(CR.getString(10)));
 
                 Log.d("DataBase operations","Data recievied from DB");
 

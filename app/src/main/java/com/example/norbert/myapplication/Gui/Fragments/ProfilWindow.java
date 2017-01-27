@@ -6,6 +6,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +23,11 @@ import android.widget.Toast;
 
 import com.example.norbert.myapplication.Engin.DataBaseHelper.DatabaseOperations;
 import com.example.norbert.myapplication.Engin.Objects.Exercise;
+import com.example.norbert.myapplication.Engin.Objects.Training;
 import com.example.norbert.myapplication.Engin.Objects.UserInformation;
 import com.example.norbert.myapplication.Engin.Repository.ExerciseRepository;
 import com.example.norbert.myapplication.Engin.Repository.InformationRepository;
+import com.example.norbert.myapplication.Engin.Repository.TrainingRepository;
 import com.example.norbert.myapplication.R;
 
 public class ProfilWindow extends Fragment {
@@ -53,6 +56,7 @@ public class ProfilWindow extends Fragment {
         final InformationRepository InformationRepository = new InformationRepository();
         final DatabaseOperations DB = new DatabaseOperations(ctx);
         final UserInformation CR =  InformationRepository.getInformationData(DB); // Dostajesz cały wypełniony obiekt!
+        Log.d(CR.toString(),"");
         final ArrayList<String> list = new ArrayList<String>();
 
         CountCalories = (Button) view.findViewById(R.id.CountCalories);
@@ -70,6 +74,15 @@ public class ProfilWindow extends Fragment {
         StartSetting(list,CR);
         ListHandling(list,CR,DB);
         calcTotalCalories(CR);
+
+
+        // Kamil Czaja tests
+
+     //   TrainingRepository trainingRepository = new TrainingRepository();
+     //   Training tmp = trainingRepository.GetTrainingById(1,DB);
+    //    trainingRepository.AddNewTrening(tmp,DB);
+
+        ///////////
 
         Save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -300,13 +313,7 @@ private void CountCaloriesIf(UserInformation CR){
 
                 final AlertDialog alert=alertDialog.create();
                 alert.show();
-                // Kamil Czaja tests
 
-                ExerciseRepository Exerciserepo = new ExerciseRepository();
-                ArrayList<Exercise> tmp =  Exerciserepo.getAllExercise(DB);
-                Exercise tmp2 =  Exerciserepo.getExerciseById(1,DB);
-
-                ///////////
             }
         });
 
