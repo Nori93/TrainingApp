@@ -3,7 +3,10 @@ package com.example.norbert.myapplication.Gui;
 
 
 import android.app.Fragment;
+import android.content.Context;
 
+import com.example.norbert.myapplication.Engin.MainActivity;
+import com.example.norbert.myapplication.Engin.ObjectSchema;
 import com.example.norbert.myapplication.Gui.Fragments.AddTrainingWindow;
 import com.example.norbert.myapplication.Gui.Fragments.CalendarWindow;
 import com.example.norbert.myapplication.Gui.Fragments.ExerciseWindow;
@@ -13,11 +16,13 @@ import com.example.norbert.myapplication.Gui.Fragments.ProfilWindow;
 import com.example.norbert.myapplication.Gui.Fragments.StartWindow;
 import com.example.norbert.myapplication.Gui.Fragments.TopControlPanel;
 import com.example.norbert.myapplication.Gui.Fragments.TrainingListWindow;
+import com.example.norbert.myapplication.R;
 
 public class FragmertsHolder {
 
     //Hold which fragment we use right now
-    private int index;
+    private ObjectSchema os;
+    private Context context;
 
     //List of fragments for app
     StartWindow startWindow;                // 1
@@ -30,7 +35,8 @@ public class FragmertsHolder {
     TrainingListWindow trainingListWindow;  // 8
     AddTrainingWindow addTrainingWindow;    // 9
     InputWindow inputWindow;
-    public FragmertsHolder(){
+    public FragmertsHolder(Context context){
+        this.context = context;
 
         startWindow = new StartWindow();
         topControlPanel = new TopControlPanel();
@@ -79,11 +85,25 @@ public class FragmertsHolder {
                 return trainingListWindow;
             case 9:
                 return addTrainingWindow;
-
+            case 10:
+                return inputWindow;
         }
         return null;
     }
 
+    public void setInputFragment(int index) {
+        switch (index) {
+            case 51:
+                inputWindow.setInputNames(os.get(getTag(R.integer.Exercise)));
+            case 52:
+                inputWindow.setInputNames(os.get(getTag(R.integer.Series)));
+            case 53:
+                inputWindow.setInputNames(os.get(getTag(R.integer.Training)));
+            case 54:
+                inputWindow.setInputNames(os.get(getTag(R.integer.UserInformation)));
+        }
+
+    }
 
 
     //Clear Frame to clear space
@@ -96,5 +116,8 @@ public class FragmertsHolder {
     public void destroyTrainingListWindow(){this.trainingListWindow=null;}
     public void destroyAddTrainingWindow(){this.addTrainingWindow=null;}
 
+    private int getTag(int resorce) {
+        return context.getResources().getInteger(resorce);
+    }
 
 }

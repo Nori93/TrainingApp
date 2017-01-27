@@ -60,6 +60,7 @@ public class ExerciseWindow extends Fragment {
         title.setText(exercise.getNazwa());
         desc.setText(exercise.getOpis());
         inst.setText(exercise.getInstrukcje());
+        Buttons();
     }
 
     private void Buttons(){
@@ -82,6 +83,8 @@ public class ExerciseWindow extends Fragment {
             @Override
             public void onClick(View v) {
 
+                ((MainActivity) getActivity()).setInputType(R.integer.Exercise);
+                ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.inputWindow);
             }
         });
     }

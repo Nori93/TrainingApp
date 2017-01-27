@@ -1,6 +1,7 @@
 package com.example.norbert.myapplication.Engin;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -61,7 +62,7 @@ public class MainActivity extends Activity {
     public void setMainWindow() {
         manager = getFragmentManager();
         transaction = manager.beginTransaction();
-        holder = new FragmertsHolder();
+        holder = new FragmertsHolder(this);
         transaction.add(R.id.Top, holder.getFragment(getTag(R.integer.topControlPanel)));
         transaction.add(R.id.Main,holder.getFragment(getTag(R.integer.startWindow)));
         transaction.commit();
@@ -119,8 +120,13 @@ public class MainActivity extends Activity {
         this.exercise = e;
     }
 
-    //on List item Click
+   public void setInputType(int tag){
+     holder.setInputFragment(tag);
+   }
 
+    public Fragment getFragment(int tag){
+      return holder.getFragment(getTag(tag));
+    }
 
     public void fragmentReplace(int where, int tag){
         transaction = manager.beginTransaction();
@@ -135,7 +141,6 @@ public class MainActivity extends Activity {
             data = format.parse(datawString);
             System.out.println(data);
         } catch (ParseException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

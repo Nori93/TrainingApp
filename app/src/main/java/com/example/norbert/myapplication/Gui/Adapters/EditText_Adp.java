@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.norbert.myapplication.Engin.Objects.Exercise;
+import com.example.norbert.myapplication.Gui.Fragments.InputWindow;
 import com.example.norbert.myapplication.R;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public class EditText_Adp extends BaseAdapter {
 
 
     // List that containt all exercise
-    String[] names;
+    String[] names  = {"ID","Name","Description","Instruction","Icon Path"};
     String[] data;
 
     //Dimension of icons in list
@@ -46,11 +47,11 @@ public class EditText_Adp extends BaseAdapter {
 
 
 
-    public EditText_Adp(Context applicationContext,String[] names){
+    public EditText_Adp(Context applicationContext){
         this.context = applicationContext;
         this.inflater = (LayoutInflater.from(applicationContext));
-        this.names = names;
-        this.data = new String[names.length];
+
+        this.data = new String[this.names.length];
 
     }
 
@@ -70,7 +71,7 @@ public class EditText_Adp extends BaseAdapter {
         return position;
     }
 
-    @Override
+   /** @Override
     public View getView(final int position, View view, ViewGroup parent) {
         view = inflater.inflate(R.layout.edit_text_adp, null);
         input = (EditText) view.findViewById(R.id.et_adp_input);
@@ -97,6 +98,60 @@ public class EditText_Adp extends BaseAdapter {
         });
 
         return view;
+    }*/
+
+    public View getView(int position, View convertView, ViewGroup parent) {
+
+        //ViewHolder holder = null;
+        final ViewHolder holder;
+        if (convertView == null) {
+
+            holder = new ViewHolder();
+            convertView = inflater.inflate(R.layout.edit_text_adp, null);
+            holder.textView1 = (TextView) convertView.findViewById(R.id.et_adp_text);
+            holder.editText1 = (EditText) convertView.findViewById(R.id.et_adp_input);
+
+            convertView.setTag(holder);
+
+        } else {
+
+            holder = (ViewHolder) convertView.getTag();
+        }
+
+        holder.ref = position;
+
+        holder.textView1.setText(names[position]);
+        holder.editText1.setText(data[position]);
+        holder.editText1.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                // TODO Auto-generated method stub
+                data[holder.ref] = arg0.toString();
+                Log.e("Typing",arg0.toString());
+            }
+        });
+
+        return convertView;
+    }
+
+    private class ViewHolder {
+        TextView textView1;
+        EditText editText1;
+        int ref;
     }
 
     public String[] getAllData(){return data;}

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--Fragment Tags -->
     <integer name="startWindow" >1</integer>
     <integer name="topControlPanel">2</integer>
     <integer name="listFragment_Workout">3</integer>
@@ -9,5 +10,12 @@
     <integer name="calendarWindow">7</integer>
     <integer name="trainingListWindow">8</integer>
     <integer name="addTrainingWindow">9</integer>
+    <integer name="inputWindow">10</integer>
+
+    <!--Schema Tags-->
+    <integer name="Exercise">51</integer>
+    <integer name="Series">52</integer>
+    <integer name="Training">53</integer>
+    <integer name="UserInformation">54</integer>
 </resources>
 

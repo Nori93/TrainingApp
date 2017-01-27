@@ -58,8 +58,10 @@ public class InputWindow extends Fragment {
 
         save = (Button)view.findViewById(R.id.input__frag_save);
         list = (ListView)view.findViewById(R.id.input_frag_list);
-        editText_adp = new EditText_Adp(view.getContext(),rows_names);
+        list.setClickable(false);
+        editText_adp = new EditText_Adp(view.getContext());
         list.setAdapter(editText_adp);
+
 
 
     }
