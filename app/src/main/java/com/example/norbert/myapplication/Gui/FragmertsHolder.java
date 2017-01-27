@@ -34,6 +34,7 @@ public class FragmertsHolder {
     CalendarWindow calendarWindow;          // 7
     TrainingListWindow trainingListWindow;  // 8
     AddTrainingWindow addTrainingWindow;    // 9
+    ListWindow listFragment_TrainingCreating;//11
     InputWindow inputWindow;
     public FragmertsHolder(Context context){
         this.context = context;
@@ -42,6 +43,7 @@ public class FragmertsHolder {
         topControlPanel = new TopControlPanel();
         listFragment_Workout = new ListWindow();
         listFragment_Meals=new ListWindow();
+        listFragment_TrainingCreating=new ListWindow();
         profilWindow = new ProfilWindow();
         exerciseWindow = new ExerciseWindow();
         calendarWindow = new CalendarWindow();
@@ -87,6 +89,8 @@ public class FragmertsHolder {
                 return addTrainingWindow;
             case 10:
                 return inputWindow;
+            case 11:
+                return listFragment_TrainingCreating;
         }
         return null;
     }

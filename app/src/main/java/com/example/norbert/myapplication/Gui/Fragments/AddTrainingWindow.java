@@ -60,7 +60,7 @@ public class AddTrainingWindow extends Fragment {
             @Override
             public void onClick(View v) {
                 ((MainActivity)getActivity()).setActualTrainingName(nameOfTraining.getText().toString());
-                ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,R.integer.listFragment_Workout);
+                ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,R.integer.listFragment_TrainingCreating);
             }
         });
 
