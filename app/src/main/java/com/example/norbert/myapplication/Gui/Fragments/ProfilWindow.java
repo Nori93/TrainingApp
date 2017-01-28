@@ -17,6 +17,8 @@ import android.widget.ListView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -69,6 +71,10 @@ public class ProfilWindow extends Fragment {
         Listadapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.customlayout, list);
         lista.setAdapter(Listadapter);
         Listadapter.notifyDataSetChanged();
+
+
+        TrainingRepository trainingRepository = new TrainingRepository();
+        List<Training> tmp = trainingRepository.GetAllTraining(DB);
 
         StartSetting(list,CR);
         ListHandling(list,CR,DB);
