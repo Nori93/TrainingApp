@@ -72,7 +72,6 @@ public class ProfilWindow extends Fragment {
 
         StartSetting(list,CR);
         ListHandling(list,CR,DB);
-        calcTotalCalories(CR);
 
         Save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
