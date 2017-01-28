@@ -56,7 +56,6 @@ public class ProfilWindow extends Fragment {
         final InformationRepository InformationRepository = new InformationRepository();
         final DatabaseOperations DB = new DatabaseOperations(ctx);
         final UserInformation CR =  InformationRepository.getInformationData(DB); // Dostajesz cały wypełniony obiekt!
-        Log.d(CR.toString(),"");
         final ArrayList<String> list = new ArrayList<String>();
 
         CountCalories = (Button) view.findViewById(R.id.CountCalories);
@@ -74,15 +73,6 @@ public class ProfilWindow extends Fragment {
         StartSetting(list,CR);
         ListHandling(list,CR,DB);
         calcTotalCalories(CR);
-
-
-        // Kamil Czaja tests
-
-     //   TrainingRepository trainingRepository = new TrainingRepository();
-     //   Training tmp = trainingRepository.GetTrainingById(1,DB);
-    //    trainingRepository.AddNewTrening(tmp,DB);
-
-        ///////////
 
         Save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -159,7 +149,7 @@ private void CountCaloriesIf(UserInformation CR){
         else if(CR.getSex()==2){
             list.add("Sex: Female");
         }
-        else{
+        else if(CR.getSex()==0){
             list.add("Sex: ");
         }
         list.add("Age: "+CR.getAge());
