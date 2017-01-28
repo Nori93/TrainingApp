@@ -2,6 +2,7 @@ package com.example.norbert.myapplication.Gui.Fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,11 @@ public class TopControlPanel extends Fragment{
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+       try{
         Gui(view);
+       }catch (Exception e){
+           Log.e("Error",e.getMessage().toString());
+       }
     }
 
     private void Gui(View view){

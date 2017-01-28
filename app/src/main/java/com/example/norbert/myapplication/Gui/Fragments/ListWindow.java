@@ -7,13 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.norbert.myapplication.Engin.DataBaseHelper.DatabaseOperations;
 import com.example.norbert.myapplication.Engin.MainActivity;
 import com.example.norbert.myapplication.Engin.Objects.Exercise;
+import com.example.norbert.myapplication.Engin.Objects.Training;
 import com.example.norbert.myapplication.Engin.Repository.ExerciseRepository;
+import com.example.norbert.myapplication.Engin.Repository.TrainingRepository;
 import com.example.norbert.myapplication.Gui.Adapters.IconText_Adp;
 import com.example.norbert.myapplication.R;
 
@@ -23,14 +26,20 @@ public class ListWindow extends Fragment {
 
 
     // GUI
-    TextView search_text;
+    TextView search_type;
+    EditText search_text;
     Button search_button;
     ListView list;
+
+    //Type
+    Boolean type = true;
 
     // DATABASE
     DatabaseOperations databaseOperations;
     ExerciseRepository exerciseRepository;
     ArrayList<Exercise> exerciseArrayList;
+    TrainingRepository trainingRepository;
+    ArrayList<Training> trainingArrayList;
 
     //Adapters
     IconText_Adp adapter;
@@ -48,26 +57,74 @@ public class ListWindow extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         exerciseArrayList = new ArrayList<Exercise>();
+        trainingArrayList = new ArrayList<Training>();
         databaseOperations = new DatabaseOperations(view.getContext());
         exerciseRepository = new ExerciseRepository();
+        trainingRepository = new TrainingRepository();
+
         exerciseArrayList = exerciseRepository.getAllExercise(databaseOperations);
+        //trainingArrayList = trainingRepository.getAllTraining(databaseOperations);
 
+        search_type = (TextView) view.findViewById(R.id.list_typeOfList);
 
-        search_text = (TextView)view.findViewById(R.id.list_search);
+        search_text = (EditText) view.findViewById(R.id.list_search);
         search_button = (Button)view.findViewById(R.id.list_button);
         list = (ListView)view.findViewById(R.id.list_listview);
-        adapter = new IconText_Adp(view.getContext(),exerciseArrayList);
-        list.setAdapter(adapter);
+        changeName(view);
 
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        search_type.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //get target exercise
-                ((MainActivity) getActivity()).setListSelected(adapter.getItem(position));
-                // start fragment exercise
-                ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.exerciseWindow);
+            public void onClick(View v) {
+                //type = !type;
+                changeName(v);
             }
         });
+
+
+        if(type){
+
+
+        }
+        else {
+
+
+        }
+    }
+
+    private void changeName(View view) {
+        if (type){
+            search_type.setText("Exercise");
+            adapter = new IconText_Adp(view.getContext(),exerciseArrayList);
+            list.setAdapter(adapter);
+
+            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    //get target exercise
+                    ((MainActivity) getActivity()).setListSelected(adapter.getItem(position));
+                    // start fragment exercise
+                    ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.exerciseWindow);
+                }
+            });
+        }
+
+        else{
+            search_type.setText("Training");
+            adapter = new IconText_Adp(view.getContext(),trainingArrayList,false);
+            list.setAdapter(adapter);
+
+            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    //get target exercise
+                    ((MainActivity) getActivity()).setListSelected(adapter.getItem(position));
+                    // start fragment exercise
+                    ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.exerciseWindow);
+                }
+            });
+
+        }
     }
 
 

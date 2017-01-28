@@ -96,16 +96,8 @@ public class FragmertsHolder {
     }
 
     public void setInputFragment(int index) {
-        switch (index) {
-            case 51:
-                inputWindow.setInputNames(os.get(getTag(R.integer.Exercise)));
-            case 52:
-                inputWindow.setInputNames(os.get(getTag(R.integer.Series)));
-            case 53:
-                inputWindow.setInputNames(os.get(getTag(R.integer.Training)));
-            case 54:
-                inputWindow.setInputNames(os.get(getTag(R.integer.UserInformation)));
-        }
+
+                inputWindow.setInputTag(getTag(index));
 
     }
 

@@ -32,13 +32,11 @@ public class EditText_Adp extends BaseAdapter {
     private LayoutInflater inflater;
 
 
-    //Elements
-    EditText input;
-    TextView title;
+
 
 
     // List that containt all exercise
-    String[] names  = {"ID","Name","Description","Instruction","Icon Path"};
+    String[] names  ;//= {"ID","Name","Description","Instruction","Icon Path"};
     String[] data;
 
     //Dimension of icons in list
@@ -47,10 +45,10 @@ public class EditText_Adp extends BaseAdapter {
 
 
 
-    public EditText_Adp(Context applicationContext){
+    public EditText_Adp(Context applicationContext,int tag){
         this.context = applicationContext;
         this.inflater = (LayoutInflater.from(applicationContext));
-
+        setInput(tag);
         this.data = new String[this.names.length];
 
     }
@@ -71,34 +69,6 @@ public class EditText_Adp extends BaseAdapter {
         return position;
     }
 
-   /** @Override
-    public View getView(final int position, View view, ViewGroup parent) {
-        view = inflater.inflate(R.layout.edit_text_adp, null);
-        input = (EditText) view.findViewById(R.id.et_adp_input);
-        title = (TextView)view.findViewById(R.id.et_adp_text);
-
-        title.setText(names[position]);
-
-        input.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                data[position] = title.getText().toString();
-                Log.e("EditTextAdp","Add" + data[position]);
-            }
-        });
-
-        return view;
-    }*/
 
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -152,6 +122,22 @@ public class EditText_Adp extends BaseAdapter {
         TextView textView1;
         EditText editText1;
         int ref;
+    }
+    public void setInput(int tag){
+        switch (tag) {
+            case 51:
+                names = new String[] {"ID","Name","Description","Instruction","Icon Path"};
+                break;
+            case 52:
+                names= new String[] {"ID","Repeats", "Weights", "ID Exercise", "ID Training"};
+                break;
+            case 53:
+                names = new String[] {"ID","Name","Description","Data"};
+                break;
+            case 54:
+                names =new String[] {"Weight","Height", "Calories", "Activity","Fat", "Carb", "Protein", "Target","Body Type", "Sex","Age"};
+                break;
+        }
     }
 
     public String[] getAllData(){return data;}

@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.norbert.myapplication.Engin.Objects.Exercise;
+import com.example.norbert.myapplication.Engin.Objects.Training;
 import com.example.norbert.myapplication.R;
 
 import java.util.List;
@@ -30,8 +31,9 @@ public class IconText_Adp extends BaseAdapter {
     TextView title;
 
 
-    // List that containt all exercise
+    // List that containt all exercise ,training
     List<Exercise> exercisesList;
+    List<Training> trainingList;
 
     //Dimension of icons in list
     private int widthIcon = 30;
@@ -40,7 +42,11 @@ public class IconText_Adp extends BaseAdapter {
 
 
 
-
+    public IconText_Adp(Context applicationContext, List<Training> trainingList,boolean s){
+        this.context = applicationContext;
+        this.inflater = (LayoutInflater.from(applicationContext));
+        this.trainingList = trainingList;
+    }
 
     public IconText_Adp(Context applicationContext, List<Exercise> exercisesList){
         this.context = applicationContext;

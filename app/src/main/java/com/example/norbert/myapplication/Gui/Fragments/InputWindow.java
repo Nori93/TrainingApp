@@ -33,14 +33,14 @@ public class InputWindow extends Fragment {
     DatabaseOperations databaseOperations;
     ExerciseRepository exerciseRepository;
 
-    String[] rows_names;
+    int tag;
     String[] rows_inputs;
 
     //Adapters
     EditText_Adp editText_adp;
 
-    public void setInputNames(String[] rows_names){
-        this.rows_names = rows_names;
+    public void setInputTag(int t){
+        this.tag = t;
     }
 
 
@@ -59,7 +59,7 @@ public class InputWindow extends Fragment {
         save = (Button)view.findViewById(R.id.input__frag_save);
         list = (ListView)view.findViewById(R.id.input_frag_list);
         list.setClickable(false);
-        editText_adp = new EditText_Adp(view.getContext());
+        editText_adp = new EditText_Adp(view.getContext(),this.tag);
         list.setAdapter(editText_adp);
 
 
