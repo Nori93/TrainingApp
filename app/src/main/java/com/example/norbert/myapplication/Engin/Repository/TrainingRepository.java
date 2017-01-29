@@ -137,6 +137,48 @@ public class TrainingRepository {
             DB.endTransaction();
         }
     }
+    public  List<Training> GetTrainingByDate(String trainingDate,DatabaseOperations db)
+    {
+        try
+        {
+            List<Training> Trainings = new ArrayList<>();
+            SQLiteDatabase DB = db.getWritableDatabase();
+            String[] coloumnsTraining = {TrainingTableDetails.COLUMN_ID, TrainingTableDetails.COLUMN_DATA,TrainingTableDetails.COLUMN_NAZWA,TrainingTableDetails.COLUMN_OPIS};
+            String whereClause = TrainingTableDetails.COLUMN_DATA+" LIKE ?";
+            String[] whereArgs = new String[] {
+                    "%"+trainingDate+"%"
+            };
+            Cursor TrainingCR = DB.query(TrainingTableDetails.TABLE_NAME, coloumnsTraining,whereClause,whereArgs,null,null,null);
+            TrainingCR.moveToFirst();
+
+            String[] columnsSeries = {SeriesRepository.SeriesTableDetails.COLUMN_ID, SeriesRepository.SeriesTableDetails.COLUMN_POWTORZENIA, SeriesRepository.SeriesTableDetails.COLUMN_OBCIAZENIE,
+                    SeriesRepository.SeriesTableDetails.COLUMN_ID_CW, SeriesRepository.SeriesTableDetails.COLUMN_ID_TR};
+             whereClause = SeriesRepository.SeriesTableDetails.COLUMN_ID_TR+"= ?";
+
+            do{
+                List<Series> serie = new ArrayList<>();
+                    whereArgs = new String[] {
+                        TrainingCR.getString(0)
+                };
+
+                Cursor SeriesCR = DB.query(SeriesRepository.SeriesTableDetails.TABLE_NAME, columnsSeries,whereClause,whereArgs,null,null,null);
+                SeriesCR.moveToFirst();
+
+                do{
+                    if(SeriesCR.getCount() > 0)
+                        serie.add(new Series(Integer.parseInt(SeriesCR.getString(0)),Integer.parseInt(SeriesCR.getString(1)),Float.parseFloat(SeriesCR.getString(2)),Integer.parseInt(SeriesCR.getString(3)),Integer.parseInt(SeriesCR.getString(4))));
+                }while(SeriesCR.moveToNext());
+
+                Trainings.add(new Training(Integer.parseInt(TrainingCR.getString(0)),TrainingCR.getString(1),serie,TrainingCR.getString(2),TrainingCR.getString(3)));
+            }while(TrainingCR.moveToNext());
+
+            return  Trainings;
+        }
+        catch (Exception ex)
+        {
+            return  new ArrayList<>();
+        }
+    }
 
     public  Training GetTrainingById(int trainingId,DatabaseOperations db)
     {
