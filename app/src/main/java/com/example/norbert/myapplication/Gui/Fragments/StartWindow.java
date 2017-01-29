@@ -35,8 +35,11 @@ public class StartWindow extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,R.integer.calendarWindow);
 
     }
+
+
 
 }

@@ -28,12 +28,13 @@ public class MainActivity extends Activity {
     Accelerometer accelerometer;
     Gravity gravity;
     LinearAccelerometer linearAccelerometer;
+    Training passedTraining;
 
     //Main Window is a container for all fragments
     private RelativeLayout mainWindow;
 
     //Calendar tools
-    Date data;
+    String data;
     String[] traningDB;
     String actualTrainingName;
 
@@ -74,9 +75,13 @@ public class MainActivity extends Activity {
     public void setBodyWindow(){
         manager = getFragmentManager();
         transaction = manager.beginTransaction();
+        holder = new FragmertsHolder(this);
+
         switch (fragmentId){
             //StartWindows Fragment
              case 1:
+
+                 holder.setStartWindow();
                 transaction.replace(R.id.Main,holder.getFragment(getTag(R.integer.startWindow)));
                 transaction.commit();
                 break;
@@ -100,6 +105,7 @@ public class MainActivity extends Activity {
                 break;
 
         }
+        holder.destroyStartFragment();
     }
 
     public void changeScene(int id){
@@ -143,19 +149,12 @@ public class MainActivity extends Activity {
     }
 
     public void setData(String rok,String miesiac,String dzien) {
-        String datawString=dzien+'-'+miesiac+'-'+rok;
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        try {
-            data = format.parse(datawString);
-            System.out.println(data);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        data=dzien+'-'+miesiac+'-'+rok;
     }
     private int getTag(int resorce) {
         return getResources().getInteger(resorce);
     }
-    public Date getData()
+    public String getData()
     {
         return data;
     }
@@ -174,4 +173,6 @@ public class MainActivity extends Activity {
     public String[] getTraningDB(){
         return traningDB;
     }
+    public Training getPassedTraining(){return passedTraining;}
+    public void setPassedTraining(Training value){passedTraining=value;}
 }
