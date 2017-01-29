@@ -104,7 +104,7 @@ public class ListWindow extends Fragment {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     //get target exercise
-                    ((MainActivity) getActivity()).setListSelected(adapter.getItem(position));
+                    ((MainActivity) getActivity()).setListSelectedEx(adapter.getItem(position));
                     // start fragment exercise
                     ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.exerciseWindow);
                 }
@@ -128,7 +128,7 @@ public class ListWindow extends Fragment {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     //get target exercise
-                    ((MainActivity) getActivity()).setListSelected(adapter.getItem(position));
+                    ((MainActivity) getActivity()).setListSelectedTr(adapter.getItemT(position));
                     // start fragment exercise
                     ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.exerciseWindow);
                 }

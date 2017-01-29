@@ -1,24 +1,19 @@
 package com.example.norbert.myapplication.Gui.Fragments;
 
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.norbert.myapplication.Engin.MainActivity;
 import com.example.norbert.myapplication.Engin.Objects.Exercise;
+import com.example.norbert.myapplication.Engin.Objects.Training;
 import com.example.norbert.myapplication.R;
-
-import java.util.ArrayList;
 
 /***
  *
@@ -29,9 +24,9 @@ import java.util.ArrayList;
  * - Button to start the exercise
  * - Button to add this exercise to training
  */
-public class ExerciseWindow extends Fragment {
+public class TrainingWindow extends Fragment {
 
-    Exercise exercise;
+    Training training;
     TextView title,
             desc,
             inst;
@@ -64,11 +59,11 @@ public class ExerciseWindow extends Fragment {
         start =(Button)view.findViewById(R.id.exer_but_start);
         add =(Button)view.findViewById(R.id.exer_but_add);
 
-        exercise = ((MainActivity)getActivity()).getListSelectedEx();
+        training = ((MainActivity)getActivity()).getListSelectedTr();
 
-        title.setText(exercise.getNazwa());
-        desc.setText(exercise.getOpis());
-        inst.setText(exercise.getInstrukcje());
+        title.setText(training.getNazwa());
+        desc.setText(training.getOpis());
+
         Buttons(view);
     }
 
@@ -91,8 +86,7 @@ public class ExerciseWindow extends Fragment {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).setInputType(R.integer.Series);
-                ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.inputWindow);
+
             }
         });
     }

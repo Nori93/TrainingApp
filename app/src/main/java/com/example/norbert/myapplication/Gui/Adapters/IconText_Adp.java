@@ -71,6 +71,10 @@ public class IconText_Adp extends BaseAdapter {
        return exercisesList.get(position);
     }
 
+    public Training getItemT(int position) { return trainingList.get(position); }
+
+
+
     @Override
     public long getItemId(int position) {
         return position;

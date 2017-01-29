@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.widget.RelativeLayout;
 
 import com.example.norbert.myapplication.Engin.Objects.Exercise;
+import com.example.norbert.myapplication.Engin.Objects.Training;
 import com.example.norbert.myapplication.Engin.Sensor.Accelerometer;
 import com.example.norbert.myapplication.Engin.Sensor.Gravity;
 import com.example.norbert.myapplication.Engin.Sensor.LinearAccelerometer;
@@ -46,6 +47,7 @@ public class MainActivity extends Activity {
 
     // List Window
     Exercise exercise;
+    Training training;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,12 +115,17 @@ public class MainActivity extends Activity {
 
 
     // Exercise Transfer
-    public Exercise getListSelected() {
+    public Exercise getListSelectedEx() {
         return exercise;
     }
-
-    public void setListSelected(Exercise e){
+    public void setListSelectedEx(Exercise e){
         this.exercise = e;
+    }
+
+    // Traning Transfer
+    public Training getListSelectedTr() {  return training;  }
+    public void setListSelectedTr(Training t){
+        this.training = t;
     }
 
    public void setInputType(int tag){

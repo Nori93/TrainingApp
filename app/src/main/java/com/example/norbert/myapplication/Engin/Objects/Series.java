@@ -22,6 +22,12 @@ public class Series {
         this.id = id;
         this.id_tr = id_tr;
     }
+    public Series( int repeats, float weights, int id_cw, int id_tr) {
+        this.repeats = repeats;
+        this.weights = weights;
+        this.id_cw = id_cw;
+        this.id_tr = id_tr;
+    }
 
     public int getId() {
         return id;

@@ -21,7 +21,6 @@ import com.example.norbert.myapplication.R;
 public class FragmertsHolder {
 
     //Hold which fragment we use right now
-    private ObjectSchema os;
     private Context context;
 
     //List of fragments for app
@@ -53,20 +52,6 @@ public class FragmertsHolder {
         inputWindow = new InputWindow();
     }
 
-
-    // version 0.1
-    /**
-    public StartWindow getStartFragment(){return startFragment;}
-    public TopControlPanel getTopControlPanel(){return topControlPanel;}
-    public ExerciseWindow getExerciseWindow(){return exerciseWindow;}
-    public ListWindow getListFragment_Workout(){return listFragment_Workout;}
-    public ListWindow getListFragment_Meals(){return listFragment_Meals;}
-    public ProfilWindow getProfilWindow(){return profilWindow;}
-    public CalendarWindow getCalendarWindow(){return calendarWindow;}
-    public TrainingListWindow getTrainingListWindow(){return  trainingListWindow;}
-    public AddTrainingWindow getAddTrainingWindow(){return addTrainingWindow;};
-    */
-    // version 0.2
     public Fragment getFragment(int index) {
         switch (index) {
             case 1:
