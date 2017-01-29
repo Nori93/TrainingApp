@@ -32,7 +32,7 @@ public class TrainingDetails extends Fragment {
     Context ctx;
     TextView nameText,descText,dateText;
     ListView seriesList;
-    Button backToTrList;
+    Button backToTrList,deleteTraining;
     Training training;
     Exercise exercise;
     ArrayList<HashMap<String, String>> seriesHashList;
@@ -61,6 +61,7 @@ public class TrainingDetails extends Fragment {
     {
         seriesList=(ListView)view.findViewById(R.id.tr_det_list);
         backToTrList=(Button)view.findViewById(R.id.tr_det_back);
+        deleteTraining=(Button)view.findViewById(R.id.tr_det_delete);
         nameText=(TextView)view.findViewById(R.id.tr_det_name);
         descText=(TextView)view.findViewById(R.id.tr_det_desc);
         dateText=(TextView)view.findViewById(R.id.tr_det_date);
@@ -103,6 +104,16 @@ public class TrainingDetails extends Fragment {
         backToTrList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,R.integer.trainingListWindow);
+            }
+        });
+        deleteTraining.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final TrainingRepository TrainingRepository = new TrainingRepository();
+                final DatabaseOperations DB = new DatabaseOperations(ctx);
+                TrainingRepository.DeleteExistingTraining(training.getID(),DB);
                 ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,R.integer.trainingListWindow);
             }
         });
