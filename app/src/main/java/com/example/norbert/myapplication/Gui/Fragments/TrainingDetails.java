@@ -110,7 +110,6 @@ public class TrainingDetails extends Fragment {
                 Fragment workout = new ListWindow();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.Main,workout);
-                transaction.addToBackStack(null);
                 transaction.commit();
             }
         });

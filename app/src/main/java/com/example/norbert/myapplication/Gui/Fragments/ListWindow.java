@@ -133,7 +133,6 @@ public class ListWindow extends Fragment {
                     Fragment TrainingDetails = new TrainingDetails();
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                     transaction.replace(R.id.Main,TrainingDetails);
-                    transaction.addToBackStack(null);
                     transaction.commit();
                   //  ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.);
 
