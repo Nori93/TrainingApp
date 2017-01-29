@@ -33,6 +33,7 @@ public class MainActivity extends Activity {
 
     //Calendar tools
     Date data;
+    String[] traningDB;
     String actualTrainingName;
 
 
@@ -158,5 +159,12 @@ public class MainActivity extends Activity {
     public void setActualTrainingName(String name)
     {
         actualTrainingName=name;
+    }
+
+    public void setTraningDB(String[] traningDB) {
+        this.traningDB = traningDB;
+    }
+    public String[] getTraningDB(){
+        return traningDB;
     }
 }

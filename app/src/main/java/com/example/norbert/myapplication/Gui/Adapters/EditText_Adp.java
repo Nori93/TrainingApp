@@ -126,13 +126,13 @@ public class EditText_Adp extends BaseAdapter {
     public void setInput(int tag){
         switch (tag) {
             case 51:
-                names = new String[] {"ID","Name","Description","Instruction","Icon Path"};
+                names = new String[] {"Name","Description","Instruction","Icon Path"};
                 break;
             case 52:
-                names= new String[] {"ID","Repeats", "Weights", "ID Exercise", "ID Training"};
+                names= new String[] {"Repeats", "Weights", "ID Exercise", "ID Training"};
                 break;
             case 53:
-                names = new String[] {"ID","Name","Description","Data"};
+                names = new String[] {"Name","Description","Data"};
                 break;
             case 54:
                 names =new String[] {"Weight","Height", "Calories", "Activity","Fat", "Carb", "Protein", "Target","Body Type", "Sex","Age"};

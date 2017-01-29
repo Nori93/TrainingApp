@@ -16,6 +16,12 @@ public class Exercise {
         Instrukcje = instrukcje;
         Sciezka = sciezka;
     }
+    public Exercise(String nazwa, String opis, String instrukcje, String sciezka) {
+        Nazwa = nazwa;
+        Opis = opis;
+        Instrukcje = instrukcje;
+        Sciezka = sciezka;
+    }
 
     public String getOpis() {
         return Opis;

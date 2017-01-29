@@ -29,6 +29,7 @@ public class ListWindow extends Fragment {
     TextView search_type;
     EditText search_text;
     Button search_button;
+    Button create_new;
     ListView list;
 
     //Type
@@ -63,12 +64,13 @@ public class ListWindow extends Fragment {
         trainingRepository = new TrainingRepository();
 
         exerciseArrayList = exerciseRepository.getAllExercise(databaseOperations);
-        //trainingArrayList = trainingRepository.getAllTraining(databaseOperations);
+        trainingArrayList = trainingRepository.getAllTraining(databaseOperations);
 
         search_type = (TextView) view.findViewById(R.id.list_typeOfList);
 
         search_text = (EditText) view.findViewById(R.id.list_search);
         search_button = (Button)view.findViewById(R.id.list_button);
+        create_new = (Button)view.findViewById(R.id.list_Create);
         list = (ListView)view.findViewById(R.id.list_listview);
         changeName(view);
 
@@ -76,7 +78,7 @@ public class ListWindow extends Fragment {
         search_type.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //type = !type;
+                type = !type;
                 changeName(v);
             }
         });
@@ -107,6 +109,14 @@ public class ListWindow extends Fragment {
                     ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.exerciseWindow);
                 }
             });
+
+            create_new.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ((MainActivity) getActivity()).setInputType(R.integer.Exercise);
+                    ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.inputWindow);
+                }
+            });
         }
 
         else{
@@ -124,7 +134,23 @@ public class ListWindow extends Fragment {
                 }
             });
 
+            create_new.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ((MainActivity) getActivity()).setInputType(R.integer.Training);
+                    ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.inputWindow);
+                }
+            });
+
         }
+    }
+    private void setTraningList(){
+        String[] temp = new String[trainingArrayList.size()];
+        for (int i=0;i<temp.length;i++)
+        {
+         temp[i]=trainingArrayList.get(i).getNazwa();
+        }
+        ((MainActivity)getActivity()).setTraningDB(temp);
     }
 
 

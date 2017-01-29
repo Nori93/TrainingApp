@@ -28,11 +28,11 @@ public class TrainingRepository {
     }
 
 
-    public List<Training> GetAllTraining(DatabaseOperations db)
+    public ArrayList<Training> getAllTraining(DatabaseOperations db)
     {
         try
         {
-            List<Training> Trainings = new ArrayList<>();
+            ArrayList<Training> Trainings = new ArrayList<>();
             SQLiteDatabase DB = db.getWritableDatabase();
             String[] coloumnsTraining = {TrainingTableDetails.COLUMN_ID, TrainingTableDetails.COLUMN_DATA,TrainingTableDetails.COLUMN_NAZWA,TrainingTableDetails.COLUMN_OPIS};
             Cursor TrainingCR = DB.query(TrainingTableDetails.TABLE_NAME, coloumnsTraining,null,null,null,null,null);
@@ -68,7 +68,7 @@ public class TrainingRepository {
 
     }
 
-    public void AddNewTrening(Training training,DatabaseOperations db)//Training -> ID Series all ID's MUST BE NULL!!!!
+    public void insertNewTrening(Training training,DatabaseOperations db)//Training -> ID Series all ID's MUST BE NULL!!!!
     {
         SQLiteDatabase DB = db.getWritableDatabase();
         ContentValues TrainingTableContent = new ContentValues();

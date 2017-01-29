@@ -35,6 +35,8 @@ public class IconText_Adp extends BaseAdapter {
     List<Exercise> exercisesList;
     List<Training> trainingList;
 
+    // true = exercise ;false traning
+    boolean type = true;
     //Dimension of icons in list
     private int widthIcon = 30;
     private int heightIcon = 30;
@@ -42,10 +44,11 @@ public class IconText_Adp extends BaseAdapter {
 
 
 
-    public IconText_Adp(Context applicationContext, List<Training> trainingList,boolean s){
+    public IconText_Adp(Context applicationContext, List<Training> trainingList,boolean t){
         this.context = applicationContext;
         this.inflater = (LayoutInflater.from(applicationContext));
         this.trainingList = trainingList;
+        this.type = t;
     }
 
     public IconText_Adp(Context applicationContext, List<Exercise> exercisesList){
@@ -57,12 +60,15 @@ public class IconText_Adp extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return exercisesList.size();
+        if(type)
+            return exercisesList.size();
+        else
+            return trainingList.size();
     }
 
     @Override
     public Exercise getItem(int position) {
-        return exercisesList.get(position);
+       return exercisesList.get(position);
     }
 
     @Override
@@ -86,7 +92,10 @@ public class IconText_Adp extends BaseAdapter {
         }catch (Exception e){
             Log.e("Error",position + " do not set on IconText adp ");
         }
-        title.setText(exercisesList.get(position).getNazwa());
+        if(type)
+            title.setText(exercisesList.get(position).getNazwa());
+        else
+            title.setText(trainingList.get(position).getNazwa());
 
         return view;
     }

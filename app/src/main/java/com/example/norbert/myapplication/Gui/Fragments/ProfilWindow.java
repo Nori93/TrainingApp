@@ -74,7 +74,7 @@ public class ProfilWindow extends Fragment {
 
 
         TrainingRepository trainingRepository = new TrainingRepository();
-        List<Training> tmp = trainingRepository.GetAllTraining(DB);
+        List<Training> tmp = trainingRepository.getAllTraining(DB);
 
         StartSetting(list,CR);
         ListHandling(list,CR,DB);

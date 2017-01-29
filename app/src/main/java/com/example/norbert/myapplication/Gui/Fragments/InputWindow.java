@@ -14,7 +14,9 @@ import android.widget.TextView;
 import com.example.norbert.myapplication.Engin.DataBaseHelper.DatabaseOperations;
 import com.example.norbert.myapplication.Engin.MainActivity;
 import com.example.norbert.myapplication.Engin.Objects.Exercise;
+import com.example.norbert.myapplication.Engin.Objects.Training;
 import com.example.norbert.myapplication.Engin.Repository.ExerciseRepository;
+import com.example.norbert.myapplication.Engin.Repository.TrainingRepository;
 import com.example.norbert.myapplication.Gui.Adapters.EditText_Adp;
 import com.example.norbert.myapplication.Gui.Adapters.IconText_Adp;
 import com.example.norbert.myapplication.R;
@@ -32,6 +34,7 @@ public class InputWindow extends Fragment {
     // DATABASE
     DatabaseOperations databaseOperations;
     ExerciseRepository exerciseRepository;
+    TrainingRepository trainingRepository;
 
     int tag;
     String[] rows_inputs;
@@ -64,6 +67,53 @@ public class InputWindow extends Fragment {
 
 
 
+        databaseOperations = new DatabaseOperations(view.getContext());
+        exerciseRepository = new ExerciseRepository();
+        trainingRepository = new TrainingRepository();
+
+
+    }
+    private void Save(){
+        switch (tag) {
+            case 51:
+              //{"id","Name","Description","Instruction","Icon Path"};
+                save.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        rows_inputs = editText_adp.getAllData();
+                        exerciseRepository.insertNewExcerise(new Exercise(rows_inputs[0],rows_inputs[1],rows_inputs[2],rows_inputs[3]),databaseOperations);
+                    }
+                });
+                break;
+            case 52:
+                // {"id","Repeats", "Weights", "ID Exercise", "ID Training"};
+                save.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+                break;
+            case 53:
+                // {"id","Name","Description","Data"};
+                save.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        rows_inputs = editText_adp.getAllData();
+                    trainingRepository.insertNewTrening(new Training(rows_inputs[0],rows_inputs[1]),databaseOperations);
+                    }
+                });
+                break;
+            case 54:
+               //{"Weight","Height", "Calories", "Activity","Fat", "Carb", "Protein", "Target","Body Type", "Sex","Age"};
+                save.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+                break;
+        }
     }
 
 

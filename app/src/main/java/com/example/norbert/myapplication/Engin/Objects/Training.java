@@ -24,6 +24,10 @@ public class Training {
         this.opis = opis;
         this.nazwa = nazwa;
     }
+    public Training(String nazwa, String opis) {
+        this.nazwa = nazwa;
+        this.opis = opis;
+    }
 
     public List<Series> getSerie() {
         return Serie;

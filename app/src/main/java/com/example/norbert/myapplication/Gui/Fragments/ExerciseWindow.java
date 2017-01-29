@@ -1,17 +1,24 @@
 package com.example.norbert.myapplication.Gui.Fragments;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.norbert.myapplication.Engin.MainActivity;
 import com.example.norbert.myapplication.Engin.Objects.Exercise;
 import com.example.norbert.myapplication.R;
+
+import java.util.ArrayList;
 
 /***
  *
@@ -35,6 +42,8 @@ public class ExerciseWindow extends Fragment {
             start,
             add;
 
+    Context context;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -44,7 +53,7 @@ public class ExerciseWindow extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        context = this.getActivity();
         title = (TextView)view.findViewById(R.id.exer_title);
         desc = (TextView)view.findViewById(R.id.exer_desc);
         inst = (TextView)view.findViewById(R.id.exer_inst);
@@ -60,10 +69,10 @@ public class ExerciseWindow extends Fragment {
         title.setText(exercise.getNazwa());
         desc.setText(exercise.getOpis());
         inst.setText(exercise.getInstrukcje());
-        Buttons();
+        Buttons(view);
     }
 
-    private void Buttons(){
+    private void Buttons(View view){
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,8 +92,6 @@ public class ExerciseWindow extends Fragment {
             @Override
             public void onClick(View v) {
 
-                ((MainActivity) getActivity()).setInputType(R.integer.Exercise);
-                ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.inputWindow);
             }
         });
     }
