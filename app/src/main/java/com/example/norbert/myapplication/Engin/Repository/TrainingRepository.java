@@ -206,7 +206,7 @@ public class TrainingRepository {
             DB.delete(TrainingTableDetails.TABLE_NAME,whereClause,whereArgs);
 
             whereClause = SeriesRepository.SeriesTableDetails.COLUMN_ID_TR+"= ?";
-            DB.delete(SeriesRepository.SeriesTableDetails.COLUMN_ID_TR,whereClause,whereArgs);
+            DB.delete(SeriesRepository.SeriesTableDetails.TABLE_NAME,whereClause,whereArgs);
             DB.setTransactionSuccessful();
             Log.d("DataBase operations", "Training successfully deleted");
             return  true;
