@@ -358,6 +358,7 @@ private void CountCaloriesIf(UserInformation CR){
                     break;}
                 else{
                     Toast.makeText(ctx,"Sum of calories, fat and protein needs to be 100%",Toast.LENGTH_LONG).show();
+                    weglowodany=CR.getCarb();
                     break;
                 }
             case 4:
@@ -371,6 +372,7 @@ private void CountCaloriesIf(UserInformation CR){
                 }
                 else{
                     Toast.makeText(ctx,"Sum of calories, fat and protein needs to be 100%",Toast.LENGTH_LONG).show();
+                    tluszcz=CR.getFat();
                     break;
                 }
             case 5:
@@ -384,6 +386,7 @@ private void CountCaloriesIf(UserInformation CR){
                 }
                 else{
                     Toast.makeText(ctx,"Sum of calories, fat and protein needs to be 100%",Toast.LENGTH_LONG).show();
+                    bialko=CR.getProtein();
                     break;
                 }
             case 6:
