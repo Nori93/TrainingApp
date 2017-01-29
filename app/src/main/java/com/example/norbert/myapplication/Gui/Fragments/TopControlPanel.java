@@ -45,12 +45,12 @@ public class TopControlPanel extends Fragment{
     private void Gui(View view){
         button1 = (LinearLayout)view.findViewById(R.id.tp_Button_1);
         button2 = (LinearLayout)view.findViewById(R.id.tp_Button_2);
-        button3 = (LinearLayout)view.findViewById(R.id.tp_Button_3);
+      //  button3 = (LinearLayout)view.findViewById(R.id.tp_Button_3);
         button4 = (LinearLayout)view.findViewById(R.id.tp_Button_4);
 
         button1_text = (TextView) view.findViewById(R.id.tp_Button_1_text);
         button2_text = (TextView) view.findViewById(R.id.tp_Button_2_text);
-        button3_text = (TextView) view.findViewById(R.id.tp_Button_3_text);
+      //  button3_text = (TextView) view.findViewById(R.id.tp_Button_3_text);
         button4_text = (TextView) view.findViewById(R.id.tp_Button_4_text);
 
         button1.setOnClickListener(new View.OnClickListener() {
@@ -67,12 +67,12 @@ public class TopControlPanel extends Fragment{
             }
         });
 
-        button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                OnClickColor(3);
-            }
-        });
+//        button3.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                OnClickColor(3);
+//            }
+//        });
 
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,45 +87,45 @@ public class TopControlPanel extends Fragment{
             case 1:
                 button1.setBackgroundColor(getResources().getColor(R.color.colorTopControlOne));
                 button2.setBackgroundColor(getResources().getColor(R.color.colorTopControlTwo));
-                button3.setBackgroundColor(getResources().getColor(R.color.colorTopControlTwo));
+             //   button3.setBackgroundColor(getResources().getColor(R.color.colorTopControlTwo));
                 button4.setBackgroundColor(getResources().getColor(R.color.colorTopControlTwo));
 
                 button1_text.setTextColor(getResources().getColor(R.color.colorTopControlTextOn));
                 button2_text.setTextColor(getResources().getColor(R.color.colorTopControlTextOff));
-                button3_text.setTextColor(getResources().getColor(R.color.colorTopControlTextOff));
+               // button3_text.setTextColor(getResources().getColor(R.color.colorTopControlTextOff));
                 button4_text.setTextColor(getResources().getColor(R.color.colorTopControlTextOff));
                 break;
             case 2:
                 button1.setBackgroundColor(getResources().getColor(R.color.colorTopControlTwo));
                 button2.setBackgroundColor(getResources().getColor(R.color.colorTopControlOne));
-                button3.setBackgroundColor(getResources().getColor(R.color.colorTopControlTwo));
+             //   button3.setBackgroundColor(getResources().getColor(R.color.colorTopControlTwo));
                 button4.setBackgroundColor(getResources().getColor(R.color.colorTopControlTwo));
 
                 button1_text.setTextColor(getResources().getColor(R.color.colorTopControlTextOff));
                 button2_text.setTextColor(getResources().getColor(R.color.colorTopControlTextOn));
-                button3_text.setTextColor(getResources().getColor(R.color.colorTopControlTextOff));
+               // button3_text.setTextColor(getResources().getColor(R.color.colorTopControlTextOff));
                 button4_text.setTextColor(getResources().getColor(R.color.colorTopControlTextOff));
                 break;
             case 3:
                 button1.setBackgroundColor(getResources().getColor(R.color.colorTopControlTwo));
                 button2.setBackgroundColor(getResources().getColor(R.color.colorTopControlTwo));
-                button3.setBackgroundColor(getResources().getColor(R.color.colorTopControlOne));
+              //  button3.setBackgroundColor(getResources().getColor(R.color.colorTopControlOne));
                 button4.setBackgroundColor(getResources().getColor(R.color.colorTopControlTwo));
 
                 button1_text.setTextColor(getResources().getColor(R.color.colorTopControlTextOff));
                 button2_text.setTextColor(getResources().getColor(R.color.colorTopControlTextOff));
-                button3_text.setTextColor(getResources().getColor(R.color.colorTopControlTextOn));
+               // button3_text.setTextColor(getResources().getColor(R.color.colorTopControlTextOn));
                 button4_text.setTextColor(getResources().getColor(R.color.colorTopControlTextOff));
                 break;
             case 4:
                 button1.setBackgroundColor(getResources().getColor(R.color.colorTopControlTwo));
                 button2.setBackgroundColor(getResources().getColor(R.color.colorTopControlTwo));
-                button3.setBackgroundColor(getResources().getColor(R.color.colorTopControlTwo));
+              //  button3.setBackgroundColor(getResources().getColor(R.color.colorTopControlTwo));
                 button4.setBackgroundColor(getResources().getColor(R.color.colorTopControlOne));
 
                 button1_text.setTextColor(getResources().getColor(R.color.colorTopControlTextOff));
                 button2_text.setTextColor(getResources().getColor(R.color.colorTopControlTextOff));
-                button3_text.setTextColor(getResources().getColor(R.color.colorTopControlTextOff));
+               // button3_text.setTextColor(getResources().getColor(R.color.colorTopControlTextOff));
                 button4_text.setTextColor(getResources().getColor(R.color.colorTopControlTextOn));
                 break;
         }

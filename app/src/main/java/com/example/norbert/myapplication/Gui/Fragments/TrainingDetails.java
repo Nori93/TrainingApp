@@ -1,6 +1,8 @@
 package com.example.norbert.myapplication.Gui.Fragments;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.app.ListFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -104,7 +106,11 @@ public class TrainingDetails extends Fragment {
         backToTrList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,R.integer.trainingListWindow);
+               // ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,R.integer.trainingListWindow);
+                Fragment workout = new ListWindow();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.Main,workout);
+                transaction.commit();
             }
         });
         deleteTraining.setOnClickListener(new View.OnClickListener() {
