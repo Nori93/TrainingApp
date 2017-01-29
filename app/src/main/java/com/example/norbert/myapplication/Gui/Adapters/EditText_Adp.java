@@ -132,7 +132,7 @@ public class EditText_Adp extends BaseAdapter {
                 names= new String[] {"Repeats", "Weights", "ID Exercise", "ID Training"};
                 break;
             case 53:
-                names = new String[] {"Name","Description","Data"};
+                names = new String[] {"Name","Description"};
                 break;
             case 54:
                 names =new String[] {"Weight","Height", "Calories", "Activity","Fat", "Carb", "Protein", "Target","Body Type", "Sex","Age"};
