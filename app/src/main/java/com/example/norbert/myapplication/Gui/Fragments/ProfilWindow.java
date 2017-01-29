@@ -74,17 +74,17 @@ public class ProfilWindow extends Fragment {
         Listadapter.notifyDataSetChanged();
 
 
-        TrainingRepository trainingRepository = new TrainingRepository();
-        List<Training> tmp = trainingRepository.getAllTraining(DB);
-
-        List<Series> serie = new ArrayList<>();
-        serie.add(new Series(0,5,5,4,0));
-        serie.add(new Series(0,5,5,4,0));
-        serie.add(new Series(0,5,5,4,0));
-
-        Training training= new Training(null,"30-01-2017",serie,"nazwa","opis");
-
-        trainingRepository.insertNewTrening(training,DB);
+//        TrainingRepository trainingRepository = new TrainingRepository();
+//        List<Training> tmp = trainingRepository.getAllTraining(DB);
+//
+//        List<Series> serie = new ArrayList<>();
+//        serie.add(new Series(0,5,5,4,0));
+//        serie.add(new Series(0,5,5,4,0));
+//        serie.add(new Series(0,5,5,4,0));
+//
+//        Training training= new Training(null,"30-01-2017",serie,"nazwa","opis");
+//
+//        trainingRepository.insertNewTrening(training,DB);
 
         StartSetting(list,CR);
         ListHandling(list,CR,DB);
