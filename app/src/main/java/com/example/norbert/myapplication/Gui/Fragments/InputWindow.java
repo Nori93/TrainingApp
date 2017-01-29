@@ -2,6 +2,7 @@ package com.example.norbert.myapplication.Gui.Fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,7 +75,7 @@ public class InputWindow extends Fragment {
         exerciseRepository = new ExerciseRepository();
         trainingRepository = new TrainingRepository();
         seriesRepository = new SeriesRepository();
-
+        Save();
 
     }
     private void Save(){
@@ -95,12 +96,14 @@ public class InputWindow extends Fragment {
                     @Override
                     public void onClick(View v) {
                         rows_inputs = editText_adp.getAllData();
+                        try{
                         ((MainActivity)getActivity()).setSeries(new Series(
                                 Integer.parseInt(rows_inputs[0]),
                                 Float.parseFloat(rows_inputs[1]),
                                 Integer.parseInt(rows_inputs[2]),
                                 Integer.parseInt(rows_inputs[3])
-                        ));
+                        ));}catch (Exception e){
+                            Log.e("InputWindow",e.getMessage().toString());}
                         ((MainActivity) getActivity()).setInputType(R.integer.inputTraining);
                         ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.inputTraining);
                     }
