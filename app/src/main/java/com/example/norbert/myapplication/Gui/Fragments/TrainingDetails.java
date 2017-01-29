@@ -81,8 +81,8 @@ public class TrainingDetails extends Fragment {
             String name=exercise.getNazwa();
             String desc=exercise.getOpis();
             String instr=exercise.getInstrukcje();
-            String repeats=String.valueOf(training.getSerie().get(i).getRepeats());
-            String weights=String.valueOf(training.getSerie().get(i).getWeights());
+            String repeats="Powtórzenia: "+String.valueOf(training.getSerie().get(i).getRepeats());
+            String weights="Obciążenie: "+String.valueOf(training.getSerie().get(i).getWeights());
 
             exerInSerie.put("name",name);
             exerInSerie.put("desc",desc);
