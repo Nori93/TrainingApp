@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.norbert.myapplication.Engin.Objects.Exercise;
+import com.example.norbert.myapplication.Engin.Objects.Series;
 import com.example.norbert.myapplication.Engin.Objects.Training;
 import com.example.norbert.myapplication.R;
 
@@ -34,15 +35,23 @@ public class IconText_Adp extends BaseAdapter {
     // List that containt all exercise ,training
     List<Exercise> exercisesList;
     List<Training> trainingList;
+    List<Series> seriesList;
 
     // true = exercise ;false traning
     boolean type = true;
+    int i = 0;
     //Dimension of icons in list
     private int widthIcon = 30;
     private int heightIcon = 30;
     private Bitmap temp_icon;
 
-
+    public IconText_Adp(Context applicationContext, List<Series> seriesList, boolean t,int i){
+        this.context = applicationContext;
+        this.inflater = (LayoutInflater.from(applicationContext));
+        this.seriesList = seriesList;
+        this.type = t;
+        this.i = i;
+    }
 
     public IconText_Adp(Context applicationContext, List<Training> trainingList,boolean t){
         this.context = applicationContext;
@@ -62,6 +71,8 @@ public class IconText_Adp extends BaseAdapter {
     public int getCount() {
         if(type)
             return exercisesList.size();
+        else if (i == 1)
+            return seriesList.size();
         else
             return trainingList.size();
     }
@@ -98,6 +109,8 @@ public class IconText_Adp extends BaseAdapter {
         }
         if(type)
             title.setText(exercisesList.get(position).getNazwa());
+        else if (i == 1)
+            title.setText(seriesList.get(position).getRepeats());
         else
             title.setText(trainingList.get(position).getNazwa());
 

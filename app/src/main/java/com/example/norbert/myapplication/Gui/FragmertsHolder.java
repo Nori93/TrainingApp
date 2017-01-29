@@ -7,9 +7,10 @@ import android.content.Context;
 
 import com.example.norbert.myapplication.Engin.MainActivity;
 import com.example.norbert.myapplication.Engin.ObjectSchema;
-import com.example.norbert.myapplication.Gui.Fragments.AddTrainingWindow;
+import com.example.norbert.myapplication.Engin.Objects.Series;
 import com.example.norbert.myapplication.Gui.Fragments.CalendarWindow;
 import com.example.norbert.myapplication.Gui.Fragments.ExerciseWindow;
+import com.example.norbert.myapplication.Gui.Fragments.InputTrainingWindow;
 import com.example.norbert.myapplication.Gui.Fragments.InputWindow;
 import com.example.norbert.myapplication.Gui.Fragments.ListWindow;
 import com.example.norbert.myapplication.Gui.Fragments.ProfilWindow;
@@ -33,9 +34,9 @@ public class FragmertsHolder {
     ProfilWindow profilWindow;              // 6
     CalendarWindow calendarWindow;          // 7
     TrainingListWindow trainingListWindow;  // 8
-    AddTrainingWindow addTrainingWindow;    // 9
+    InputTrainingWindow inputTrainingWindow; // 9
     ListWindow listFragment_TrainingCreating;//11
-    InputWindow inputWindow;
+    InputWindow inputWindow;                 //12
     public FragmertsHolder(Context context){
         this.context = context;
 
@@ -49,7 +50,7 @@ public class FragmertsHolder {
         calendarWindow = new CalendarWindow();
         trainingListWindow=new TrainingListWindow();
         trainingListWindow=new TrainingListWindow();
-        addTrainingWindow= new AddTrainingWindow();
+        inputTrainingWindow = new InputTrainingWindow();
         inputWindow = new InputWindow();
     }
 
@@ -86,7 +87,7 @@ public class FragmertsHolder {
             case 8:
                 return trainingListWindow;
             case 9:
-                return addTrainingWindow;
+                return inputTrainingWindow;
             case 10:
                 return inputWindow;
             case 11:
@@ -101,6 +102,10 @@ public class FragmertsHolder {
 
     }
 
+    public Series addSeries(){
+        return inputWindow.getSeries();
+    }
+
 
     //Clear Frame to clear space
     public void destroyStartFragment(){this.startWindow = null;}
@@ -110,7 +115,8 @@ public class FragmertsHolder {
     public void destroyListFragment_Meals(){this.listFragment_Meals = null;}
     public void destroyProfilWindow(){this.profilWindow = null;}
     public void destroyTrainingListWindow(){this.trainingListWindow=null;}
-    public void destroyAddTrainingWindow(){this.addTrainingWindow=null;}
+    public void destroyInputTrainingWindow(){this.inputTrainingWindow=null;}
+    public void destroyInputWindow(){this.inputWindow=null;}
 
     private int getTag(int resorce) {
         return context.getResources().getInteger(resorce);

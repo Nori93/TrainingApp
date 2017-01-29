@@ -88,7 +88,7 @@ public class TrainingListWindow extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 ((MainActivity)getActivity()).setPassedTraining(lista.get(position));
-                ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,R.integer.trainingDetails);
+                //((MainActivity)getActivity()).fragmentReplace(R.id.calendar,R.integer.trainingDetails);
             }
         });
     }

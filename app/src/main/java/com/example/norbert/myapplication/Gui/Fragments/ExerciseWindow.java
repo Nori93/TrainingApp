@@ -91,8 +91,7 @@ public class ExerciseWindow extends Fragment {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).setInputType(R.integer.Series);
-                ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.inputWindow);
+
             }
         });
     }

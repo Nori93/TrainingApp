@@ -95,7 +95,14 @@ public class InputWindow extends Fragment {
                     @Override
                     public void onClick(View v) {
                         rows_inputs = editText_adp.getAllData();
-                       // seriesRepository.insertNewSerie(new Series(Integer.parseInt(rows_inputs[0]),Float.parseFloat(rows_inputs[1]),Integer.parseInt(rows_inputs[2]),Integer.parseInt(rows_inputs[3])),databaseOperations);
+                        ((MainActivity)getActivity()).setSeries(new Series(
+                                Integer.parseInt(rows_inputs[0]),
+                                Float.parseFloat(rows_inputs[1]),
+                                Integer.parseInt(rows_inputs[2]),
+                                Integer.parseInt(rows_inputs[3])
+                        ));
+                        ((MainActivity) getActivity()).setInputType(R.integer.inputTraining);
+                        ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.inputTraining);
                     }
                 });
                 break;
@@ -122,5 +129,12 @@ public class InputWindow extends Fragment {
     }
 
 
-
+    public Series getSeries() {
+        return new Series(
+                Integer.parseInt(rows_inputs[0]),
+                Float.parseFloat(rows_inputs[1]),
+                Integer.parseInt(rows_inputs[2]),
+                Integer.parseInt(rows_inputs[3])
+        );
+    }
 }

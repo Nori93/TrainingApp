@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.widget.RelativeLayout;
 
 import com.example.norbert.myapplication.Engin.Objects.Exercise;
+import com.example.norbert.myapplication.Engin.Objects.Series;
 import com.example.norbert.myapplication.Engin.Objects.Training;
 import com.example.norbert.myapplication.Engin.Sensor.Accelerometer;
 import com.example.norbert.myapplication.Engin.Sensor.Gravity;
@@ -19,6 +20,7 @@ import com.example.norbert.myapplication.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class MainActivity extends Activity {
@@ -49,6 +51,12 @@ public class MainActivity extends Activity {
     // List Window
     Exercise exercise;
     Training training;
+
+    //Series
+    String trName;
+    String trDesc;
+    String trData;
+    ArrayList<Series>serieslist = new ArrayList<Series>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +89,7 @@ public class MainActivity extends Activity {
             //StartWindows Fragment
              case 1:
 
-                 holder.setStartWindow();
+                 //holder.setStartWindow();
                 transaction.replace(R.id.Main,holder.getFragment(getTag(R.integer.startWindow)));
                 transaction.commit();
                 break;
@@ -175,4 +183,14 @@ public class MainActivity extends Activity {
     }
     public Training getPassedTraining(){return passedTraining;}
     public void setPassedTraining(Training value){passedTraining=value;}
+
+    public void setSeries(Series s){ serieslist.add(s);}
+    public ArrayList<Series> getSeries(){return serieslist;}
+
+    public void setTrainingName(String n){this.trName= n;}
+    public String getTrainingName(){return trName;}
+    public void setTrainingDesc(String n){this.trDesc= n;}
+    public String getTrainingDesc(){return trDesc;}
+    public void setTrainingData(String trainingData) {  this.trData = trainingData;  }
+    public String getTrainingData(){return trData;}
 }

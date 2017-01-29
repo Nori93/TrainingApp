@@ -137,8 +137,8 @@ public class ListWindow extends Fragment {
             create_new.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ((MainActivity) getActivity()).setInputType(R.integer.Training);
-                    ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.inputWindow);
+
+                    ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.inputTraining);
                 }
             });
 

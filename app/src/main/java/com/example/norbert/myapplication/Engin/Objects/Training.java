@@ -24,6 +24,13 @@ public class Training {
         this.opis = opis;
         this.nazwa = nazwa;
     }
+
+    public Training( String data, List<Series> serie,String nazwa, String opis) {
+        Data = data;
+        Serie = serie;
+        this.opis = opis;
+        this.nazwa = nazwa;
+    }
     public Training(String nazwa, String opis) {
         this.nazwa = nazwa;
         this.opis = opis;
