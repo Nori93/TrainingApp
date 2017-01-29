@@ -1,6 +1,7 @@
 package com.example.norbert.myapplication.Gui.Fragments;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -127,10 +128,15 @@ public class ListWindow extends Fragment {
             list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    //get target exercise
-                    ((MainActivity) getActivity()).setListSelectedTr(adapter.getItemT(position));
-                    // start fragment exercise
-                    ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.exerciseWindow);
+
+                    ((MainActivity)getActivity()).setPassedTraining(adapter.getItemT(position));
+                    Fragment TrainingDetails = new TrainingDetails();
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    transaction.replace(R.id.Main,TrainingDetails);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+                  //  ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.);
+
                 }
             });
 
