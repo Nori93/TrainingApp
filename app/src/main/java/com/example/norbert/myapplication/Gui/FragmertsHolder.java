@@ -12,6 +12,7 @@ import com.example.norbert.myapplication.Gui.Fragments.CalendarWindow;
 import com.example.norbert.myapplication.Gui.Fragments.ExerciseWindow;
 import com.example.norbert.myapplication.Gui.Fragments.InputTrainingWindow;
 import com.example.norbert.myapplication.Gui.Fragments.InputWindow;
+import com.example.norbert.myapplication.Gui.Fragments.ListSelectWindow;
 import com.example.norbert.myapplication.Gui.Fragments.ListWindow;
 import com.example.norbert.myapplication.Gui.Fragments.ProfilWindow;
 import com.example.norbert.myapplication.Gui.Fragments.StartWindow;
@@ -37,6 +38,7 @@ public class FragmertsHolder {
     InputTrainingWindow inputTrainingWindow; // 9
     ListWindow listFragment_TrainingCreating;//11
     InputWindow inputWindow;                 //12
+    ListSelectWindow listSelectWindow;
     public FragmertsHolder(Context context){
         this.context = context;
 
@@ -52,6 +54,7 @@ public class FragmertsHolder {
         trainingListWindow=new TrainingListWindow();
         inputTrainingWindow = new InputTrainingWindow();
         inputWindow = new InputWindow();
+        listSelectWindow = new ListSelectWindow();
     }
 
 
@@ -92,6 +95,8 @@ public class FragmertsHolder {
                 return inputWindow;
             case 11:
                 return listFragment_TrainingCreating;
+            case 12:
+                return listSelectWindow;
         }
         return null;
     }

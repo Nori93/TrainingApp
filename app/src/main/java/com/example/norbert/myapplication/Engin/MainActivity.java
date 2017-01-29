@@ -50,6 +50,7 @@ public class MainActivity extends Activity {
 
     // List Window
     Exercise exercise;
+    Exercise exerciseTemp;
     Training training;
 
     //Series
@@ -193,4 +194,6 @@ public class MainActivity extends Activity {
     public String getTrainingDesc(){return trDesc;}
     public void setTrainingData(String trainingData) {  this.trData = trainingData;  }
     public String getTrainingData(){return trData;}
+
+
 }

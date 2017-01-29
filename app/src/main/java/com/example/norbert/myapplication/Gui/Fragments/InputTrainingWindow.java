@@ -109,8 +109,8 @@ public class InputTrainingWindow extends Fragment {
                 ((MainActivity)getActivity()).setTrainingName(name.getText().toString());
                 ((MainActivity)getActivity()).setTrainingData(data.getText().toString());
                 ((MainActivity)getActivity()).setTrainingDesc(desc.getText().toString());
-                ((MainActivity) getActivity()).setInputType(R.integer.Series);
-                ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.inputWindow);
+                //((MainActivity) getActivity()).setInputType(R.integer.Series);
+                ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.listSelectWindow);
             }
         });
 
