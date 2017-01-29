@@ -7,6 +7,7 @@ import android.provider.BaseColumns;
 import android.util.Log;
 
 import com.example.norbert.myapplication.Engin.DataBaseHelper.DatabaseOperations;
+import com.example.norbert.myapplication.Engin.Helpers.TrainingHelper;
 import com.example.norbert.myapplication.Engin.Objects.Series;
 import com.example.norbert.myapplication.Engin.Objects.Training;
 
@@ -27,6 +28,87 @@ public class TrainingRepository {
         public static final String COLUMN_OPIS = "opis";
     }
 
+
+    public void SetDateToTraining(String date, int Id_tr,DatabaseOperations db)
+    {
+        Training currentTraining = this.GetTrainingById(Id_tr,db);
+        currentTraining = TrainingHelper.TrainingDateHelper.AddToDate(currentTraining,date);
+
+        this.EditTrainingData(currentTraining,db);
+
+
+    }
+
+    public void DeleteDateFromTraining(String date, int Id_tr,DatabaseOperations db)
+    {
+        Training currentTraining = this.GetTrainingById(Id_tr,db);
+        currentTraining = TrainingHelper.TrainingDateHelper.DeleteFromDate(currentTraining,date);
+
+        this.EditTrainingData(currentTraining,db);
+
+    }
+
+
+    public void EditTrainingStructure(Training training,DatabaseOperations db){
+
+
+    }
+
+        public void EditTrainingData(Training training,DatabaseOperations db){  //Use when you dont adding/deleteing series, ONLY FOR CHANGEING DATA
+        SQLiteDatabase DB = db.getWritableDatabase();
+
+
+        ContentValues TrainingTableContent = new ContentValues();
+        ContentValues SeriesContentValue = new ContentValues();
+
+        DB.beginTransaction();
+        try{
+            TrainingTableContent.put(TrainingTableDetails.COLUMN_DATA,training.getData());
+            TrainingTableContent.put(TrainingTableDetails.COLUMN_NAZWA,training.getNazwa());
+            TrainingTableContent.put(TrainingTableDetails.COLUMN_OPIS,training.getOpis());
+
+            String whereClause = TrainingTableDetails._ID+"= ?";
+            String[] whereArgs = new String[]{
+                    Integer.toString(training.getID())
+            };
+
+
+            if(-1 == DB.update(TrainingTableDetails.TABLE_NAME,TrainingTableContent,whereClause,whereArgs))
+            {
+                throw new Exception();
+            }
+
+            for(Series seria : training.getSerie())
+            {
+
+                whereClause = SeriesRepository.SeriesTableDetails.COLUMN_ID+"= ?";
+                whereArgs = new String[]{
+                        Integer.toString(seria.getId())
+                };
+
+                SeriesContentValue.clear();
+                SeriesContentValue.put(SeriesRepository.SeriesTableDetails.COLUMN_POWTORZENIA, seria.getRepeats());
+                SeriesContentValue.put(SeriesRepository.SeriesTableDetails.COLUMN_OBCIAZENIE, seria.getWeights());
+                SeriesContentValue.put(SeriesRepository.SeriesTableDetails.COLUMN_ID_CW, seria.getId_cw());
+
+                if(-1 == DB.update(SeriesRepository.SeriesTableDetails.TABLE_NAME,SeriesContentValue,whereClause,whereArgs))
+                {
+                    throw new Exception();
+                }
+            }
+
+            Log.d("Training repository", "Row Edited");
+
+            DB.setTransactionSuccessful();
+        }catch (Exception ex)
+        {
+            Log.d("Training repository", "Exception while Editihng data to DB. Transaction aborted");
+        }finally {
+            DB.endTransaction();
+        }
+
+
+    }
 
     public ArrayList<Training> getAllTraining(DatabaseOperations db)
     {

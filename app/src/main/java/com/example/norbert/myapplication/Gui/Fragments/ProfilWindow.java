@@ -76,8 +76,11 @@ public class ProfilWindow extends Fragment {
         TrainingRepository trainingRepository = new TrainingRepository();
         List<Training> tmp = trainingRepository.getAllTraining(DB);
 
-
         List<Training> tmbpydate = trainingRepository.GetTrainingByDate(tmp.get(0).getData(),DB);
+
+        trainingRepository.SetDateToTraining("20-01-2017",tmp.get(0).getID(),DB);
+
+        Training tmpTraining = trainingRepository.GetTrainingById(tmp.get(0).getID(),DB);
 
         StartSetting(list,CR);
         ListHandling(list,CR,DB);
