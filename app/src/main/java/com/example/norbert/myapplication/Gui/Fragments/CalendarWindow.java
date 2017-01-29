@@ -19,6 +19,7 @@ public class CalendarWindow extends Fragment {
     CalendarView calendar;
     String selectedDate;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class CalendarWindow extends Fragment {
         //Toast.makeText(getActivity().getApplicationContext(), selectedDate, Toast.LENGTH_LONG).show();
 
     }
+
     public void initializeCalendar(View view) {
 
         calendar = (CalendarView)view.findViewById(R.id.calendar);

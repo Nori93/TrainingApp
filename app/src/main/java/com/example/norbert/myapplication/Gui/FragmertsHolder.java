@@ -7,7 +7,6 @@ import android.content.Context;
 
 import com.example.norbert.myapplication.Engin.MainActivity;
 import com.example.norbert.myapplication.Engin.ObjectSchema;
-import com.example.norbert.myapplication.Gui.Fragments.AddTrainingWindow;
 import com.example.norbert.myapplication.Gui.Fragments.CalendarWindow;
 import com.example.norbert.myapplication.Gui.Fragments.ExerciseWindow;
 import com.example.norbert.myapplication.Gui.Fragments.InputWindow;
@@ -15,6 +14,7 @@ import com.example.norbert.myapplication.Gui.Fragments.ListWindow;
 import com.example.norbert.myapplication.Gui.Fragments.ProfilWindow;
 import com.example.norbert.myapplication.Gui.Fragments.StartWindow;
 import com.example.norbert.myapplication.Gui.Fragments.TopControlPanel;
+import com.example.norbert.myapplication.Gui.Fragments.TrainingDetails;
 import com.example.norbert.myapplication.Gui.Fragments.TrainingListWindow;
 import com.example.norbert.myapplication.R;
 
@@ -33,9 +33,9 @@ public class FragmertsHolder {
     ProfilWindow profilWindow;              // 6
     CalendarWindow calendarWindow;          // 7
     TrainingListWindow trainingListWindow;  // 8
-    AddTrainingWindow addTrainingWindow;    // 9
     ListWindow listFragment_TrainingCreating;//11
     InputWindow inputWindow;
+    TrainingDetails trainingDetails;//9
     public FragmertsHolder(Context context){
         this.context = context;
 
@@ -49,8 +49,8 @@ public class FragmertsHolder {
         calendarWindow = new CalendarWindow();
         trainingListWindow=new TrainingListWindow();
         trainingListWindow=new TrainingListWindow();
-        addTrainingWindow= new AddTrainingWindow();
         inputWindow = new InputWindow();
+        trainingDetails=new TrainingDetails();
     }
 
 
@@ -64,7 +64,6 @@ public class FragmertsHolder {
     public ProfilWindow getProfilWindow(){return profilWindow;}
     public CalendarWindow getCalendarWindow(){return calendarWindow;}
     public TrainingListWindow getTrainingListWindow(){return  trainingListWindow;}
-    public AddTrainingWindow getAddTrainingWindow(){return addTrainingWindow;};
     */
     // version 0.2
     public Fragment getFragment(int index) {
@@ -86,7 +85,7 @@ public class FragmertsHolder {
             case 8:
                 return trainingListWindow;
             case 9:
-                return addTrainingWindow;
+                return trainingDetails;
             case 10:
                 return inputWindow;
             case 11:
@@ -101,6 +100,7 @@ public class FragmertsHolder {
 
     }
 
+    public void setStartWindow(){this.startWindow=new StartWindow();}
 
     //Clear Frame to clear space
     public void destroyStartFragment(){this.startWindow = null;}
@@ -110,7 +110,8 @@ public class FragmertsHolder {
     public void destroyListFragment_Meals(){this.listFragment_Meals = null;}
     public void destroyProfilWindow(){this.profilWindow = null;}
     public void destroyTrainingListWindow(){this.trainingListWindow=null;}
-    public void destroyAddTrainingWindow(){this.addTrainingWindow=null;}
+    public void destroyTrainingDetails(){this.trainingDetails=null;}
+
 
     private int getTag(int resorce) {
         return context.getResources().getInteger(resorce);

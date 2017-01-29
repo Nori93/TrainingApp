@@ -9,7 +9,7 @@
     <integer name="profilWindow">6</integer>
     <integer name="calendarWindow">7</integer>
     <integer name="trainingListWindow">8</integer>
-    <integer name="addTrainingWindow">9</integer>
+    <integer name="trainingDetails">9</integer>
     <integer name="inputWindow">10</integer>
     <integer name="listFragment_TrainingCreating">11</integer>
 
