@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.example.norbert.myapplication.Engin.DataBaseHelper.DatabaseOperations;
 import com.example.norbert.myapplication.Engin.Objects.Exercise;
+import com.example.norbert.myapplication.Engin.Objects.Series;
 import com.example.norbert.myapplication.Engin.Objects.Training;
 import com.example.norbert.myapplication.Engin.Objects.UserInformation;
 import com.example.norbert.myapplication.Engin.Repository.ExerciseRepository;
@@ -76,11 +77,14 @@ public class ProfilWindow extends Fragment {
         TrainingRepository trainingRepository = new TrainingRepository();
         List<Training> tmp = trainingRepository.getAllTraining(DB);
 
-        List<Training> tmbpydate = trainingRepository.GetTrainingByDate(tmp.get(0).getData(),DB);
+        List<Series> serie = new ArrayList<>();
+        serie.add(new Series(0,5,5,4,0));
+        serie.add(new Series(0,5,5,4,0));
+        serie.add(new Series(0,5,5,4,0));
 
-        trainingRepository.SetDateToTraining("20-01-2017",tmp.get(0).getID(),DB);
+        Training training= new Training(null,"30-01-2017",serie,"nazwa","opis");
 
-        Training tmpTraining = trainingRepository.GetTrainingById(tmp.get(0).getID(),DB);
+        trainingRepository.insertNewTrening(training,DB);
 
         StartSetting(list,CR);
         ListHandling(list,CR,DB);

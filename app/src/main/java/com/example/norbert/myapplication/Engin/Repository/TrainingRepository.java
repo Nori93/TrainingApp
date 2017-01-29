@@ -156,7 +156,7 @@ public class TrainingRepository {
         ContentValues TrainingTableContent = new ContentValues();
         ContentValues SeriesContentValue = new ContentValues();
 
-        DB.beginTransaction();
+
         try{
             TrainingTableContent.put(TrainingTableDetails.COLUMN_DATA,training.getData());
             TrainingTableContent.put(TrainingTableDetails.COLUMN_NAZWA,training.getNazwa());
@@ -168,6 +168,19 @@ public class TrainingRepository {
                 throw new Exception();
             }
 
+            String[] coloumnsTraining = {TrainingTableDetails.COLUMN_ID, TrainingTableDetails.COLUMN_DATA,TrainingTableDetails.COLUMN_NAZWA,TrainingTableDetails.COLUMN_OPIS};
+
+            Cursor CR = DB.query(TrainingTableDetails.TABLE_NAME, coloumnsTraining,null,null,null,null, TrainingTableDetails.COLUMN_ID+" DESC");
+            CR.moveToFirst();
+            String TrainingID = "-1";
+
+            Log.d("d",CR.getString(2));
+
+        //    if(training.getNazwa() == CR.getString(2))
+         //   {
+                TrainingID = CR.getString(0);
+        //    }
+
             for(Series seria : training.getSerie())
             {
                 SeriesContentValue.clear();
@@ -175,7 +188,7 @@ public class TrainingRepository {
                 SeriesContentValue.put(SeriesRepository.SeriesTableDetails.COLUMN_POWTORZENIA, seria.getRepeats());
                 SeriesContentValue.put(SeriesRepository.SeriesTableDetails.COLUMN_OBCIAZENIE, seria.getWeights());
                 SeriesContentValue.put(SeriesRepository.SeriesTableDetails.COLUMN_ID_CW, seria.getId_cw());
-                SeriesContentValue.put(SeriesRepository.SeriesTableDetails.COLUMN_ID_TR, seria.getId_tr());
+                SeriesContentValue.put(SeriesRepository.SeriesTableDetails.COLUMN_ID_TR, TrainingID);
 
                 if(-1 == DB.insert(SeriesRepository.SeriesTableDetails.TABLE_NAME,null,SeriesContentValue))
                 {
@@ -185,12 +198,9 @@ public class TrainingRepository {
 
             Log.d("DataBase operations", "Row inserted to series");
 
-            DB.setTransactionSuccessful();
         }catch (Exception ex)
         {
             Log.d("Training repository", "Exception while inserting data to DB. Transaction aborted");
-        }finally {
-            DB.endTransaction();
         }
     }
 
