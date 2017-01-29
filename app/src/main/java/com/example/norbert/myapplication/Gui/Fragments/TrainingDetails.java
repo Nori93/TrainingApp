@@ -66,9 +66,9 @@ public class TrainingDetails extends Fragment {
         dateText=(TextView)view.findViewById(R.id.tr_det_date);
         training=((MainActivity)getActivity()).getPassedTraining();
 
-        nameText.setText(training.getNazwa());
-        descText.setText(training.getOpis());
-        dateText.setText(training.getData());
+        nameText.setText("Nazwa treningu: "+training.getNazwa());
+        descText.setText("Opis treningu: "+training.getOpis());
+        dateText.setText("Planowana data wykonania: "+training.getData());
 
         for(int i=0;i<training.getSerie().size();i++)
         {
