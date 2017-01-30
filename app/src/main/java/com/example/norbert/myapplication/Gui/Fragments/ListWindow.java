@@ -2,7 +2,9 @@ package com.example.norbert.myapplication.Gui.Fragments;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +25,7 @@ import com.example.norbert.myapplication.Gui.Adapters.IconText_Adp;
 import com.example.norbert.myapplication.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ListWindow extends Fragment {
 
@@ -47,6 +50,7 @@ public class ListWindow extends Fragment {
 
     //Adapters
     IconText_Adp adapter;
+
 
 
     @Override
@@ -143,7 +147,9 @@ public class ListWindow extends Fragment {
             create_new.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Calendar c = Calendar.getInstance();
 
+                    ((MainActivity)getActivity()).setData("2017","01","30");
                     ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.addTrainingWindow);
                 }
             });
