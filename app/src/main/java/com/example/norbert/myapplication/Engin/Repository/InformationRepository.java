@@ -59,6 +59,7 @@ public class InformationRepository{
 
         long success = DB.insert(InformationTableDetails.TABLE_NAME,null,content);
         Log.d("DataBase operations", "Row inserted to informacje");
+        DB.close();
     }
 
         public UserInformation getInformationData(DatabaseOperations db)
@@ -80,6 +81,7 @@ public class InformationRepository{
 
                 Log.d("DataBase operations","Data recievied from DB");
 
+                DB.close();
                 return userData;
             }
             catch (Exception ex){

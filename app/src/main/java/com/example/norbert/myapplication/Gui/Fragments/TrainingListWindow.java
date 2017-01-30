@@ -66,10 +66,7 @@ public class TrainingListWindow extends Fragment {
         final TrainingRepository TrainingRepository = new TrainingRepository();
         final DatabaseOperations DB = new DatabaseOperations(ctx);
         lista =  TrainingRepository.GetTrainingByDate(((MainActivity)getActivity()).getData(),DB); // Dostajesz cały wypełniony obiekt!
-
-
         dataTextView.setText(((MainActivity)getActivity()).getData());
-
 
         backToCalendarButt.setOnClickListener(new View.OnClickListener() {
             @Override
