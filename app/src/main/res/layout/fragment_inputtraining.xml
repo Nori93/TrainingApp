@@ -75,10 +75,13 @@
                 android:orientation="horizontal"
                 android:layout_weight="1">
                 <Button
+                    android:background="@drawable/custom_button_press_effect"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Add Serie"
-                    android:id="@+id/trai_add"/>
+                    android:id="@+id/trai_add"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true" />
 
             </RelativeLayout>
         </LinearLayout>
@@ -102,6 +105,7 @@
         >
 
         <Button
+            android:background="@drawable/custom_button_press_effect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Save"

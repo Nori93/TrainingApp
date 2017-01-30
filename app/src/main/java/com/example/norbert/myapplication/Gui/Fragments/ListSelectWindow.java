@@ -86,8 +86,8 @@ public class ListSelectWindow extends Fragment {
                             exerciseTemp.getID()
                     ));}catch (Exception e){
                     Log.e("InputWindow",e.getMessage().toString());}
-                //((MainActivity) getActivity()).setInputType(R.integer.inputTraining);
-                ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.inputTraining);
+                ((MainActivity) getActivity()).setInputType(R.integer.inputTrainingWindow);
+                ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.inputTrainingWindow);
             }
         });
 

@@ -4,6 +4,7 @@
     android:layout_height="match_parent">
 
     <Button
+        android:background="@drawable/custom_button_press_effect"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="3"
@@ -38,12 +39,14 @@
     </ListView>
 
     <Button
+        android:background="@drawable/custom_button_press_effect"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="3"
         android:text="Add Series"
         android:id="@+id/add_tr_add_serie" />
     <Button
+        android:background="@drawable/custom_button_press_effect"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="3"

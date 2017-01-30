@@ -193,22 +193,25 @@
         android:padding="5dp"
         android:layout_weight="2.5">
         <Button
+            android:background="@drawable/custom_button_press_effect"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/exer_button1"
             android:id="@+id/tra_but_back"/>
         <Button
+            android:background="@drawable/custom_button_press_effect"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/exer_button2"
             android:id="@+id/tra_but_start"/>
         <Button
+            android:background="@drawable/custom_button_press_effect"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/exer_button3"
-            android:id="@+id/tra_but_add"/>
+            android:text="EDIT"
+            android:id="@+id/tra_but_edit"/>
     </LinearLayout>
 </LinearLayout>

@@ -143,7 +143,7 @@ public class ListWindow extends Fragment {
                 @Override
                 public void onClick(View v) {
 
-                    ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.inputTraining);
+                    ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.inputTrainingWindow);
                 }
             });
 
