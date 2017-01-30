@@ -6,7 +6,6 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,22 +14,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.norbert.myapplication.Engin.DataBaseHelper.DatabaseOperations;
-import com.example.norbert.myapplication.Engin.Objects.Exercise;
-import com.example.norbert.myapplication.Engin.Objects.Series;
-import com.example.norbert.myapplication.Engin.Objects.Training;
 import com.example.norbert.myapplication.Engin.Objects.UserInformation;
-import com.example.norbert.myapplication.Engin.Repository.ExerciseRepository;
 import com.example.norbert.myapplication.Engin.Repository.InformationRepository;
-import com.example.norbert.myapplication.Engin.Repository.TrainingRepository;
 import com.example.norbert.myapplication.R;
 
 public class ProfilWindow extends Fragment {
@@ -58,7 +50,7 @@ public class ProfilWindow extends Fragment {
         ctx= this.getActivity();
         final InformationRepository InformationRepository = new InformationRepository();
         final DatabaseOperations DB = new DatabaseOperations(ctx);
-        final UserInformation CR =  InformationRepository.getInformationData(DB); // Dostajesz cały wypełniony obiekt!
+        final UserInformation CR =  InformationRepository.getInformationData(DB);
         final ArrayList<String> list = new ArrayList<String>();
 
         CountCalories = (Button) view.findViewById(R.id.CountCalories);
@@ -72,19 +64,6 @@ public class ProfilWindow extends Fragment {
         Listadapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.customlayout, list);
         lista.setAdapter(Listadapter);
         Listadapter.notifyDataSetChanged();
-
-
-//        TrainingRepository trainingRepository = new TrainingRepository();
-//        List<Training> tmp = trainingRepository.getAllTraining(DB);
-//
-//        List<Series> serie = new ArrayList<>();
-//        serie.add(new Series(0,5,5,4,0));
-//        serie.add(new Series(0,5,5,4,0));
-//        serie.add(new Series(0,5,5,4,0));
-//
-//        Training training= new Training(null,"30-01-2017",serie,"nazwa","opis");
-//
-//        trainingRepository.insertNewTrening(training,DB);
 
         StartSetting(list,CR);
         ListHandling(list,CR,DB);
@@ -102,9 +81,7 @@ public class ProfilWindow extends Fragment {
         return view;
     }
 
-
 private void CountCaloriesIf(UserInformation CR){
-
     if(CR.getWeight()==0){
         Toast.makeText(ctx,"You need to fill Weight",Toast.LENGTH_LONG).show();
     }
@@ -178,7 +155,6 @@ private void CountCaloriesIf(UserInformation CR){
             {
                 final AlertDialog.Builder alertDialog = new AlertDialog.Builder(ctx);
                 final EditText text = new EditText(ctx);
-
                 switch(position) {
                     case 0:
                         alertDialog.setView(text);
@@ -211,8 +187,6 @@ private void CountCaloriesIf(UserInformation CR){
                             }
 
                         });
-
-
                         regexStr="[+-]?([0-9]*[.])?[0-9]+";
                         break;
                     case 3:
@@ -234,7 +208,6 @@ private void CountCaloriesIf(UserInformation CR){
 
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
                                 if(which==0) {
                                     target = "Reduce";
                                     text.setText(""+target);
@@ -249,7 +222,6 @@ private void CountCaloriesIf(UserInformation CR){
                                 }
                             }
                         });
-
                         regexStr=".*";
                         break;
                     case 7:
@@ -259,7 +231,6 @@ private void CountCaloriesIf(UserInformation CR){
 
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
                                 if(which==0) {
                                    bodyType = "Mesomorph";
                                     text.setText(""+bodyType);
@@ -272,7 +243,6 @@ private void CountCaloriesIf(UserInformation CR){
                                     bodyType="Endomorph";
                                     text.setText(""+bodyType);
                                 }
-
                             }
                         });
                         regexStr=".*";
@@ -284,7 +254,6 @@ private void CountCaloriesIf(UserInformation CR){
 
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
                                 if(which==0) {
                                     sex = 1;
                                     text.setText(""+sex);
@@ -295,16 +264,13 @@ private void CountCaloriesIf(UserInformation CR){
                                 }
                             }
                         });
-
                         regexStr=".*";
                         break;
                     case 9:
                         alertDialog.setView(text);
                         alertDialog.setTitle("Set your Age ");
                         break;
-
                 }
-
                 alertDialog.setNeutralButton("OK",new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog,int which) {
                         if (text.getText().toString().trim().matches(regexStr)&&text.getText().toString().isEmpty()==false) {
@@ -315,10 +281,8 @@ private void CountCaloriesIf(UserInformation CR){
                         }
                     }
                 });
-
                 final AlertDialog alert=alertDialog.create();
                 alert.show();
-
             }
         });
 
@@ -408,7 +372,6 @@ private void CountCaloriesIf(UserInformation CR){
                 else{
                     list.set(8,"Sex: Female");
                 }
-
                 Listadapter.notifyDataSetChanged();
                 break;
             case 9:
@@ -416,7 +379,6 @@ private void CountCaloriesIf(UserInformation CR){
                 CR.setAge(Integer.valueOf(text.getText().toString()));
                 Listadapter.notifyDataSetChanged();
                 break;
-
         }
     }
 
@@ -465,7 +427,6 @@ private void CountCaloriesIf(UserInformation CR){
                     }
                     break;
             }
-
         }
         else if(CR.getSex()==2){
         totalCalories=(65.5+(9.6*CR.getWeight())+(1.85*CR.getHeight())-(4.7-CR.getAge()))*CR.getActivityLvl();
@@ -510,16 +471,13 @@ private void CountCaloriesIf(UserInformation CR){
                     }
                     break;
             }
-
         }
 
         return totalCalories;
     }
 
     private void SaveToBase(UserInformation CR,DatabaseOperations DB,InformationRepository InformationRepository){
-
         InformationRepository.putInformationData(DB,new UserInformation(CR.getWeight(),CR.getHeight(),CR.getCal(),CR.getActivityLvl(),CR.getFat(),CR.getCarb(),CR.getProtein(),CR.getTarget(),CR.getBodyType(),CR.getSex(),CR.getAge()));
-
     }
 
     @Override
