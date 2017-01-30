@@ -8,14 +8,19 @@ import android.content.Context;
 import com.example.norbert.myapplication.Engin.MainActivity;
 import com.example.norbert.myapplication.Engin.ObjectSchema;
 import com.example.norbert.myapplication.Engin.Objects.Series;
+import com.example.norbert.myapplication.Gui.Fragments.AddTrainingWindow;
 import com.example.norbert.myapplication.Gui.Fragments.CalendarWindow;
+import com.example.norbert.myapplication.Gui.Fragments.ChooseExerciseDetails;
+import com.example.norbert.myapplication.Gui.Fragments.ChooseExerciseWindow;
 import com.example.norbert.myapplication.Gui.Fragments.ExerciseWindow;
 import com.example.norbert.myapplication.Gui.Fragments.InputTrainingWindow;
 import com.example.norbert.myapplication.Gui.Fragments.InputWindow;
+import com.example.norbert.myapplication.Gui.Fragments.ListSelectWindow;
 import com.example.norbert.myapplication.Gui.Fragments.ListWindow;
 import com.example.norbert.myapplication.Gui.Fragments.ProfilWindow;
 import com.example.norbert.myapplication.Gui.Fragments.StartWindow;
 import com.example.norbert.myapplication.Gui.Fragments.TopControlPanel;
+import com.example.norbert.myapplication.Gui.Fragments.TrainingDetails;
 import com.example.norbert.myapplication.Gui.Fragments.TrainingListWindow;
 import com.example.norbert.myapplication.R;
 
@@ -48,7 +53,7 @@ public class FragmertsHolder {
         startWindow = new StartWindow();
         topControlPanel = new TopControlPanel();
         listFragment_Workout = new ListWindow();
-        //listFragment_Meals=new ListWindow();
+       // listFragment_Meals=new ListWindow();
         listFragment_TrainingCreating=new ListWindow();
         profilWindow = new ProfilWindow();
         exerciseWindow = new ExerciseWindow();
@@ -87,7 +92,7 @@ public class FragmertsHolder {
             case 3:
                 return listFragment_Workout;
             case 4:
-                return listFragment_Meals;
+               // return listFragment_Meals;
             case 5:
                 return exerciseWindow;
             case 6:

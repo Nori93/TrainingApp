@@ -22,6 +22,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class MainActivity extends Activity {
 
@@ -52,6 +53,7 @@ public class MainActivity extends Activity {
     // List Window
     Exercise exercise;
     Exercise exerciseTemp;
+    Exercise passedExercise;
     Training training;
 
     //Series
@@ -59,6 +61,8 @@ public class MainActivity extends Activity {
     String trDesc;
     String trData;
     ArrayList<Series>serieslist = new ArrayList<Series>();
+
+    ArrayList<Series> helpingList;
 
     public int flag=0;
     @Override
