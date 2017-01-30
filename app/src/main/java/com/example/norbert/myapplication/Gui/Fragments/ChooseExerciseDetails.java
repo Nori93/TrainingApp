@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.norbert.myapplication.Engin.MainActivity;
+import com.example.norbert.myapplication.Engin.Objects.Exercise;
 import com.example.norbert.myapplication.Engin.Objects.Series;
 import com.example.norbert.myapplication.R;
 
@@ -65,13 +66,23 @@ public class ChooseExerciseDetails extends Fragment {
 
                 if(!repeatsEdit.getText().toString().matches("")&&!weightEdit.getText().toString().matches("")) {
 
-                    int rep = Integer.parseInt(repeatsEdit.getText().toString());
-                    float weigh = Float.parseFloat(weightEdit.getText().toString());
-                    repeatsEdit.setText("");
-                    weightEdit.setText("");
-                    int id_cw = ((MainActivity) getActivity()).getPassedExercise().getID();
-                    ((MainActivity) getActivity()).addHelpingList(new Series(0, rep, weigh, id_cw, 0));
-                    ((MainActivity) getActivity()).fragmentReplace(R.id.calendar, R.integer.addTrainingWindow);
+
+                    try{
+                        int rep = Integer.parseInt(repeatsEdit.getText().toString());
+                        float weigh = Float.parseFloat(weightEdit.getText().toString());
+
+                        repeatsEdit.setText("");
+                        weightEdit.setText("");
+                        int id_cw = ((MainActivity) getActivity()).getPassedExercise().getID();
+                        ((MainActivity) getActivity()).addHelpingList(new Series(0, rep, weigh, id_cw, 0));
+                        ((MainActivity) getActivity()).fragmentReplace(R.id.calendar, R.integer.addTrainingWindow);
+                    }
+                    catch (Exception ex)
+                    {
+                        return;
+                    }
+
+
                 }
             }
         });
