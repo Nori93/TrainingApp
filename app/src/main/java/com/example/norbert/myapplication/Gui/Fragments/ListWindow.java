@@ -130,11 +130,11 @@ public class ListWindow extends Fragment {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                     ((MainActivity)getActivity()).setPassedTraining(adapter.getItemT(position));
-                    Fragment TrainingDetails = new TrainingDetails();
-                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                    transaction.replace(R.id.Main,TrainingDetails);
-                    transaction.commit();
-                  //  ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.);
+                   // Fragment TrainingDetails = new TrainingDetails();
+                   // FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                   // transaction.replace(R.id.Main,TrainingDetails);
+                    //transaction.commit();
+                    ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.trainingDetails);
 
                 }
             });

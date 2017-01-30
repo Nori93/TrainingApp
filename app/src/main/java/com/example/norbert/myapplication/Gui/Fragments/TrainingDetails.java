@@ -106,12 +106,13 @@ public class TrainingDetails extends Fragment {
         backToTrList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,R.integer.trainingListWindow);
-                Fragment workout = new ListWindow();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.Main,workout);
-                transaction.commit();
-            }
+                if(((MainActivity) getActivity()).getFlag()==0)
+                {          ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,R.integer.trainingListWindow);}
+                else if(((MainActivity) getActivity()).getFlag()==1){
+                    ((MainActivity)getActivity()).fragmentReplace(R.id.Main,R.integer.listFragment_Workout);}
+                }
+
+
         });
         deleteTraining.setOnClickListener(new View.OnClickListener() {
             @Override

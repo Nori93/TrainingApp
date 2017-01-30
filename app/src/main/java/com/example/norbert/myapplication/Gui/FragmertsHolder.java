@@ -12,7 +12,6 @@ import com.example.norbert.myapplication.Gui.Fragments.CalendarWindow;
 import com.example.norbert.myapplication.Gui.Fragments.ExerciseWindow;
 import com.example.norbert.myapplication.Gui.Fragments.InputTrainingWindow;
 import com.example.norbert.myapplication.Gui.Fragments.InputWindow;
-import com.example.norbert.myapplication.Gui.Fragments.ListSelectWindow;
 import com.example.norbert.myapplication.Gui.Fragments.ListWindow;
 import com.example.norbert.myapplication.Gui.Fragments.ProfilWindow;
 import com.example.norbert.myapplication.Gui.Fragments.StartWindow;
@@ -39,6 +38,10 @@ public class FragmertsHolder {
     ListWindow listFragment_TrainingCreating;//11
     InputWindow inputWindow;                 //12
     ListSelectWindow listSelectWindow;
+    AddTrainingWindow addTrainingWindow; //12
+    ChooseExerciseWindow chooseExerciseWindow;//13
+    ChooseExerciseDetails chooseExerciseDetails;//14
+    TrainingDetails trainingDetails;//15
     public FragmertsHolder(Context context){
         this.context = context;
 
@@ -54,6 +57,10 @@ public class FragmertsHolder {
         trainingListWindow=new TrainingListWindow();
         inputTrainingWindow = new InputTrainingWindow();
         inputWindow = new InputWindow();
+        addTrainingWindow=new AddTrainingWindow();
+        chooseExerciseWindow=new ChooseExerciseWindow();
+        chooseExerciseDetails=new ChooseExerciseDetails();
+
         listSelectWindow = new ListSelectWindow();
     }
 
@@ -79,8 +86,8 @@ public class FragmertsHolder {
                 return topControlPanel;
             case 3:
                 return listFragment_Workout;
-//            case 4:
-//                return listFragment_Meals;
+            case 4:
+                return listFragment_Meals;
             case 5:
                 return exerciseWindow;
             case 6:
@@ -95,8 +102,17 @@ public class FragmertsHolder {
                 return inputWindow;
             case 11:
                 return listFragment_TrainingCreating;
-            case 12:
+            case 16:
                 return listSelectWindow;
+            case 12:
+                return addTrainingWindow;
+            case 13:
+                return chooseExerciseWindow;
+            case 14:
+                return chooseExerciseDetails;
+            case 15:
+                return trainingDetails;
+
         }
         return null;
     }
