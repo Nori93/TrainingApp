@@ -96,8 +96,8 @@ public class ListWindow extends Fragment {
         search_type.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                type = !type;
-                changeName(view1);
+                //type = !type;
+                //changeName(view1);
             }
         });
 
