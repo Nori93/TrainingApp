@@ -32,12 +32,8 @@ public class CalendarWindow extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initializeCalendar(view);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        selectedDate = sdf.format(new Date(calendar.getDate()));
-        selectedDate=selectedDate.substring(3,5);
-        ((MainActivity)getActivity()).loadTrainings(selectedDate);
 
-        //Toast.makeText(getActivity().getApplicationContext(), selectedDate, Toast.LENGTH_LONG).show();
+
 
     }
 
@@ -99,15 +95,10 @@ public class CalendarWindow extends Fragment {
                 String year1=String.valueOf(year);
                 String day1=String.valueOf(day);
                 ((MainActivity)getActivity()).setData(year1,month1,day1);
-                if(selectedDate!=month1) {
-                    ((MainActivity) getActivity()).loadTrainings(String.valueOf(month));
-                    selectedDate=month1;
 
-                }
                 ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,R.integer.trainingListWindow);
 
 
-                Toast.makeText(getActivity().getApplicationContext(), day + "/" + month1 + "/" + year, Toast.LENGTH_LONG).show();
 
             }
 

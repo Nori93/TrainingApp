@@ -80,7 +80,7 @@ public class TrainingListWindow extends Fragment {
         addTrainingButt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,R.integer.listFragment_TrainingCreating);
+                ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,R.integer.addTrainingWindow);
             }
         });
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -88,7 +88,7 @@ public class TrainingListWindow extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 ((MainActivity)getActivity()).setPassedTraining(lista.get(position));
-                //((MainActivity)getActivity()).fragmentReplace(R.id.calendar,R.integer.trainingDetails);
+                ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,R.integer.trainingDetails);
             }
         });
     }

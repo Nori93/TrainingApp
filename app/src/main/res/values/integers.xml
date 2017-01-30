@@ -12,6 +12,10 @@
     <integer name="inputTraining">9</integer>
     <integer name="inputWindow">10</integer>
     <integer name="listFragment_TrainingCreating">11</integer>
+    <integer name="addTrainingWindow">12</integer>
+    <integer name="chooseExerciseWindow">13</integer>
+    <integer name="chooseExerciseDetails">14</integer>
+    <integer name="trainingDetails">15</integer>
 
     <!--Schema Tags-->
     <integer name="Exercise">51</integer>

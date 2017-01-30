@@ -22,6 +22,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class MainActivity extends Activity {
 
@@ -31,6 +32,8 @@ public class MainActivity extends Activity {
     Gravity gravity;
     LinearAccelerometer linearAccelerometer;
     Training passedTraining;
+    List<Series> helpingList;
+    Exercise passedExercise;
 
     //Main Window is a container for all fragments
     private RelativeLayout mainWindow;
@@ -38,6 +41,7 @@ public class MainActivity extends Activity {
     //Calendar tools
     String data;
     String[] traningDB;
+    String actualTrainingDesc;
     String actualTrainingName;
 
 
@@ -57,6 +61,8 @@ public class MainActivity extends Activity {
     String trDesc;
     String trData;
     ArrayList<Series>serieslist = new ArrayList<Series>();
+
+    public int flag=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +75,7 @@ public class MainActivity extends Activity {
         accelerometer = new Accelerometer(sensorManager);
         gravity = new Gravity(sensorManager);
         linearAccelerometer = new LinearAccelerometer(sensorManager);
+        helpingList=new ArrayList<>();
     }
 
     public void setMainWindow() {
@@ -89,12 +96,16 @@ public class MainActivity extends Activity {
             //StartWindows Fragment
              case 1:
 
+                 clearAll();
+                 flag=0;
                  //holder.setStartWindow();
                 transaction.replace(R.id.Main,holder.getFragment(getTag(R.integer.startWindow)));
                 transaction.commit();
                 break;
             //Workout List Fragment
             case 2:
+                clearAll();
+                flag=1;
                 //holder.getStartFragment() <give some informations>
                 transaction.replace(R.id.Main,holder.getFragment(getTag(R.integer.listFragment_Workout)));
                 transaction.commit();
@@ -107,6 +118,7 @@ public class MainActivity extends Activity {
                 break;
             //Profile Fragment
             case 4:
+                clearAll();
                 transaction.replace(R.id.Main,holder.getFragment(getTag(R.integer.profilWindow)));
                 transaction.commit();
 
@@ -174,6 +186,14 @@ public class MainActivity extends Activity {
     {
         actualTrainingName=name;
     }
+    public String getActualTrainingDesc()
+    {
+        return actualTrainingName;
+    }
+    public void setActualTrainingDesc(String name)
+    {
+        actualTrainingName=name;
+    }
 
     public void setTraningDB(String[] traningDB) {
         this.traningDB = traningDB;
@@ -187,10 +207,22 @@ public class MainActivity extends Activity {
     public void setSeries(Series s){ serieslist.add(s);}
     public ArrayList<Series> getSeries(){return serieslist;}
 
+    public void setFlag(int flaga){flag=flaga;}
+    public int getFlag(){return flag;}
+
     public void setTrainingName(String n){this.trName= n;}
     public String getTrainingName(){return trName;}
     public void setTrainingDesc(String n){this.trDesc= n;}
     public String getTrainingDesc(){return trDesc;}
     public void setTrainingData(String trainingData) {  this.trData = trainingData;  }
     public String getTrainingData(){return trData;}
+    public List<Series> getHelpingList(){return helpingList;}
+    public void addHelpingList(Series a){helpingList.add(a);}
+    public void clearHelpingList(){helpingList.clear();}
+    public void deleteHelpingList(int i){helpingList.remove(i);}
+    public void setPassedExercise(Exercise value){passedExercise=value;}
+    public Exercise getPassedExercise(){return passedExercise;}
+    public void clearPassedExercise(){passedExercise=null;}
+    public void clearData(){data=null;}
+    public void clearAll(){clearHelpingList();clearPassedExercise();clearData();setActualTrainingName("");setActualTrainingDesc("");}
 }
