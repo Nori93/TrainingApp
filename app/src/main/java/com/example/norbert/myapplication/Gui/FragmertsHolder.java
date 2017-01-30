@@ -59,7 +59,7 @@ public class FragmertsHolder {
         exerciseWindow = new ExerciseWindow();
         calendarWindow = new CalendarWindow();
         trainingListWindow=new TrainingListWindow();
-        trainingListWindow=new TrainingListWindow();
+        trainingDetails=new TrainingDetails();
         inputTrainingWindow = new InputTrainingWindow();
         inputWindow = new InputWindow();
         addTrainingWindow=new AddTrainingWindow();
