@@ -5,7 +5,6 @@ package com.example.norbert.myapplication.Gui;
 import android.app.Fragment;
 import android.content.Context;
 
-import com.example.norbert.myapplication.Engin.MainActivity;
 import com.example.norbert.myapplication.Engin.ObjectSchema;
 import com.example.norbert.myapplication.Engin.Objects.Series;
 import com.example.norbert.myapplication.Gui.Fragments.AddTrainingWindow;
@@ -13,16 +12,13 @@ import com.example.norbert.myapplication.Gui.Fragments.CalendarWindow;
 import com.example.norbert.myapplication.Gui.Fragments.ChooseExerciseDetails;
 import com.example.norbert.myapplication.Gui.Fragments.ChooseExerciseWindow;
 import com.example.norbert.myapplication.Gui.Fragments.ExerciseWindow;
-import com.example.norbert.myapplication.Gui.Fragments.InputTrainingWindow;
 import com.example.norbert.myapplication.Gui.Fragments.InputWindow;
-import com.example.norbert.myapplication.Gui.Fragments.ListSelectWindow;
 import com.example.norbert.myapplication.Gui.Fragments.ListWindow;
 import com.example.norbert.myapplication.Gui.Fragments.ProfilWindow;
 import com.example.norbert.myapplication.Gui.Fragments.StartWindow;
 import com.example.norbert.myapplication.Gui.Fragments.TopControlPanel;
 import com.example.norbert.myapplication.Gui.Fragments.TrainingDetails;
 import com.example.norbert.myapplication.Gui.Fragments.TrainingListWindow;
-import com.example.norbert.myapplication.R;
 
 public class FragmertsHolder {
 
@@ -39,10 +35,10 @@ public class FragmertsHolder {
     ProfilWindow profilWindow;              // 6
     CalendarWindow calendarWindow;          // 7
     TrainingListWindow trainingListWindow;  // 8
-    InputTrainingWindow inputTrainingWindow; // 9
+
     ListWindow listFragment_TrainingCreating;//11
     InputWindow inputWindow;                 //12
-    ListSelectWindow listSelectWindow;
+
     AddTrainingWindow addTrainingWindow; //12
     ChooseExerciseWindow chooseExerciseWindow;//13
     ChooseExerciseDetails chooseExerciseDetails;//14
@@ -60,13 +56,13 @@ public class FragmertsHolder {
         calendarWindow = new CalendarWindow();
         trainingListWindow=new TrainingListWindow();
         trainingDetails=new TrainingDetails();
-        inputTrainingWindow = new InputTrainingWindow();
+
         inputWindow = new InputWindow();
         addTrainingWindow=new AddTrainingWindow();
         chooseExerciseWindow=new ChooseExerciseWindow();
         chooseExerciseDetails=new ChooseExerciseDetails();
 
-        listSelectWindow = new ListSelectWindow();
+
     }
 
 
@@ -102,13 +98,13 @@ public class FragmertsHolder {
             case 8:
                 return trainingListWindow;
             case 9:
-                return inputTrainingWindow;
+
             case 10:
                 return inputWindow;
             case 11:
                 return listFragment_TrainingCreating;
             case 16:
-                return listSelectWindow;
+
             case 12:
                 return addTrainingWindow;
             case 13:
@@ -141,7 +137,7 @@ public class FragmertsHolder {
    // public void destroyListFragment_Meals(){this.listFragment_Meals = null;}
     public void destroyProfilWindow(){this.profilWindow = null;}
     public void destroyTrainingListWindow(){this.trainingListWindow=null;}
-    public void destroyInputTrainingWindow(){this.inputTrainingWindow=null;}
+
     public void destroyInputWindow(){this.inputWindow=null;}
 
     private int getTag(int resorce) {

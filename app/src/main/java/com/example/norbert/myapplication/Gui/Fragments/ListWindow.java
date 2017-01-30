@@ -34,6 +34,7 @@ public class ListWindow extends Fragment {
     Button create_new;
     ListView list;
 
+    View view1;
     //Type
     Boolean type = true;
 
@@ -59,6 +60,7 @@ public class ListWindow extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        this.view1 = view;
         exerciseArrayList = new ArrayList<Exercise>();
         trainingArrayList = new ArrayList<Training>();
         databaseOperations = new DatabaseOperations(view.getContext());
@@ -91,19 +93,11 @@ public class ListWindow extends Fragment {
             @Override
             public void onClick(View v) {
                 type = !type;
-                changeName(v);
+                changeName(view1);
             }
         });
 
 
-        if(type){
-
-
-        }
-        else {
-
-
-        }
     }
 
     private void changeName(View view) {
@@ -141,10 +135,6 @@ public class ListWindow extends Fragment {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                     ((MainActivity)getActivity()).setPassedTraining(adapter.getItemT(position));
-                   // Fragment TrainingDetails = new TrainingDetails();
-                   // FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                   // transaction.replace(R.id.Main,TrainingDetails);
-                    //transaction.commit();
                     ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.trainingDetails);
 
                 }
@@ -154,20 +144,13 @@ public class ListWindow extends Fragment {
                 @Override
                 public void onClick(View v) {
 
-                    ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.inputTrainingWindow);
+                    ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.addTrainingWindow);
                 }
             });
 
         }
     }
-    private void setTraningList(){
-        String[] temp = new String[trainingArrayList.size()];
-        for (int i=0;i<temp.length;i++)
-        {
-         temp[i]=trainingArrayList.get(i).getNazwa();
-        }
-        ((MainActivity)getActivity()).setTraningDB(temp);
-    }
+
 
 
 }
