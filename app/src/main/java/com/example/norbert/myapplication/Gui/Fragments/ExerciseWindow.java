@@ -56,20 +56,20 @@ public class ExerciseWindow extends Fragment {
         context = this.getActivity();
         title = (TextView)view.findViewById(R.id.exer_title);
         desc = (TextView)view.findViewById(R.id.exer_desc);
-        inst = (TextView)view.findViewById(R.id.exer_inst);
+       inst = (TextView)view.findViewById(R.id.exer_inst);
 
         img = (ImageView)view.findViewById(R.id.exer_icon);
 
-        back =(Button)view.findViewById(R.id.exer_but_back);
-        start =(Button)view.findViewById(R.id.exer_but_start);
-        add =(Button)view.findViewById(R.id.exer_but_add);
+       // back =(Button)view.findViewById(R.id.exer_but_back);
+      //  start =(Button)view.findViewById(R.id.exer_but_start);
+       // add =(Button)view.findViewById(R.id.exer_but_add);
 
         exercise = ((MainActivity)getActivity()).getListSelectedEx();
 
         title.setText(exercise.getNazwa());
         desc.setText(exercise.getOpis());
-        inst.setText(exercise.getInstrukcje());
-        Buttons(view);
+       inst.setText(exercise.getInstrukcje());
+     //   Buttons(view);
     }
 
     private void Buttons(View view){

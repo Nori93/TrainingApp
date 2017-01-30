@@ -3,6 +3,7 @@ package com.example.norbert.myapplication.Gui.Fragments;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,6 +75,16 @@ public class ListWindow extends Fragment {
         create_new = (Button)view.findViewById(R.id.list_Create);
         list = (ListView)view.findViewById(R.id.list_listview);
         changeName(view);
+
+
+        search_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Log.d("dad",search_text.getText().toString());
+
+            }
+        });
 
 
         search_type.setOnClickListener(new View.OnClickListener() {

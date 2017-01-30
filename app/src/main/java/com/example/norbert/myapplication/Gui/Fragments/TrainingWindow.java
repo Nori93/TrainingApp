@@ -51,13 +51,13 @@ public class TrainingWindow extends Fragment {
         context = this.getActivity();
         title = (TextView)view.findViewById(R.id.exer_title);
         desc = (TextView)view.findViewById(R.id.exer_desc);
-        inst = (TextView)view.findViewById(R.id.exer_inst);
+     //   inst = (TextView)view.findViewById(R.id.exer_inst);
 
         img = (ImageView)view.findViewById(R.id.exer_icon);
 
-        back =(Button)view.findViewById(R.id.exer_but_back);
-        start =(Button)view.findViewById(R.id.exer_but_start);
-        add =(Button)view.findViewById(R.id.exer_but_add);
+      //  back =(Button)view.findViewById(R.id.exer_but_back);
+      //  start =(Button)view.findViewById(R.id.exer_but_start);
+      //  add =(Button)view.findViewById(R.id.exer_but_add);
 
         training = ((MainActivity)getActivity()).getListSelectedTr();
 
