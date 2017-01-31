@@ -106,7 +106,7 @@ public class ListWindow extends Fragment {
         });
         search_text.addTextChangedListener(new TextWatcher(){
             public void afterTextChanged(Editable s) {
-                
+
 
 
             }
@@ -135,6 +135,8 @@ public class ListWindow extends Fragment {
                     }
 
                 }
+                if(search_text.getText().toString().matches(""))
+                    search_button.setVisibility(View.GONE);
             }
         });
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {

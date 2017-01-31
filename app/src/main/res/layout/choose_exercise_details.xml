@@ -50,7 +50,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:text="Save"
             android:id="@+id/choo_exer_details_add"
-            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
     </RelativeLayout>
 </LinearLayout>
