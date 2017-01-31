@@ -1,6 +1,7 @@
 package com.example.norbert.myapplication.Gui.Fragments;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.norbert.myapplication.Engin.DataBaseHelper.DatabaseOperations;
 import com.example.norbert.myapplication.Engin.MainActivity;
@@ -31,26 +33,8 @@ public class InputWindow extends Fragment {
 
     // GUI
 
-    Button save;
-    ListView list;
-
-    // DATABASE
-    DatabaseOperations databaseOperations;
-    ExerciseRepository exerciseRepository;
-    TrainingRepository trainingRepository;
-    SeriesRepository seriesRepository;
-
-    int tag;
-    String[] rows_inputs;
-
-    //Adapters
-    EditText_Adp editText_adp;
-
-    public void setInputTag(int t){
-        this.tag = t;
-    }
-
-
+    Button save,back;
+    EditText editName,editDesc,editInstr;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,72 +47,53 @@ public class InputWindow extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        save = (Button)view.findViewById(R.id.input__frag_save);
-        list = (ListView)view.findViewById(R.id.input_frag_list);
-        list.setClickable(false);
-        editText_adp = new EditText_Adp(view.getContext(),this.tag);
-        list.setAdapter(editText_adp);
 
-
-
-        databaseOperations = new DatabaseOperations(view.getContext());
-        exerciseRepository = new ExerciseRepository();
-        trainingRepository = new TrainingRepository();
-        seriesRepository = new SeriesRepository();
-        Save();
+        initialize(view);
 
     }
-    private void Save(){
-        switch (tag) {
-            case 51:
-              //{"id","Name","Description","Instruction","Icon Path"};
-                save.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        rows_inputs = editText_adp.getAllData();
-                        exerciseRepository.insertNewExcerise(new Exercise(rows_inputs[0],rows_inputs[1],rows_inputs[2],rows_inputs[3]),databaseOperations);
-                    }
-                });
-                break;
-            case 52:
-                // {"id","Repeats", "Weights", "ID Exercise", "ID Training"};
-                save.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        rows_inputs = editText_adp.getAllData();
+    public void initialize(View view){
+        save = (Button)view.findViewById(R.id.input_save);
+        back=(Button)view.findViewById(R.id.input_back);
+        editDesc=(EditText)view.findViewById(R.id.input_descr);
+        editInstr=(EditText)view.findViewById(R.id.input_instr);
+        editName=(EditText)view.findViewById(R.id.input_name);
 
-                    }
-                });
-                break;
-            case 53:
-                // {"id","Name","Description","Data"};
-                save.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        rows_inputs = editText_adp.getAllData();
-                    trainingRepository.insertNewTrening(new Training(rows_inputs[0],rows_inputs[1]),databaseOperations);
-                    }
-                });
-                break;
-            case 54:
-               //{"Weight","Height", "Calories", "Activity","Fat", "Carb", "Protein", "Target","Body Type", "Sex","Age"};
-                save.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
 
-                    }
-                });
-                break;
-        }
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.listFragment_Workout);
+            }
+        });
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!editDesc.getText().toString().matches("")&&!editName.getText().toString().matches("")&&!editInstr.getText().toString().matches("")) {
+
+
+
+                        String name = editName.getText().toString();
+                        String desc = editDesc.getText().toString();
+                        String instr = editInstr.getText().toString();
+
+                        editName.setText("");
+                        editInstr.setText("");
+                        editDesc.setText("");
+                        Exercise cwiczenie = new Exercise(0,name,desc,instr,"");
+                    Context ctx=getActivity();
+                    final ExerciseRepository exerciseRepository = new ExerciseRepository();
+                    final DatabaseOperations DB = new DatabaseOperations(ctx);
+                    exerciseRepository.insertNewExcerise(cwiczenie,DB);
+                    ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.listFragment_Workout);
+
+                }
+                else
+                    Toast.makeText(getActivity(), "Fill all inputs",
+                            Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
     }
 
-
-    public Series getSeries() {
-        return new Series(
-                Integer.parseInt(rows_inputs[0]),
-                Float.parseFloat(rows_inputs[1]),
-                Integer.parseInt(rows_inputs[2]),
-                Integer.parseInt(rows_inputs[3])
-        );
-    }
 }

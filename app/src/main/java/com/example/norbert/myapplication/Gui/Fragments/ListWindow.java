@@ -2,6 +2,7 @@ package com.example.norbert.myapplication.Gui.Fragments;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -12,8 +13,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.norbert.myapplication.Engin.DataBaseHelper.DatabaseOperations;
 import com.example.norbert.myapplication.Engin.MainActivity;
@@ -26,30 +30,26 @@ import com.example.norbert.myapplication.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
 
 public class ListWindow extends Fragment {
 
 
     // GUI
-    TextView search_type;
     EditText search_text;
     Button search_button;
     Button create_new;
     ListView list;
+    List<Exercise> listaCwiczen;
 
-    View view1;
-    //Type
-    Boolean type = true;
 
-    // DATABASE
-    DatabaseOperations databaseOperations;
-    ExerciseRepository exerciseRepository;
-    ArrayList<Exercise> exerciseArrayList;
-    TrainingRepository trainingRepository;
-    ArrayList<Training> trainingArrayList;
 
-    //Adapters
-    IconText_Adp adapter;
+    Context ctx;
+
+
+
+
 
 
 
@@ -64,98 +64,94 @@ public class ListWindow extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        this.view1 = view;
-        exerciseArrayList = new ArrayList<Exercise>();
-        trainingArrayList = new ArrayList<Training>();
-        databaseOperations = new DatabaseOperations(view.getContext());
-        exerciseRepository = new ExerciseRepository();
-        trainingRepository = new TrainingRepository();
+        initialize(view);
+        initializeAdapter();
 
-        exerciseArrayList = exerciseRepository.getAllExercise(databaseOperations);
-        trainingArrayList = trainingRepository.getAllTraining(databaseOperations);
-
-        search_type = (TextView) view.findViewById(R.id.list_typeOfList);
-
+    }
+    public void initialize(View view){
         search_text = (EditText) view.findViewById(R.id.list_search);
-        search_button = (Button)view.findViewById(R.id.list_button);
-        create_new = (Button)view.findViewById(R.id.list_Create);
+        search_button = (Button)view.findViewById(R.id.list_search_button);
+        create_new = (Button)view.findViewById(R.id.list_add_exercise);
         list = (ListView)view.findViewById(R.id.list_listview);
-        changeName(view);
+
+        ctx=getActivity();
+        final ExerciseRepository ExerciseRepository = new ExerciseRepository();
+        final DatabaseOperations DB = new DatabaseOperations(ctx);
+        listaCwiczen =  ExerciseRepository.getAllExercise(DB);
 
 
+
+        create_new.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.inputWindow);
+            }
+        });
         search_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Log.d("dad",search_text.getText().toString());
+                if(!search_text.getText().toString().matches("")) {
+                    list.setAdapter(null);
+                    ArrayList<HashMap<String, String>> exercisesList = new ArrayList<HashMap<String, String>>();
+                    for (int i = 0; i < listaCwiczen.size(); i++) {
+                        HashMap<String, String> exer = new HashMap<String, String>();
+                        if(listaCwiczen.get(i).getNazwa().toLowerCase().contains(search_text.getText().toString().toLowerCase())) {
+                            String name = "Nazwa: " + listaCwiczen.get(i).getNazwa();
+
+                            String desc = "Opis: " + listaCwiczen.get(i).getOpis();
+                            String instr = "Instrukcja: " + listaCwiczen.get(i).getInstrukcje();
+                            exer.put("name", name);
+                            exer.put("desc", desc);
+                            exer.put("instr", instr);
+
+                            exercisesList.add(exer);
+                            ListAdapter adapter = new SimpleAdapter(
+                                    getActivity().getApplicationContext(), exercisesList,
+                                    R.layout.adapter_exercises, new String[]{"name", "desc", "instr"}, new int[]{R.id.adap_exer_list_name,
+                                    R.id.adap_exer_list_desc, R.id.adap_exer_list_instr});
+
+                            list.setAdapter(adapter);
+                        }
+
+                    }
+
+
+
+                }
+                else
+                    Toast.makeText(getActivity(), "Fill search input",
+                            Toast.LENGTH_SHORT).show();
 
             }
         });
 
 
-        search_type.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //type = !type;
-                //changeName(view1);
-            }
-        });
 
 
     }
+    public void initializeAdapter() {
+        ArrayList<HashMap<String, String>> exercisesList = new ArrayList<HashMap<String, String>>();
+        for (int i = 0; i < listaCwiczen.size(); i++) {
+            HashMap<String, String> exer = new HashMap<String, String>();
+            String name = "Nazwa: " + listaCwiczen.get(i).getNazwa();
+            String desc = "Opis: " + listaCwiczen.get(i).getOpis();
+            String instr = "Instrukcja: " + listaCwiczen.get(i).getInstrukcje();
+            exer.put("name", name);
+            exer.put("desc", desc);
+            exer.put("instr", instr);
 
-    private void changeName(View view) {
-        if (type){
-            search_type.setText("Exercise");
-            adapter = new IconText_Adp(view.getContext(),exerciseArrayList);
+            exercisesList.add(exer);
+            ListAdapter adapter = new SimpleAdapter(
+                    getActivity().getApplicationContext(), exercisesList,
+                    R.layout.adapter_exercises, new String[]{"name", "desc", "instr"}, new int[]{R.id.adap_exer_list_name,
+                    R.id.adap_exer_list_desc, R.id.adap_exer_list_instr});
+
             list.setAdapter(adapter);
-
-            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    //get target exercise
-                    ((MainActivity) getActivity()).setListSelectedEx(adapter.getItem(position));
-                    // start fragment exercise
-                    ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.exerciseWindow);
-                }
-            });
-
-            create_new.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ((MainActivity) getActivity()).setInputType(R.integer.Exercise);
-                    ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.inputWindow);
-                }
-            });
-        }
-
-        else{
-            search_type.setText("Training");
-            adapter = new IconText_Adp(view.getContext(),trainingArrayList,false);
-            list.setAdapter(adapter);
-
-            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                    ((MainActivity)getActivity()).setPassedTraining(adapter.getItemT(position));
-                    ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.trainingDetails);
-
-                }
-            });
-
-            create_new.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Calendar c = Calendar.getInstance();
-
-                    ((MainActivity)getActivity()).setData("2017","01","30");
-                    ((MainActivity) getActivity()).fragmentReplace(R.id.Main,R.integer.addTrainingWindow);
-                }
-            });
 
         }
     }
+
 
 
 

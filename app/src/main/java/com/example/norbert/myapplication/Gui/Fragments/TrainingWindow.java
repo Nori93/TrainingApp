@@ -49,11 +49,11 @@ public class TrainingWindow extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         context = this.getActivity();
-        title = (TextView)view.findViewById(R.id.exer_title);
-        desc = (TextView)view.findViewById(R.id.exer_desc);
+        //title = (TextView)view.findViewById(R.id.exer_title);
+        //desc = (TextView)view.findViewById(R.id.exer_desc);
      //   inst = (TextView)view.findViewById(R.id.exer_inst);
 
-        img = (ImageView)view.findViewById(R.id.exer_icon);
+        //img = (ImageView)view.findViewById(R.id.exer_icon);
 
       //  back =(Button)view.findViewById(R.id.exer_but_back);
       //  start =(Button)view.findViewById(R.id.exer_but_start);

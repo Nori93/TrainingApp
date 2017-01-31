@@ -53,7 +53,6 @@ public class MainActivity extends Activity {
 
     // List Window
     Exercise exercise;
-    Exercise exerciseTemp;
     Exercise passedExercise;
     Training training;
 
@@ -157,9 +156,7 @@ public class MainActivity extends Activity {
         this.training = t;
     }
 
-   public void setInputType(int tag){
-     holder.setInputFragment(tag);
-   }
+
 
     public Fragment getFragment(int tag){
       return holder.getFragment(getTag(tag));

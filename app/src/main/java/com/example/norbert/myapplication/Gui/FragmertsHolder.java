@@ -118,15 +118,9 @@ public class FragmertsHolder {
         return null;
     }
 
-    public void setInputFragment(int index) {
 
-                inputWindow.setInputTag(getTag(index));
 
-    }
 
-    public Series addSeries(){
-        return inputWindow.getSeries();
-    }
 
 
     //Clear Frame to clear space
