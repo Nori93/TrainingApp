@@ -87,6 +87,7 @@ public class ChooseExerciseDetails extends Fragment {
 
 
                 }
+                else
                 Toast.makeText(getActivity(), "Complete filling repeats and weight inputs",
                         Toast.LENGTH_SHORT).show();
 

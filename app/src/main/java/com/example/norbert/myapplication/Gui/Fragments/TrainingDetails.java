@@ -1,9 +1,11 @@
 package com.example.norbert.myapplication.Gui.Fragments;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -117,11 +119,26 @@ public class TrainingDetails extends Fragment {
         deleteTraining.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                new AlertDialog.Builder(ctx)
+                        .setTitle("DELETE TRAINING")
+                        .setMessage("Are you sure you want to delete this training?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                final TrainingRepository TrainingRepository = new TrainingRepository();
+                                final DatabaseOperations DB = new DatabaseOperations(ctx);
+                                TrainingRepository.DeleteExistingTraining(training.getID(),DB);
+                                ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,R.integer.trainingListWindow);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // do nothing
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
 
-                final TrainingRepository TrainingRepository = new TrainingRepository();
-                final DatabaseOperations DB = new DatabaseOperations(ctx);
-                TrainingRepository.DeleteExistingTraining(training.getID(),DB);
-                ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,R.integer.trainingListWindow);
+
             }
         });
     }
