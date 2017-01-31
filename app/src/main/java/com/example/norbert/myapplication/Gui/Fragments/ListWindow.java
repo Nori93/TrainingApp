@@ -76,6 +76,7 @@ public class ListWindow extends Fragment {
         search_button = (Button)view.findViewById(R.id.list_search_button);
         create_new = (Button)view.findViewById(R.id.list_add_exercise);
         list = (ListView)view.findViewById(R.id.list_listview);
+        //search_text.setSe
 
         ctx=getActivity();
         final ExerciseRepository ExerciseRepository = new ExerciseRepository();
@@ -95,55 +96,46 @@ public class ListWindow extends Fragment {
             public void onClick(View v) {
                 list.setAdapter(null);
                 initializeAdapter();
-                search_button.setEnabled(false);
+                //search_button.setEnabled(false);
+               // search_text.setFo
                 search_text.setText("");
+                search_text.setVisibility(View.GONE);
 
 
             }
         });
         search_text.addTextChangedListener(new TextWatcher(){
             public void afterTextChanged(Editable s) {
-                if(!search_text.getText().toString().matches("")) {
-                    list.setAdapter(null);
-                    exercisesList = new ArrayList<HashMap<String, String>>();
-                    for (int i = 0; i < listaCwiczen.size(); i++) {
-                        HashMap<String, String> exer = new HashMap<String, String>();
-                        if(listaCwiczen.get(i).getNazwa().toLowerCase().contains(search_text.getText().toString().toLowerCase())) {
-                            String name = "Nazwa: " + listaCwiczen.get(i).getNazwa();
-
-                            String desc = "Opis: " + listaCwiczen.get(i).getOpis();
-                            String instr = "Instrukcja: " + listaCwiczen.get(i).getInstrukcje();
-                            exer.put("name", name);
-                            exer.put("desc", desc);
-                            exer.put("instr", instr);
-
-                            exercisesList.add(exer);
-                            ListAdapter adapter = new SimpleAdapter(
-                                    getActivity().getApplicationContext(), exercisesList,
-                                    R.layout.adapter_exercises, new String[]{"name", "desc", "instr"}, new int[]{R.id.adap_exer_list_name,
-                                    R.id.adap_exer_list_desc, R.id.adap_exer_list_instr});
-
-                            list.setAdapter(adapter);
-                        }
-
-                    }
-                    if(exercisesList.size()==0)
-                        Toast.makeText(getActivity(), "No exercises found",
-                                Toast.LENGTH_SHORT).show();
-                    else
-                        Toast.makeText(getActivity(), "Found "+exercisesList.size()+" exercises",
-                                Toast.LENGTH_SHORT).show();
-                    search_button.setEnabled(true);
-
-
-
-
-                }
+                
 
 
             }
             public void beforeTextChanged(CharSequence s, int start, int count, int after){}
-            public void onTextChanged(CharSequence s, int start, int before, int count){}
+            public void onTextChanged(CharSequence s, int start, int before, int count){
+                list.setAdapter(null);
+                exercisesList = new ArrayList<HashMap<String, String>>();
+                for (int i = 0; i < listaCwiczen.size(); i++) {
+                    HashMap<String, String> exer = new HashMap<String, String>();
+                    if(listaCwiczen.get(i).getNazwa().toLowerCase().contains(search_text.getText().toString().toLowerCase())) {
+                        String name = "Nazwa: " + listaCwiczen.get(i).getNazwa();
+
+                        String desc = "Opis: " + listaCwiczen.get(i).getOpis();
+                        String instr = "Instrukcja: " + listaCwiczen.get(i).getInstrukcje();
+                        exer.put("name", name);
+                        exer.put("desc", desc);
+                        exer.put("instr", instr);
+
+                        exercisesList.add(exer);
+                        ListAdapter adapter = new SimpleAdapter(
+                                getActivity().getApplicationContext(), exercisesList,
+                                R.layout.adapter_exercises, new String[]{"name", "desc", "instr"}, new int[]{R.id.adap_exer_list_name,
+                                R.id.adap_exer_list_desc, R.id.adap_exer_list_instr});
+
+                        list.setAdapter(adapter);
+                    }
+
+                }
+            }
         });
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

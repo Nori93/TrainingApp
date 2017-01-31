@@ -29,7 +29,7 @@ android:layout_height="match_parent">
         android:layout_height="match_parent"
         android:layout_weight="5"
         android:text="CLEAR SEARCH"
-        android:enabled="false"
+        android:visibility="gone"
         android:id="@+id/list_search_button" />
 
 <ListView
