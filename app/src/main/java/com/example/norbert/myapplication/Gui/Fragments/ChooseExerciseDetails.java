@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.norbert.myapplication.Engin.MainActivity;
 import com.example.norbert.myapplication.Engin.Objects.Exercise;
@@ -79,11 +80,16 @@ public class ChooseExerciseDetails extends Fragment {
                     }
                     catch (Exception ex)
                     {
+                        Toast.makeText(getActivity(), "Complete filling repeats and weight inputs by numbers",
+                                Toast.LENGTH_SHORT).show();
                         return;
                     }
 
 
                 }
+                Toast.makeText(getActivity(), "Complete filling repeats and weight inputs",
+                        Toast.LENGTH_SHORT).show();
+
             }
         });
     }

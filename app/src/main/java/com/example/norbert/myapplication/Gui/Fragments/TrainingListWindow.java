@@ -35,8 +35,8 @@ public class TrainingListWindow extends Fragment {
     Context ctx;
     ListView lv;
     Button addTrainingButt;
+    TextView upText;
     Button backToCalendarButt;
-    TextView dataTextView;
     List<Training> lista;
     ArrayList<HashMap<String, String>> trainingList;
 
@@ -60,13 +60,19 @@ public class TrainingListWindow extends Fragment {
         lv=(ListView)view.findViewById(R.id.frtrli_list);
         addTrainingButt=(Button)view.findViewById(R.id.frtrli_add_button);
         backToCalendarButt=(Button)view.findViewById(R.id.frtrli_back_button);
-        dataTextView=(TextView)view.findViewById(R.id.frtrli_data_textview);
+        upText=(TextView)view.findViewById(R.id.frtrli_upText);
+
+
+
 
         ctx= this.getActivity();
         final TrainingRepository TrainingRepository = new TrainingRepository();
         final DatabaseOperations DB = new DatabaseOperations(ctx);
         lista =  TrainingRepository.GetTrainingByDate(((MainActivity)getActivity()).getData(),DB); // Dostajesz cały wypełniony obiekt!
-        dataTextView.setText(((MainActivity)getActivity()).getData());
+
+        if(lista.size()==0)
+            upText.setText("CREATE NEW TRAINING FOR "+((MainActivity)getActivity()).getData());
+        else upText.setText("CREATE NEW TRAINING FOR "+((MainActivity)getActivity()).getData()+" OR CHECK EXISTING");
 
         backToCalendarButt.setOnClickListener(new View.OnClickListener() {
             @Override

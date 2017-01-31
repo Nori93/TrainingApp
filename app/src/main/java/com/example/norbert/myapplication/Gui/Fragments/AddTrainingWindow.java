@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.norbert.myapplication.Engin.DataBaseHelper.DatabaseOperations;
 import com.example.norbert.myapplication.Engin.MainActivity;
@@ -35,6 +37,7 @@ public class AddTrainingWindow extends Fragment {
     Button backToList,addToSeries,saveTraining;
     ListView listOfCreatedSeries;
     ArrayList<HashMap<String, String>> createdSeriesList;
+    TextView upText;
 
 
 
@@ -63,28 +66,21 @@ public class AddTrainingWindow extends Fragment {
         descText=(EditText)view.findViewById(R.id.add_tr_desc);
         listOfCreatedSeries=(ListView)view.findViewById(R.id.add_tr_list);
         ctx= this.getActivity();
-
-        nameText.setText(((MainActivity)getActivity()).getActualTrainingName());
-        descText.setText(((MainActivity)getActivity()).getActualTrainingDesc());
-
+        upText=(TextView)view.findViewById(R.id.add_tr_upText);
 
         createdSeriesList = new ArrayList<HashMap<String, String>>();
 
-
-
-
-
+        if(((MainActivity)getActivity()).getHelpingList().size()==0)
+            upText.setText("CREATE NEW SERIES BY USING BUTTON ON BOTTOM OF SCREEN (ADD SERIES)");
+        else upText.setText("CREATE NEW SERIES OR SAVE TRAINING BY USING BUTTON (SAVE TRAINING)");
 
         backToList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 nameText.setText("");
                 descText.setText("");
-
-
                 ((MainActivity)getActivity()).clearPassedExercise();
                 ((MainActivity)getActivity()).clearHelpingList();
-
                 ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,R.integer.trainingListWindow);
             }
         });
@@ -120,6 +116,9 @@ public class AddTrainingWindow extends Fragment {
                     ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,R.integer.trainingListWindow);
 
                 }
+                else
+                    Toast.makeText(getActivity(), "Complete training name,description and add some series before saving",
+                            Toast.LENGTH_SHORT).show();
 
             }
         });

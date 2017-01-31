@@ -7,6 +7,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.example.norbert.myapplication.Engin.Objects.Exercise;
@@ -39,8 +40,8 @@ public class MainActivity extends Activity {
     //Calendar tools
     String data;
     String[] traningDB;
-    String actualTrainingDesc;
-    String actualTrainingName;
+    ArrayList<Series> helpingList;
+
 
 
     //Fragment tools
@@ -62,7 +63,7 @@ public class MainActivity extends Activity {
     String trData;
     ArrayList<Series>serieslist = new ArrayList<Series>();
 
-    ArrayList<Series> helpingList;
+
 
     public int flag=0;
     @Override
@@ -180,22 +181,6 @@ public class MainActivity extends Activity {
     {
         return data;
     }
-    public String getActualTrainingName()
-    {
-        return actualTrainingName;
-    }
-    public void setActualTrainingName(String name)
-    {
-        actualTrainingName=name;
-    }
-    public String getActualTrainingDesc()
-    {
-        return actualTrainingName;
-    }
-    public void setActualTrainingDesc(String name)
-    {
-        actualTrainingName=name;
-    }
 
     public void setTraningDB(String[] traningDB) {
         this.traningDB = traningDB;
@@ -226,5 +211,6 @@ public class MainActivity extends Activity {
     public Exercise getPassedExercise(){return passedExercise;}
     public void clearPassedExercise(){passedExercise=null;}
     public void clearData(){data=null;}
-    public void clearAll(){clearHelpingList();clearPassedExercise();clearData();setActualTrainingName("");setActualTrainingDesc("");}
+    public void clearAll(){clearHelpingList();clearPassedExercise();clearData();}
+
 }

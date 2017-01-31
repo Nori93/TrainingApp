@@ -3,11 +3,16 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/frtrli_upText"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/frtrli_data_textview"
-        android:textSize="20dp"
-        android:textColor="#000000"/>
+        android:gravity="center"
+        android:paddingBottom="2dip"
+        android:paddingTop="6dip"
+        android:textColor="#5d5d5d"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
     <Button
         android:background="@drawable/custom_button_press_effect"
         android:layout_width="match_parent"

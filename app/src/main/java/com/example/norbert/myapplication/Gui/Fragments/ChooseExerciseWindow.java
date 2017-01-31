@@ -1,7 +1,9 @@
 package com.example.norbert.myapplication.Gui.Fragments;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +33,7 @@ public class ChooseExerciseWindow extends Fragment {
     Context ctx;
     List<Exercise> listaCwiczen;
     ArrayList<HashMap<String, String>> exerciseList;
+
 
 
 
@@ -72,10 +75,25 @@ public class ChooseExerciseWindow extends Fragment {
         });
         listOfExercises.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position,
+            public void onItemClick(AdapterView<?> parent, View view, final int position,
                                     long id) {
-                ((MainActivity)getActivity()).setPassedExercise(listaCwiczen.get(position));
-                ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,R.integer.chooseExerciseDetails);
+                new AlertDialog.Builder(ctx)
+                        .setTitle("Accept Exercise")
+                        .setMessage("Are you sure you want to take this exercise?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                ((MainActivity)getActivity()).setPassedExercise(listaCwiczen.get(position));
+                                ((MainActivity)getActivity()).fragmentReplace(R.id.calendar,R.integer.chooseExerciseDetails);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // do nothing
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+
             }
         });
 
