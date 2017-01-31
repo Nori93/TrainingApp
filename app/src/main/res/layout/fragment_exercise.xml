@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
-        android:text="EXERCISE"
+        android:text="DELETE EXERCISE"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -18,43 +18,44 @@
     <Button
         android:background="@drawable/custom_button_press_effect"
         android:layout_width="match_parent"
-        android:layout_height="74dp"
-        android:text="Back"
-        android:id="@+id/exercise_back" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:text="Name"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/exercise_name"/>
+        android:layout_height="50dp"
+        android:text="Back to exercises list"
+        android:id="@+id/exerc_back" />
 
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:text="Description"/>
-    <EditText
-        android:layout_width="match_parent"
+        android:id="@+id/exer_name"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/exercise_descr"/>
-
-
+        android:paddingBottom="2dip"
+        android:paddingTop="6dip"
+        android:textColor="#5d5d5d"
+        android:textSize="16sp"
+        android:textStyle="bold" />
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="29dp"
-        android:text="Instruction"/>
-    <EditText
-        android:layout_width="match_parent"
+        android:id="@+id/exer_desc"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/exercise_instr"/>
+        android:paddingBottom="2dip"
+        android:textStyle="bold"
+        android:textColor="#5d5d5d"
+
+
+        />
+    <TextView
+        android:id="@+id/exer_instr"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="2dip"
+        android:textStyle="bold"
+        android:textColor="#5d5d5d"
+
+        />
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
@@ -65,9 +66,9 @@
             android:background="@drawable/custom_button_press_effect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Delete"
-            android:id="@+id/exercise_delete"
-            android:layout_alignParentTop="true"
+            android:text="DELETE"
+            android:id="@+id/exer_delete"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
     </RelativeLayout>
 </LinearLayout>

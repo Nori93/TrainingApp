@@ -6,6 +6,8 @@ import android.content.Context;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +44,7 @@ public class ListWindow extends Fragment {
     Button create_new;
     ListView list;
     List<Exercise> listaCwiczen;
+    ArrayList<HashMap<String, String>> exercisesList;
 
 
 
@@ -90,10 +93,19 @@ public class ListWindow extends Fragment {
         search_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                list.setAdapter(null);
+                initializeAdapter();
+                search_button.setEnabled(false);
+                search_text.setText("");
 
+
+            }
+        });
+        search_text.addTextChangedListener(new TextWatcher(){
+            public void afterTextChanged(Editable s) {
                 if(!search_text.getText().toString().matches("")) {
                     list.setAdapter(null);
-                    ArrayList<HashMap<String, String>> exercisesList = new ArrayList<HashMap<String, String>>();
+                    exercisesList = new ArrayList<HashMap<String, String>>();
                     for (int i = 0; i < listaCwiczen.size(); i++) {
                         HashMap<String, String> exer = new HashMap<String, String>();
                         if(listaCwiczen.get(i).getNazwa().toLowerCase().contains(search_text.getText().toString().toLowerCase())) {
@@ -115,14 +127,31 @@ public class ListWindow extends Fragment {
                         }
 
                     }
+                    if(exercisesList.size()==0)
+                        Toast.makeText(getActivity(), "No exercises found",
+                                Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(getActivity(), "Found "+exercisesList.size()+" exercises",
+                                Toast.LENGTH_SHORT).show();
+                    search_button.setEnabled(true);
+
 
 
 
                 }
-                else
-                    Toast.makeText(getActivity(), "Fill search input",
-                            Toast.LENGTH_SHORT).show();
 
+
+            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after){}
+            public void onTextChanged(CharSequence s, int start, int before, int count){}
+        });
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                listaCwiczen.size();
+                ((MainActivity)getActivity()).setPassedExercise(listaCwiczen.get(position));
+                ((MainActivity)getActivity()).fragmentReplace(R.id.Main,R.integer.exerciseWindow);
             }
         });
 

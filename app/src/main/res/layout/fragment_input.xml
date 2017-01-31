@@ -18,8 +18,8 @@
     <Button
         android:background="@drawable/custom_button_press_effect"
         android:layout_width="match_parent"
-        android:layout_height="74dp"
-        android:text="Back"
+        android:layout_height="50dp"
+        android:text="Back to exercises list"
         android:id="@+id/input_back" />
 
     <TextView
@@ -54,7 +54,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:text="Save"
             android:id="@+id/input_save"
-            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
     </RelativeLayout>
 </LinearLayout>
