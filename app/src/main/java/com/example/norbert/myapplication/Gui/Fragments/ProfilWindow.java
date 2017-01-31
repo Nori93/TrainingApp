@@ -67,7 +67,8 @@ public class ProfilWindow extends Fragment {
 
         StartSetting(list,CR);
         ListHandling(list,CR,DB);
-
+        setButton(CR);
+        Toast.makeText(ctx,"Fill all positions except % Calories  to be able to save your profile.",Toast.LENGTH_LONG).show();
         Save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             SaveToBase(CR,DB,InformationRepository);
@@ -109,6 +110,14 @@ private void CountCaloriesIf(UserInformation CR){
         Calories(CR);
     }
 }
+    private void setButton(UserInformation CR){
+        if(CR.getWeight()!=0&&CR.getHeight()!=0&&CR.getActivityLvl()!=0&&CR.getTarget()!=null&&CR.getBodyType()!=null&&CR.getSex()!=0&&CR.getAge()!=0){
+            Save.setEnabled(true);
+        }
+        else{
+            Save.setEnabled(false);
+        }
+    }
     private void StartSetting(ArrayList<String> list, UserInformation CR){
         calories.setText("Total Calories Needed: "+Math.round(CR.getCal()));
         carb.setText("Total carbohydrates needed: "+CR.getCarb()+"g");
@@ -117,6 +126,7 @@ private void CountCaloriesIf(UserInformation CR){
         weglowodany=(Math.round(((CR.getCarb()*4)*100)/CR.getCal()));
         tluszcz=(Math.round(((CR.getFat()*9)*100)/CR.getCal()));
         bialko=(Math.round(((CR.getProtein()*4)*100)/CR.getCal()));
+
         list.add("Weight: "+CR.getWeight()+"kg");
         list.add("Height: "+CR.getHeight()+"cm");
         list.add("Activity level: "+CR.getActivityLvl());
@@ -275,6 +285,7 @@ private void CountCaloriesIf(UserInformation CR){
                     public void onClick(DialogInterface dialog,int which) {
                         if (text.getText().toString().trim().matches(regexStr)&&text.getText().toString().isEmpty()==false) {
                            switchForOk(position,CR,text,list);
+                            setButton(CR);
                         }
                         else{
                             Toast.makeText(ctx,"Wrong values",Toast.LENGTH_LONG).show();
@@ -477,7 +488,9 @@ private void CountCaloriesIf(UserInformation CR){
     }
 
     private void SaveToBase(UserInformation CR,DatabaseOperations DB,InformationRepository InformationRepository){
+
         InformationRepository.putInformationData(DB,new UserInformation(CR.getWeight(),CR.getHeight(),CR.getCal(),CR.getActivityLvl(),CR.getFat(),CR.getCarb(),CR.getProtein(),CR.getTarget(),CR.getBodyType(),CR.getSex(),CR.getAge()));
+        Toast.makeText(ctx,"Saved.",Toast.LENGTH_LONG).show();
     }
 
     @Override
