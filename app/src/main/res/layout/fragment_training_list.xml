@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="4"
-        android:text="Back"
+        android:text="Back to calendar"
         android:id="@+id/frtrli_back_button" />
     <ListView
 

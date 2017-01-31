@@ -52,6 +52,24 @@ public class ExerciseRepository {
         }
     }
 
+    public void deleteExerciseByID(int Id, DatabaseOperations db){
+
+        SQLiteDatabase DB = db.getWritableDatabase();
+        try{
+            String whereClause = ExerciseTableDetails.COLUMN_ID+"= ?";
+            String[] whereArgs = new String[] {
+                    Integer.toString(Id)
+            };
+            DB.delete(ExerciseTableDetails.TABLE_NAME,whereClause,whereArgs);
+
+            Log.d("DataBase operations", "Training successfully deleted");
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+
     public Exercise getExerciseById(int Id,DatabaseOperations db){
 
 
