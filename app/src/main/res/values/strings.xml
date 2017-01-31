@@ -4,7 +4,7 @@
     <!--  FRAGMENTS -->
     <!--Top Control-->
     <string name="top_button1">Home</string>
-    <string name="top_button2">Workout</string>
+    <string name="top_button2">Exercise</string>
     <string name="top_button3">Meals</string>
     <string name="top_button4">Profile</string>
 
