@@ -173,13 +173,7 @@ public class TrainingRepository {
             Cursor CR = DB.query(TrainingTableDetails.TABLE_NAME, coloumnsTraining,null,null,null,null, TrainingTableDetails.COLUMN_ID+" DESC");
             CR.moveToFirst();
             String TrainingID = "-1";
-
-            Log.d("d",CR.getString(2));
-
-        //    if(training.getNazwa() == CR.getString(2))
-         //   {
-                TrainingID = CR.getString(0);
-        //    }
+            TrainingID = CR.getString(0);
 
             for(Series seria : training.getSerie())
             {
@@ -203,6 +197,55 @@ public class TrainingRepository {
             Log.d("Training repository", "Exception while inserting data to DB. Transaction aborted");
         }
     }
+
+
+    public boolean DeleteExistingSeries(int seriaId,DatabaseOperations db) {
+
+
+        SQLiteDatabase DB = db.getWritableDatabase();
+        try{
+            String whereClause = SeriesRepository.SeriesTableDetails.COLUMN_ID+"= ?";
+            String[] whereArgs = new String[] {
+                    Integer.toString(seriaId)
+            };
+            DB.delete(SeriesRepository.SeriesTableDetails.TABLE_NAME,whereClause,whereArgs);
+
+            Log.d("DataBase operations", "series successfully deleted");
+            return  true;
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+    }
+
+
+    public List<Training> getAllTrainingsGroupByName(DatabaseOperations db)
+    {
+        try
+        {
+                throw new Exception();
+        }
+        catch (Exception ex)
+        {
+            return  new ArrayList<>();
+        }
+    }
+
+    public boolean duplicateTrainingWithNewDate(int trainingId,String date,DatabaseOperations db)
+    {
+        try{
+            Training training = GetTrainingById(trainingId,db);
+            training.setData(date);
+            this.insertNewTrening(training,db);
+
+            return true;
+        }
+        catch (Exception ex){
+            return false;
+        }
+    }
+
 
     public boolean DeleteExistingTraining(int trainingId,DatabaseOperations db){ //return false if exception was throwed
 
